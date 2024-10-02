@@ -30,11 +30,11 @@ def main_page():
     col1, col2 = st.columns([1, 3])  # Der erste Parameter gibt das relative Verhältnis der Spalten an
 
 
-        with col1:
-            st.image("sk.png", width=100)
+    with col1:
+        st.image("sk.png", width=100)
 
-        with col2:
-            st.title("Stromkonto")
+    with col2:
+        st.title("Stromkonto")
     
     username = st.session_state['username']
     user_data = users_db[username]

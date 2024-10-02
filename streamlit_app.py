@@ -13,7 +13,7 @@ if 'logged_in' not in st.session_state:
 
 # Anmeldeseite
 def login():
-    st.title("Anmelden zur Stromkonto")
+    st.title("Log-In")
     username = st.text_input("Benutzername")
     password = st.text_input("Passwort", type="password")
     
@@ -27,7 +27,7 @@ def login():
 
 # Hauptseite für Stromverbrauch, Kontoübersicht und Handel
 def main_page():
-    st.image("sk.png")
+    st.image("sk.png",width="50", height="50")
     st.title("Stromkonto")
     
     username = st.session_state['username']

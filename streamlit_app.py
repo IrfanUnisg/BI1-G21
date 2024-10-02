@@ -27,7 +27,7 @@ def login():
 
 # Hauptseite für Stromverbrauch, Kontoübersicht und Handel
 def main_page():
-    st.image("sk.png",width="50", height="50")
+    st.image("sk.png",width=50, height=50)
     st.title("Stromkonto")
     
     username = st.session_state['username']

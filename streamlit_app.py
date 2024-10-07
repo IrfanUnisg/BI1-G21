@@ -39,36 +39,37 @@ def check_password():
 if not check_password():
     st.stop()  # Do not continue if check_password is not True.
 
-
+preis=0.1
+stromverbrauch=500
+guthaben=600
 # Übersicht über den Stromverbrauch
 st.subheader("Stromverbrauch")
-st.write(f"Ihr aktueller Stromverbrauch: {user_data['consumption']} kWh")
+st.write(f"Ihr aktueller Stromverbrauch: {stromverbrauch} kWh")
 
 # Kontoübersicht (Stromguthaben)
 st.subheader("Stromkonto")
-st.write(f"Ihr aktuelles Stromguthaben: {user_data['balance']} EUR")
+st.write(f"Ihr aktuelles Stromguthaben: {guthaben} kWh")
 
 # Strom kaufen/verkaufen
 st.subheader("Stromhandel")
 
 trade_type = st.radio("Möchten Sie Strom kaufen oder verkaufen?", ("Kaufen", "Verkaufen"))
 trade_amount = st.number_input(f"Wählen Sie die Menge an Strom zum {trade_type.lower()} (kWh)", min_value=0)
-trade_price = st.number_input("Geben Sie den Preis pro kWh ein (EUR)", min_value=0.0, format="%.2f")
 
 if st.button(f"{trade_type} bestätigen"):
-    total_price = trade_amount * trade_price
+    total_price = trade_amount * preis
     
     if trade_type == "Kaufen":
-        if total_price <= user_data['balance']:
-            user_data['consumption'] += trade_amount
-            user_data['balance'] -= total_price
+        if total_price <= guthaben:
+            stromverbrauch += trade_amount
+            guthaben -= total_price
             st.success(f"Sie haben erfolgreich {trade_amount} kWh gekauft.")
         else:
             st.error("Nicht genügend Guthaben!")
     else:  # Verkaufen
-        if trade_amount <= user_data['consumption']:
-            user_data['consumption'] -= trade_amount
-            user_data['balance'] += total_price
+        if trade_amount <= stromverbrauch:
+            stromverbrauch -= trade_amount
+            guthaben += total_price
             st.success(f"Sie haben erfolgreich {trade_amount} kWh verkauft.")
         else:
             st.error("Nicht genügend Strom zu verkaufen!")

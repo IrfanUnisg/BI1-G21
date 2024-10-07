@@ -1,4 +1,5 @@
 import streamlit as st
+import hmac
 
 # Hauptseite für Stromverbrauch, Kontoübersicht und Handel
 

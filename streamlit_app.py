@@ -1,15 +1,16 @@
 import streamlit as st
 import hmac
 
-# Hauptseite für Stromverbrauch, Kontoübersicht und Handel
+def main():
+    # builds the sidebar menu
+    with st.sidebar:
+        st.page_link('streamlit_app.py', label='Dashboard', icon='🔥')
+        st.page_link('pages/Trade.py', label='Trade', icon='🛡️')
 
-col1, col2 = st.columns([1, 3])  # Der erste Parameter gibt das relative Verhältnis der Spalten an
 
-with col1:
-    st.image("sk.png", width=100)
 
-with col2:
-    st.title("Stromkonto")
+
+
 
 def check_password():
     """Returns `True` if the user had the correct password."""
@@ -39,6 +40,15 @@ def check_password():
 if not check_password():
     st.stop()  # Do not continue if check_password is not True.
 
+# Hauptseite für Stromverbrauch, Kontoübersicht und Handel
+
+col1, col2 = st.columns([1, 3])  # Der erste Parameter gibt das relative Verhältnis der Spalten an
+
+with col1:
+    st.image("sk.png", width=100)
+
+with col2:
+    st.title("Stromkonto")
 preis=0.1
 stromverbrauch=500
 guthaben=600
@@ -73,3 +83,5 @@ if st.button(f"{trade_type} bestätigen"):
             st.success(f"Sie haben erfolgreich {trade_amount} kWh verkauft.")
         else:
             st.error("Nicht genügend Strom zu verkaufen!")
+if __name__ == '__main__':
+    main()

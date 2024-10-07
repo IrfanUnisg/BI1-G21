@@ -1,34 +1,8 @@
 import streamlit as st
 
-# Dummy-Datenbank für Benutzer
-users_db = {
-    "Jan": {"password": "stromkonto", "consumption": 500, "balance": 1000},  # Stromverbrauch in kWh, Guthaben in EUR
-    "admin": {"password": "stromkonto", "consumption": 600, "balance": 1500},
-}
-
-# Session-State für die Anmeldung
-if 'logged_in' not in st.session_state:
-    st.session_state['logged_in'] = False
-    st.session_state['username'] = ''
-
-# Anmeldeseite
-def login():
-    st.title("Log-In")
-    username = st.text_input("Benutzername")
-    password = st.text_input("Passwort", type="password")
-    
-    if st.button("Anmelden"):
-        if username in users_db and users_db[username]["password"] == password:
-            st.session_state['logged_in'] = True
-            st.session_state['username'] = username
-            st.success(f"Erfolgreich angemeldet als {username}")
-        else:
-            st.error("Falscher Benutzername oder Passwort!")
-
 # Hauptseite für Stromverbrauch, Kontoübersicht und Handel
 def main_page():
     col1, col2 = st.columns([1, 3])  # Der erste Parameter gibt das relative Verhältnis der Spalten an
-
 
     with col1:
         st.image("sk.png", width=100)
@@ -36,8 +10,34 @@ def main_page():
     with col2:
         st.title("Stromkonto")
     
-    username = st.session_state['username']
-    user_data = users_db[username]
+    def check_password():
+        """Returns `True` if the user had the correct password."""
+    
+        def password_entered():
+            """Checks whether a password entered by the user is correct."""
+            if hmac.compare_digest(st.session_state["password"], st.secrets["password"]):
+                st.session_state["password_correct"] = True
+                del st.session_state["password"]  # Don't store the password.
+            else:
+                st.session_state["password_correct"] = False
+    
+        # Return True if the password is validated.
+        if st.session_state.get("password_correct", False):
+            return True
+    
+        # Show input for password.
+        st.subheader("Please enter the password.")
+        st.text_input(
+            "Password", type="password", on_change=password_entered, key="password"
+        )
+        if "password_correct" in st.session_state:
+            st.error("😕 Password incorrect")
+        return False
+    
+    
+    if not check_password():
+        st.stop()  # Do not continue if check_password is not True.
+
     
     # Übersicht über den Stromverbrauch
     st.subheader("Stromverbrauch")

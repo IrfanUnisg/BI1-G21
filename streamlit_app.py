@@ -1,6 +1,6 @@
 import streamlit as st
 import hmac
-
+st.beta_set_page_config(page_title="Stromkonto",page_icon="sk.png")
 def main():
     # builds the sidebar menu
     with st.sidebar:

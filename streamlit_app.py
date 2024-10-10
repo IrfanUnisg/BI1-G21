@@ -1,20 +1,9 @@
 import streamlit as st
 import hmac
+import plotly.graph_objects as go
 st.set_page_config(page_title="Stromkonto",page_icon="sk.png")
-def main():
-    # builds the sidebar menu
-    with st.sidebar:
-        st.page_link('streamlit_app.py', label='Dashboard', icon='🔥')
-        st.page_link('pages/Trade.py', label='Trade', icon='🛡️')
-
-
-
-
-
-
 def check_password():
     """Returns `True` if the user had the correct password."""
-
     def password_entered():
         """Checks whether a password entered by the user is correct."""
         if hmac.compare_digest(st.session_state["password"], st.secrets["password"]):
@@ -22,12 +11,9 @@ def check_password():
             del st.session_state["password"]  # Don't store the password.
         else:
             st.session_state["password_correct"] = False
-
     # Return True if the password is validated.
     if st.session_state.get("password_correct", False):
         return True
-
-    # Show input for password.
     st.subheader("Please enter the password.")
     st.text_input(
         "Password", type="password", on_change=password_entered, key="password"
@@ -35,13 +21,11 @@ def check_password():
     if "password_correct" in st.session_state:
         st.error("😕 Password incorrect")
     return False
-
-
 if not check_password():
     st.stop()  # Do not continue if check_password is not True.
 
-# Hauptseite für Stromverbrauch, Kontoübersicht und Handel
 
+# Hauptseite für Stromverbrauch, Kontoübersicht und Handel
 col1, col2 = st.columns([1, 3])  # Der erste Parameter gibt das relative Verhältnis der Spalten an
 
 with col1:
@@ -52,6 +36,7 @@ with col2:
 preis=0.1
 stromverbrauch=500
 guthaben=600
+kapazitaet=1000
 # Übersicht über den Stromverbrauch
 st.subheader("Stromverbrauch")
 st.write(f"Ihr aktueller Stromverbrauch: {stromverbrauch} kWh")
@@ -59,6 +44,17 @@ st.write(f"Ihr aktueller Stromverbrauch: {stromverbrauch} kWh")
 # Kontoübersicht (Stromguthaben)
 st.subheader("Stromkonto")
 st.write(f"Ihr aktuelles Stromguthaben: {guthaben} kWh")
+
+# Create a gauge chart
+fig = go.Figure(go.Indicator(
+    mode="gauge+number",
+    value=guthaben,
+    gauge={'axis': {'range': [0, kapazitaet]},
+           'bar': {'color': "blue"}},
+    title={'text': "Battery State"},
+))
+# Display the gauge chart
+st.plotly_chart(fig)
 
 # Strom kaufen/verkaufen
 st.subheader("Stromhandel")

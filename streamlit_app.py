@@ -79,5 +79,3 @@ if st.button(f"{trade_type} bestätigen"):
             st.success(f"Sie haben erfolgreich {trade_amount} kWh verkauft.")
         else:
             st.error("Nicht genügend Strom zu verkaufen!")
-if __name__ == '__main__':
-    main()

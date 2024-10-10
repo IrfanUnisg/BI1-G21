@@ -9,16 +9,6 @@ def check_password():
         if hmac.compare_digest(st.session_state["password"], st.secrets["password"]):
             st.session_state["password_correct"] = True
             del st.session_state["password"]  # Don't store the password.
-import hmac
-import plotly.graph_objects as go
-st.set_page_config(page_title="Stromkonto",page_icon="sk.png")
-def check_password():
-    """Returns `True` if the user had the correct password."""
-    def password_entered():
-        """Checks whether a password entered by the user is correct."""
-        if hmac.compare_digest(st.session_state["password"], st.secrets["password"]):
-            st.session_state["password_correct"] = True
-            del st.session_state["password"]  # Don't store the password.
         else:
             st.session_state["password_correct"] = False
     # Return True if the password is validated.
@@ -36,9 +26,6 @@ if not check_password():
 
 
 # Hauptseite für Stromverbrauch, Kontoübersicht und Handel
-col1, col2, col3 = st.columns(3)
-with col1:
-    st.image("sk.png", width=100)
 col1, col2, col3 = st.columns(3)
 with col1:
     st.image("sk.png", width=100)

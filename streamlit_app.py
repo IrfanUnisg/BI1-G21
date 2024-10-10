@@ -1,7 +1,7 @@
 import streamlit as st
 import hmac
 import plotly.graph_objects as go
-st.set_page_config(page_title="Stromkonto",page_icon="sk.png")
+st.set_page_config(page_title="Stromkonto",page_icon="sk.png", layout='wide')
 def check_password():
     """Returns `True` if the user had the correct password."""
     def password_entered():
@@ -26,8 +26,7 @@ if not check_password():
 
 
 # Hauptseite für Stromverbrauch, Kontoübersicht und Handel
-col1, col2, col3 = st.columns([1, 3, 1])  # Der erste Parameter gibt das relative Verhältnis der Spalten an
-
+col1, col2, col3 = st.columns(3)
 with col1:
     st.image("sk.png", width=100)
 

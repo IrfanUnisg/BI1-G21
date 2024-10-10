@@ -26,13 +26,17 @@ if not check_password():
 
 
 # Hauptseite für Stromverbrauch, Kontoübersicht und Handel
-col1, col2 = st.columns([1, 3])  # Der erste Parameter gibt das relative Verhältnis der Spalten an
+col1, col2, col3 = st.columns([1, 3, 1])  # Der erste Parameter gibt das relative Verhältnis der Spalten an
 
 with col1:
     st.image("sk.png", width=100)
 
 with col2:
     st.title("Stromkonto")
+
+with col3:
+    st.image("sk.png", width=100)
+
 preis=0.1
 stromverbrauch=500
 guthaben=600

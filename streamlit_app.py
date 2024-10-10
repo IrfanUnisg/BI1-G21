@@ -1,7 +1,7 @@
 import streamlit as st
 import hmac
 import plotly.graph_objects as go
-st.set_page_config(page_title="Stromkonto",page_icon="sk.png", layout='wide')
+st.set_page_config(page_title="Stromkonto",page_icon="sk.png")
 def check_password():
     """Returns `True` if the user had the correct password."""
     def password_entered():

@@ -43,10 +43,6 @@ guthaben = st.session_state.get("guthaben", 600)
 kapazitaet = 1000
 cash = st.session_state.get("cash", 508)
 
-# Übersicht über den Stromverbrauch
-st.subheader("Stromverbrauch")
-st.write(f"Ihr aktueller Stromverbrauch: {stromverbrauch} kWh")
-
 # Kontoübersicht (Stromguthaben)
 st.subheader("Stromkonto")
 st.write(f"Ihr aktuelles Stromguthaben: {guthaben} kWh")

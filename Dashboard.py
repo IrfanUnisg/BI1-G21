@@ -55,7 +55,8 @@ fig = go.Figure(go.Indicator(
     title={'text': "Battery State"},
 ))
 # Display the gauge chart
-st.plotly_chart(fig)
+g=go.FigureWidget(fig)
+st.plotly_chart(g)
 
 # Strom kaufen/verkaufen
 st.subheader("Stromhandel")

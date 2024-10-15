@@ -37,11 +37,14 @@ with col1:
 with col2:
     st.title("Stromkonto")
 
-preis = 0.1
-stromverbrauch = 500
-guthaben = st.session_state.get("guthaben", 600)
+st.session_state[preis] = 0.1
+st.session_state[stromverbrauch] = 500
+st.session_state[guthaben] = 600
+st.session_state[kapazitaet] = 1000
+st.session_state[cash] = 508
+guthaben = st.session_state.get("guthaben")
 kapazitaet = 1000
-cash = st.session_state.get("cash", 508)
+cash = st.session_state.get("cash")
 
 # Kontoübersicht (Stromguthaben)
 st.subheader("Stromkonto")

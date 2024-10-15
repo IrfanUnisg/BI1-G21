@@ -1,4 +1,4 @@
 import streamlit as st
-from Dashboard.py import *
+import Dashboard
 st.subheader("Stromverbrauch")
 st.write(f"Ihr aktueller Stromverbrauch: {stromverbrauch} kWh")

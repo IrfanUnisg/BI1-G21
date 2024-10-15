@@ -1,8 +1,9 @@
 import streamlit as st
 import hmac
 import plotly.graph_objects as go
-import ipywidgets
-st.set_page_config(page_title="Stromkonto",page_icon="sk.png")
+
+st.set_page_config(page_title="Stromkonto", page_icon="sk.png")
+
 def check_password():
     """Returns `True` if the user had the correct password."""
     def password_entered():
@@ -12,9 +13,11 @@ def check_password():
             del st.session_state["password"]  # Don't store the password.
         else:
             st.session_state["password_correct"] = False
+
     # Return True if the password is validated.
     if st.session_state.get("password_correct", False):
         return True
+
     st.subheader("Please enter the password.")
     st.text_input(
         "Password", type="password", on_change=password_entered, key="password"
@@ -22,24 +25,24 @@ def check_password():
     if "password_correct" in st.session_state:
         st.error("😕 Password incorrect")
     return False
+
 if not check_password():
     st.stop()  # Do not continue if check_password is not True.
 
-
 # Hauptseite für Stromverbrauch, Kontoübersicht und Handel
-col1, col2= st.columns([1,4])
+col1, col2 = st.columns([1, 4])
 with col1:
     st.image("sk.png", width=100)
 
 with col2:
     st.title("Stromkonto")
 
+preis = 0.1
+stromverbrauch = 500
+guthaben = st.session_state.get("guthaben", 600)
+kapazitaet = 1000
+cash = st.session_state.get("cash", 508)
 
-preis=0.1
-stromverbrauch=500
-guthaben=600
-kapazitaet=1000
-cash=508
 # Übersicht über den Stromverbrauch
 st.subheader("Stromverbrauch")
 st.write(f"Ihr aktueller Stromverbrauch: {stromverbrauch} kWh")
@@ -48,16 +51,21 @@ st.write(f"Ihr aktueller Stromverbrauch: {stromverbrauch} kWh")
 st.subheader("Stromkonto")
 st.write(f"Ihr aktuelles Stromguthaben: {guthaben} kWh")
 st.write(f"Ihr Kontoguthaben: {cash} CHF")
+
 # Create a gauge chart
-fig = go.Figure(go.Indicator(
-    mode="gauge+number",
-    value=guthaben,
-    gauge={'axis': {'range': [0, kapazitaet]},
-           'bar': {'color': "blue"}},
-    title={'text': "Battery State"},
-))
+def create_gauge_chart(guthaben, kapazitaet):
+    fig = go.Figure(go.Indicator(
+        mode="gauge+number",
+        value=guthaben,
+        gauge={'axis': {'range': [0, kapazitaet]},
+               'bar': {'color': "blue"}},
+        title={'text': "Battery State"},
+    ))
+    return fig
+
 # Display the gauge chart
-g=go.FigureWidget(fig)
+fig = create_gauge_chart(guthaben, kapazitaet)
+g = go.FigureWidget(fig)
 st.plotly_chart(g)
 
 # Strom kaufen/verkaufen
@@ -68,13 +76,12 @@ trade_amount = st.number_input(f"Wählen Sie die Menge an Strom zum {trade_type.
 
 if st.button(f"{trade_type} bestätigen"):
     total_price = trade_amount * preis
-    
+
     if trade_type == "Kaufen":
         if total_price <= cash:
             guthaben += trade_amount
             cash -= total_price
             st.success(f"Sie haben erfolgreich {trade_amount} kWh gekauft.")
-            g=go.FigureWidget(fig)
         else:
             st.error("Nicht genügend Guthaben!")
     else:  # Verkaufen
@@ -82,6 +89,14 @@ if st.button(f"{trade_type} bestätigen"):
             guthaben -= trade_amount
             cash += total_price
             st.success(f"Sie haben erfolgreich {trade_amount} kWh verkauft.")
-            g=go.FigureWidget(fig)
         else:
             st.error("Nicht genügend Strom zu verkaufen!")
+
+    # Update the session state with the new values
+    st.session_state["guthaben"] = guthaben
+    st.session_state["cash"] = cash
+
+    # Update and display the updated gauge chart
+    fig = create_gauge_chart(guthaben, kapazitaet)
+    st.plotly_chart(fig)
+

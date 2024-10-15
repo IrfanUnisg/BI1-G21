@@ -39,6 +39,7 @@ preis=0.1
 stromverbrauch=500
 guthaben=600
 kapazitaet=1000
+cash=508
 # Übersicht über den Stromverbrauch
 st.subheader("Stromverbrauch")
 st.write(f"Ihr aktueller Stromverbrauch: {stromverbrauch} kWh")
@@ -46,7 +47,7 @@ st.write(f"Ihr aktueller Stromverbrauch: {stromverbrauch} kWh")
 # Kontoübersicht (Stromguthaben)
 st.subheader("Stromkonto")
 st.write(f"Ihr aktuelles Stromguthaben: {guthaben} kWh")
-
+st.write(f"Ihr Kontoguthaben: {cash} CHF")
 # Create a gauge chart
 fig = go.Figure(go.Indicator(
     mode="gauge+number",
@@ -69,30 +70,18 @@ if st.button(f"{trade_type} bestätigen"):
     total_price = trade_amount * preis
     
     if trade_type == "Kaufen":
-        if total_price <= guthaben:
-            stromverbrauch += trade_amount
-            guthaben -= total_price
+        if total_price <= cash:
+            guthaben += trade_amount
+            cash -= total_price
             st.success(f"Sie haben erfolgreich {trade_amount} kWh gekauft.")
-            fig = go.Figure(go.Indicator(
-                mode="gauge+number",
-                value=guthaben,
-                gauge={'axis': {'range': [0, kapazitaet]},
-                    'bar': {'color': "blue"}},
-            title={'text': "Battery State"},
-            ))
+            g=go.FigureWidget(fig)
         else:
             st.error("Nicht genügend Guthaben!")
     else:  # Verkaufen
-        if trade_amount <= stromverbrauch:
-            stromverbrauch -= trade_amount
-            guthaben += total_price
+        if trade_amount <= guthaben:
+            guthaben -= trade_amount
+            cash += total_price
             st.success(f"Sie haben erfolgreich {trade_amount} kWh verkauft.")
-            fig = go.Figure(go.Indicator(
-                mode="gauge+number",
-                value=guthaben,
-                gauge={'axis': {'range': [0, kapazitaet]},
-                    'bar': {'color': "blue"}},
-            title={'text': "Battery State"},
-            ))
+            g=go.FigureWidget(fig)
         else:
             st.error("Nicht genügend Strom zu verkaufen!")

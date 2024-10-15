@@ -52,8 +52,8 @@ st.subheader("Stromkonto")
 st.write(f"Ihr aktuelles Stromguthaben: {guthaben} kWh")
 st.write(f"Ihr Kontoguthaben: {cash} CHF")
 
-# Create a gauge chart
-def create_gauge_chart(guthaben, kapazitaet):
+# Create the gauge chart once and store it in session state
+if "gauge_chart" not in st.session_state:
     fig = go.Figure(go.Indicator(
         mode="gauge+number",
         value=guthaben,
@@ -61,12 +61,10 @@ def create_gauge_chart(guthaben, kapazitaet):
                'bar': {'color': "blue"}},
         title={'text': "Battery State"},
     ))
-    return fig
+    st.session_state["gauge_chart"] = fig
 
-# Display the gauge chart
-fig = create_gauge_chart(guthaben, kapazitaet)
-g = go.FigureWidget(fig)
-st.plotly_chart(g)
+# Display the gauge chart (use Plotly's figure object from session state)
+chart_plot = st.plotly_chart(st.session_state["gauge_chart"], use_container_width=True)
 
 # Strom kaufen/verkaufen
 st.subheader("Stromhandel")
@@ -96,7 +94,8 @@ if st.button(f"{trade_type} bestätigen"):
     st.session_state["guthaben"] = guthaben
     st.session_state["cash"] = cash
 
-    # Update and display the updated gauge chart
-    fig = create_gauge_chart(guthaben, kapazitaet)
-    st.plotly_chart(fig)
+    # Update the existing gauge chart with new values
+    st.session_state["gauge_chart"].data[0].value = guthaben
 
+    # Rerender the updated chart in the same place
+    chart_plot.plotly_chart(st.session_state["gauge_chart"], use_container_width=True)

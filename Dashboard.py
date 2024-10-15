@@ -71,6 +71,13 @@ if st.button(f"{trade_type} bestätigen"):
             stromverbrauch += trade_amount
             guthaben -= total_price
             st.success(f"Sie haben erfolgreich {trade_amount} kWh gekauft.")
+        fig = go.Figure(go.Indicator(
+            mode="gauge+number",
+            value=guthaben,
+            gauge={'axis': {'range': [0, kapazitaet]},
+                'bar': {'color': "blue"}},
+        title={'text': "Battery State"},
+        ))
         else:
             st.error("Nicht genügend Guthaben!")
     else:  # Verkaufen
@@ -78,5 +85,12 @@ if st.button(f"{trade_type} bestätigen"):
             stromverbrauch -= trade_amount
             guthaben += total_price
             st.success(f"Sie haben erfolgreich {trade_amount} kWh verkauft.")
+                    fig = go.Figure(go.Indicator(
+            mode="gauge+number",
+            value=guthaben,
+            gauge={'axis': {'range': [0, kapazitaet]},
+                'bar': {'color': "blue"}},
+        title={'text': "Battery State"},
+        ))
         else:
             st.error("Nicht genügend Strom zu verkaufen!")

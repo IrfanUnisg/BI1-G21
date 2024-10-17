@@ -1,10 +1,14 @@
 import streamlit as st
 import hmac
 import plotly.graph_objects as go
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 
+# Seite konfigurieren
 st.set_page_config(page_title="Stromkonto", page_icon="⚡", layout="wide")
 
-# Password check
+# Passwort-Überprüfung
 def check_password():
     """Returns `True` if the user had the correct password."""
     def password_entered():
@@ -18,16 +22,16 @@ def check_password():
     if st.session_state.get("password_correct", False):
         return True
 
-    st.subheader("Please enter the password.")
-    st.text_input("Password", type="password", on_change=password_entered, key="password")
+    st.subheader("Bitte Passwort eingeben.")
+    st.text_input("Passwort", type="password", on_change=password_entered, key="password")
     if "password_correct" in st.session_state:
-        st.error("😕 Password incorrect")
+        st.error("😕 Passwort inkorrekt")
     return False
 
 if not check_password():
     st.stop()
 
-# Initialize values if they are not already set
+# Initialisiere Session States
 if "guthaben" not in st.session_state:
     st.session_state["guthaben"] = 600
 if "cash" not in st.session_state:
@@ -36,8 +40,19 @@ if "stromverbrauch" not in st.session_state:
     st.session_state["stromverbrauch"] = 500
 if "kapazitaet" not in st.session_state:
     st.session_state["kapazitaet"] = 1000
+if "strompreis" not in st.session_state:
+    # Erstelle einen zufälligen Preisverlauf für die letzten 30 Tage
+    np.random.seed(42)
+    st.session_state["strompreis"] = 0.1 + np.cumsum(np.random.randn(30) * 0.01)
 
-# Hauptseite für Stromverbrauch, Kontoübersicht und Handel
+# Werte laden
+preis = 0.1
+stromverbrauch = st.session_state["stromverbrauch"]
+guthaben = st.session_state["guthaben"]
+cash = st.session_state["cash"]
+kapazitaet = st.session_state["kapazitaet"]
+
+# Hauptseite
 col1, col2 = st.columns([1, 4])
 with col1:
     st.image("sk.png", width=100)
@@ -45,34 +60,27 @@ with col1:
 with col2:
     st.title("Stromkonto")
 
-preis = 0.1
-stromverbrauch = st.session_state["stromverbrauch"]
-guthaben = st.session_state["guthaben"]
-cash = st.session_state["cash"]
-kapazitaet = st.session_state["kapazitaet"]
-
-# Übersicht über den Stromverbrauch
+# Stromverbrauch Übersicht
 st.subheader("Stromverbrauch")
 st.write(f"Ihr aktueller Stromverbrauch: {stromverbrauch} kWh")
 
-# Kontoübersicht (Stromguthaben)
+# Kontoübersicht (Stromguthaben und Cash)
 st.subheader("Stromkonto")
 st.write(f"Ihr aktuelles Stromguthaben: {guthaben} kWh")
 st.write(f"Ihr Kontoguthaben: {cash} CHF")
 
-# Create and display the gauge chart
+# Anzeige des Batterie-Status als Gauge-Diagramm
 fig = go.Figure(go.Indicator(
     mode="gauge+number",
     value=guthaben,
     gauge={'axis': {'range': [0, kapazitaet]},
            'bar': {'color': "blue"}},
-    title={'text': "Battery State"},
+    title={'text': "Batterie-Status"},
 ))
-chart_plot = st.plotly_chart(fig, use_container_width=True)
+st.plotly_chart(fig, use_container_width=True)
 
 # Stromhandel
 st.subheader("Stromhandel")
-
 trade_type = st.radio("Möchten Sie Strom kaufen oder verkaufen?", ("Kaufen", "Verkaufen"))
 trade_amount = st.number_input(f"Wählen Sie die Menge an Strom zum {trade_type.lower()} (kWh)", min_value=0)
 
@@ -94,9 +102,25 @@ if st.button(f"{trade_type} bestätigen"):
         else:
             st.error("Nicht genügend Strom zu verkaufen!")
 
-    # Update session state and chart
+    # Aktualisiere den Session-State
     st.session_state["guthaben"] = guthaben
     st.session_state["cash"] = cash
-    fig.data[0].value = guthaben
-    chart_plot.plotly_chart(fig, use_container_width=True)
 
+# Strompreis-Verlauf hinzufügen
+st.subheader("Strompreis-Verlauf (letzte 30 Tage)")
+days = pd.date_range(end=pd.Timestamp.today(), periods=30).to_pydatetime().tolist()
+strompreis = st.session_state["strompreis"]
+
+# Erstelle eine Linie für den Strompreis-Verlauf
+fig, ax = plt.subplots()
+ax.plot(days, strompreis, label="Strompreis (CHF)")
+ax.set_xlabel("Datum")
+ax.set_ylabel("Preis (CHF)")
+ax.set_title("Verlauf des Strompreises")
+plt.xticks(rotation=45)
+
+st.pyplot(fig)
+
+# Fußzeile oder zusätzliche Informationen
+st.markdown("---")
+st.write("Dies ist ein Stromkonto-Dashboard mit integriertem Stromhandel und einer Übersicht des Strompreis-Verlaufs.")

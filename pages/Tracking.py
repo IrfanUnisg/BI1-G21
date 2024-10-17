@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import altair as alt
 
 # Seitentitel
 st.title("Solaranlage Tracking Dashboard")
@@ -21,14 +22,22 @@ df = pd.DataFrame(data)
 st.subheader("Stromkosten: Vergleich ohne Stromkonto und mit Stromkonto")
 st.write("Dieses Diagramm zeigt die monatlichen Stromkosten ohne Stromkonto im Vergleich zu den Kosten mit einem Standard-Stromkonto-Abo.")
 
-# Daten für das gestapelte Diagramm vorbereiten
-bar_data = pd.DataFrame({
-    'Kosten ohne Stromkonto (CHF)': df['Kosten ohne Stromkonto (CHF)'],
-    'Kosten mit Stromkonto (CHF)': df['Kosten mit Stromkonto (CHF)']
-}, index=df['Monat'])
+# Daten für Altair in das richtige Format umwandeln
+df_melted = df.melt(id_vars='Monat', value_vars=['Kosten ohne Stromkonto (CHF)', 'Kosten mit Stromkonto (CHF)'],
+                    var_name='Kostenart', value_name='Kosten (CHF)')
 
-# Bar chart anzeigen
-st.bar_chart(bar_data)
+# Altair Säulendiagramm erstellen
+chart = alt.Chart(df_melted).mark_bar().encode(
+    x='Monat:N',
+    y='Kosten (CHF):Q',
+    color='Kostenart:N',
+    column=alt.Column('Kostenart:N', title=None)
+).properties(
+    width=150
+).interactive()
+
+# Chart anzeigen
+st.altair_chart(chart, use_container_width=True)
 
 # Weitere relevante Daten nebeneinander anzeigen
 st.subheader("Weitere Energiedaten")

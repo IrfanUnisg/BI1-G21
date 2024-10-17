@@ -1,7 +1,5 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
 
 # Seitentitel
 st.title("Solaranlage Tracking Dashboard")
@@ -21,25 +19,14 @@ df = pd.DataFrame(data)
 st.subheader("Kosten mit Solaranlage vs. Kosten mit Stromkonto")
 st.write("Dieses Diagramm zeigt die monatlichen Stromkosten, wenn Sie eine Solaranlage nutzen, im Vergleich zu den Kosten mit einem Standard-Stromkonto-Abo.")
 
-# Plot-Einstellungen
-fig, ax = plt.subplots()
-bar_width = 0.35
-index = np.arange(len(df['Monat']))
+# Daten in das richtige Format für ein gestapeltes Diagramm umwandeln
+bar_data = pd.DataFrame({
+    'Kosten mit Solaranlage (CHF)': df['Kosten mit Solaranlage (CHF)'],
+    'Kosten mit Stromkonto (CHF)': df['Kosten mit Stromkonto (CHF)']
+}, index=df['Monat'])
 
-# Balkendiagramme erstellen
-ax.bar(index, df['Kosten mit Solaranlage (CHF)'], bar_width, label='Kosten mit Solaranlage (CHF)', color='skyblue')
-ax.bar(index + bar_width, df['Kosten mit Stromkonto (CHF)'], bar_width, label='Kosten mit Stromkonto (CHF)', color='lightgreen')
-
-# Achsenbeschriftungen und Titel
-ax.set_xlabel('Monat')
-ax.set_ylabel('Kosten (CHF)')
-ax.set_title('Kostenvergleich: Solaranlage vs. Stromkonto')
-ax.set_xticks(index + bar_width / 2)
-ax.set_xticklabels(df['Monat'])
-ax.legend()
-
-# Plot anzeigen
-st.pyplot(fig)
+# Bar chart anzeigen
+st.bar_chart(bar_data)
 
 # Weitere relevante Daten nebeneinander anzeigen
 st.subheader("Weitere Energiedaten")
@@ -62,4 +49,3 @@ current_savings = 15  # Aktuelle Einsparungen in CHF (Beispiel)
 
 st.metric("Aktuell erzeugte Energie (heute)", f"{current_energy} kWh")
 st.metric("Aktuelle Einsparungen (heute)", f"{current_savings:.2f} CHF")
-

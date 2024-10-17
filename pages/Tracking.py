@@ -62,3 +62,4 @@ current_savings = 15  # Aktuelle Einsparungen in CHF (Beispiel)
 
 st.metric("Aktuell erzeugte Energie (heute)", f"{current_energy} kWh")
 st.metric("Aktuelle Einsparungen (heute)", f"{current_savings:.2f} CHF")
+

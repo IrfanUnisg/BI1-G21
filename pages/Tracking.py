@@ -96,6 +96,3 @@ st.write("Dieses Diagramm zeigt die monatliche Energieproduktion Ihrer Solaranla
 # Liniendiagramm für die Energieerzeugung
 st.line_chart(df.set_index('Monat')['Erzeugte Energie (kWh)'])
 
-# Footer / Hinweis auf Echtzeit-Datenintegration
-st.markdown("---")
-st.write("Hinweis: Die angezeigten Daten sind Beispielwerte und können durch Echtzeitdaten Ihrer Solaranlage ersetzt werden.")

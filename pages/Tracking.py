@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import altair as alt
+import plotly.graph_objects as go
 
 # Seitentitel
 st.title("Solaranlage Tracking Dashboard")
@@ -18,31 +18,39 @@ data = {
 # In einen DataFrame umwandeln
 df = pd.DataFrame(data)
 
-# Säulendiagramm für die Kosten mit und ohne Stromkonto
+# Balkendiagramm für die Kosten mit und ohne Stromkonto
 st.subheader("Stromkosten: Vergleich ohne Stromkonto und mit Stromkonto")
 st.write("Dieses Diagramm zeigt die monatlichen Stromkosten ohne Stromkonto im Vergleich zu den Kosten mit einem Standard-Stromkonto-Abo.")
 
-# Daten für Altair in das richtige Format umwandeln
-df_melted = df.melt(id_vars='Monat', value_vars=['Kosten ohne Stromkonto (CHF)', 'Kosten mit Stromkonto (CHF)'],
-                    var_name='Kostenart', value_name='Kosten (CHF)')
+# Erstelle das Plotly Balkendiagramm
+fig = go.Figure()
 
-# Altair Säulendiagramm erstellen
-chart = alt.Chart(df_melted).mark_bar().encode(
-    x=alt.X('Monat:N', title='Monat', axis=alt.Axis(labelAngle=0), sort=df['Monat']),
-    y=alt.Y('Kosten (CHF):Q', title='Kosten (CHF)'),
-    color='Kostenart:N',
-    column=alt.Column('Monat:N', title=""),
-    tooltip=['Monat', 'Kosten (CHF)', 'Kostenart']
-).properties(
-    width=25,
-    height=400
-).configure_axis(
-    labelFontSize=12,
-    titleFontSize=14
-).interactive()
+# Kosten ohne Stromkonto
+fig.add_trace(go.Bar(
+    x=df['Monat'],
+    y=df['Kosten ohne Stromkonto (CHF)'],
+    name='Kosten ohne Stromkonto',
+    marker_color='indianred'
+))
 
-# Chart anzeigen
-st.altair_chart(chart, use_container_width=True)
+# Kosten mit Stromkonto
+fig.add_trace(go.Bar(
+    x=df['Monat'],
+    y=df['Kosten mit Stromkonto (CHF)'],
+    name='Kosten mit Stromkonto',
+    marker_color='lightsalmon'
+))
+
+# Layout anpassen
+fig.update_layout(
+    barmode='group',
+    xaxis_title="Monat",
+    yaxis_title="Kosten (CHF)",
+    title="Monatliche Stromkosten: Mit und ohne Stromkonto im Vergleich"
+)
+
+# Diagramm anzeigen
+st.plotly_chart(fig)
 
 # Weitere relevante Daten nebeneinander anzeigen
 st.subheader("Weitere Energiedaten")

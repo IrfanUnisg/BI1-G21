@@ -18,11 +18,11 @@ data = {
 # In einen DataFrame umwandeln
 df = pd.DataFrame(data)
 
-# Balkendiagramm für die Kosten mit und ohne Stromkonto
+# Stromkosten: Vergleich ohne und mit Stromkonto
 st.subheader("Stromkosten: Vergleich ohne Stromkonto und mit Stromkonto")
 st.write("Dieses Diagramm zeigt die monatlichen Stromkosten ohne Stromkonto im Vergleich zu den Kosten mit einem Standard-Stromkonto-Abo.")
 
-# Erstelle das Plotly Balkendiagramm
+# Plotly Balkendiagramm
 fig = go.Figure()
 
 # Kosten ohne Stromkonto
@@ -46,40 +46,56 @@ fig.update_layout(
     barmode='group',
     xaxis_title="Monat",
     yaxis_title="Kosten (CHF)",
-    title="Monatliche Stromkosten: Mit und ohne Stromkonto im Vergleich"
+    title="Monatliche Stromkosten: Mit und ohne Stromkonto im Vergleich",
+    margin=dict(l=40, r=40, t=40, b=40),
+    height=400,
+    legend=dict(
+        orientation="h",
+        yanchor="bottom",
+        y=1.02,
+        xanchor="right",
+        x=1
+    )
 )
 
 # Diagramm anzeigen
-st.plotly_chart(fig)
+st.plotly_chart(fig, use_container_width=True)
 
-# Weitere relevante Daten nebeneinander anzeigen
+# Weitere Energiedaten
 st.subheader("Weitere Energiedaten")
-col1, col2 = st.columns(2)
-
-# Berechnung der Gesamterzeugung und Gesamteinsparung
-total_energy = df['Erzeugte Energie (kWh)'].sum()
-total_solar_savings = df['Gesparte Kosten durch Solaranlage (CHF)'].sum()
-total_account_savings = df['Ersparnisse durch Stromkonto (CHF)'].sum()
+st.markdown("---")
+col1, col2, col3 = st.columns([1, 1, 1])
 
 # Gesamte erzeugte Energie
-col1.metric("Gesamte erzeugte Energie (kWh)", f"{total_energy} kWh")
+col1.metric("Gesamte erzeugte Energie (kWh)", f"{df['Erzeugte Energie (kWh)'].sum()} kWh")
 
 # Gesamte Einsparungen durch die Solaranlage
-col1.metric("Gesamt eingesparte Kosten durch Solaranlage (CHF)", f"{total_solar_savings:.2f} CHF")
+col2.metric("Gesamt eingesparte Kosten durch Solaranlage (CHF)", f"{df['Gesparte Kosten durch Solaranlage (CHF)'].sum():.2f} CHF")
 
-# Gesamte Einsparungen durch Stromkonto
-col2.metric("Gesamt eingesparte Kosten durch Stromkonto (CHF)", f"{total_account_savings:.2f} CHF")
+# Gesamte Einsparungen durch das Stromkonto
+col3.metric("Gesamt eingesparte Kosten durch Stromkonto (CHF)", f"{df['Ersparnisse durch Stromkonto (CHF)'].sum():.2f} CHF")
 
-# Aktuelle Leistung der Solaranlage (Beispieldaten)
+st.markdown("---")
+
+# Aktuelle Leistung der Solaranlage
 st.subheader("Aktuelle Solardaten")
-current_energy = 35  # Aktuelle Energieproduktion in kWh (Beispiel)
-current_savings = 15  # Aktuelle Einsparungen in CHF (Beispiel)
+col4, col5 = st.columns([1, 1])
 
-st.metric("Aktuell erzeugte Energie (heute)", f"{current_energy} kWh")
-st.metric("Aktuelle Einsparungen (heute)", f"{current_savings:.2f} CHF")
+# Beispiel für aktuelle Werte
+current_energy = 35  # kWh
+current_savings = 15  # CHF
+
+# Aktuelle Daten
+col4.metric("Aktuell erzeugte Energie (heute)", f"{current_energy} kWh")
+col5.metric("Aktuelle Einsparungen (heute)", f"{current_savings:.2f} CHF")
 
 # Diagramm für die erzeugte Energie
 st.subheader("Monatliche erzeugte Energie")
 st.write("Dieses Diagramm zeigt die monatliche Energieproduktion Ihrer Solaranlage.")
 
+# Liniendiagramm für die Energieerzeugung
 st.line_chart(df.set_index('Monat')['Erzeugte Energie (kWh)'])
+
+# Footer / Hinweis auf Echtzeit-Datenintegration
+st.markdown("---")
+st.write("Hinweis: Die angezeigten Daten sind Beispielwerte und können durch Echtzeitdaten Ihrer Solaranlage ersetzt werden.")

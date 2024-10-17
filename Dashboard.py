@@ -11,7 +11,7 @@ st.set_page_config(page_title="Stromkonto", page_icon="⚡", layout="wide")
 def check_password():
     """Returns `True` if the user had the correct password."""
     def password_entered():
-        """Checks whether a password entered by the user is correct."""
+        """Checks whether a password entered von the user is correct."""
         if hmac.compare_digest(st.session_state["password"], st.secrets["password"]):
             st.session_state["password_correct"] = True
             del st.session_state["password"]  # Don't store the password.
@@ -40,9 +40,9 @@ if "stromverbrauch" not in st.session_state:
 if "kapazitaet" not in st.session_state:
     st.session_state["kapazitaet"] = 1000
 if "strompreis" not in st.session_state:
-    # Erstelle zufällige Strompreise zwischen 3 und 15 Rappen für die letzten 30 Tage
+    # Generiere zufällige Strompreise für jede Stunde (24 Messungen pro Tag für 30 Tage)
     np.random.seed(42)
-    st.session_state["strompreis"] = np.random.uniform(0.03, 0.15, 30)
+    st.session_state["strompreis"] = np.random.uniform(0.03, 0.15, 24 * 30)
 
 # Werte laden
 preis = 0.1
@@ -106,21 +106,24 @@ if st.button(f"{trade_type} bestätigen"):
     st.session_state["cash"] = cash
 
 # Strompreis-Verlauf hinzufügen
-st.subheader("Strompreis-Verlauf (letzte 30 Tage)")
-days = pd.date_range(end=pd.Timestamp.today(), periods=30).to_pydatetime().tolist()
+st.subheader("Strompreis-Verlauf (letzte 30 Tage, stündliche Messungen)")
 strompreis = st.session_state["strompreis"]
+
+# Erstelle Zeitstempel für jede Stunde der letzten 30 Tage
+time_index = pd.date_range(end=pd.Timestamp.today(), periods=24 * 30, freq='H').to_pydatetime().tolist()
 
 # Plotly-Liniendiagramm für den Strompreis-Verlauf
 fig_price = go.Figure()
-fig_price.add_trace(go.Scatter(x=days, y=strompreis, mode='lines+markers', name='Strompreis'))
+fig_price.add_trace(go.Scatter(x=time_index, y=strompreis, mode='lines+markers', name='Strompreis'))
 
 # Layout anpassen
 fig_price.update_layout(
-    title="Verlauf des Strompreises (Rp/kWh)",
-    xaxis_title="Datum",
+    title="Verlauf des Strompreises (Rp/kWh) - Stündlich",
+    xaxis_title="Datum und Uhrzeit",
     yaxis_title="Preis (Rp)",
-    xaxis_tickformat='%d-%b',
-    xaxis=dict(tickmode='linear')
+    xaxis_tickformat='%d-%b %H:%M',
+    xaxis=dict(tickmode='linear'),
+    showlegend=False  # Entfernt die Legende, um Platz zu sparen
 )
 
 st.plotly_chart(fig_price, use_container_width=True)

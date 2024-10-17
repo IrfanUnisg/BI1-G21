@@ -40,9 +40,10 @@ if "stromverbrauch" not in st.session_state:
 if "kapazitaet" not in st.session_state:
     st.session_state["kapazitaet"] = 1000
 if "strompreis" not in st.session_state:
-    # Generiere zufällige Strompreise für jede Stunde (24 Messungen pro Tag für 30 Tage)
+    # Generiere stabilere Strompreise für jede Stunde (24 Messungen pro Tag für 30 Tage)
     np.random.seed(42)
-    st.session_state["strompreis"] = np.random.uniform(0.03, 0.15, 24 * 30)
+    base_price = 0.1  # Basispreis (10 Rp)
+    st.session_state["strompreis"] = np.clip(base_price + np.random.normal(0, 0.02, 24 * 30), 0.03, 0.15)
 
 # Werte laden
 preis = 0.1

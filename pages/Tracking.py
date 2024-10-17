@@ -1,21 +1,10 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
-
-stromverbrauch = st.session_state.get("stromverbrauch", "Nicht verfügbar")
-st.subheader("Stromverbrauch")
-st.write(f"Ihr aktueller Stromverbrauch: {stromverbrauch} kWh")
 
 # Seitentitel
-st.title("Solar-Tracking ")
-
-# Einführung
-st.write("""
-Willkommen im Dashboard zur Überwachung Ihrer Solaranlage. Hier sehen Sie Ihre aktuelle Energieproduktion, Einsparungen und weitere nützliche Daten.
-""")
+st.title("Solaranlage Tracking Dashboard")
 
 # Beispiel-Daten (können durch Echtzeitdaten ersetzt werden)
-# Erzeugte Energie in kWh pro Monat
 data = {
     'Monat': ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
     'Erzeugte Energie (kWh)': [300, 320, 400, 450, 500, 550, 600, 620, 500, 450, 380, 350],
@@ -28,12 +17,9 @@ df = pd.DataFrame(data)
 # Säulendiagramm für die gesparten Kosten
 st.subheader("Stromkosten Einsparungen durch Ihre Solaranlage")
 st.write("Dieses Diagramm zeigt, wie viel Sie durch Ihre Solaranlage jeden Monat an Stromkosten gespart haben.")
-fig, ax = plt.subplots()
-ax.bar(df['Monat'], df['Gesparte Kosten (€)'], color='skyblue')
-ax.set_xlabel('Monat')
-ax.set_ylabel('Gesparte Kosten (€)')
-ax.set_title('Einsparungen im Stromkonto (in €)')
-st.pyplot(fig)
+
+# Verwende Streamlit's native plot Funktion
+st.bar_chart(df.set_index('Monat')['Gesparte Kosten (€)'])
 
 # Weitere relevante Daten
 st.subheader("Weitere Solardaten")
@@ -56,13 +42,4 @@ st.metric("Aktuelle Einsparungen (heute)", f"{current_savings:.2f} €")
 st.subheader("Monatliche erzeugte Energie")
 st.write("Dieses Diagramm zeigt die monatliche Energieproduktion Ihrer Solaranlage.")
 
-fig2, ax2 = plt.subplots()
-ax2.plot(df['Monat'], df['Erzeugte Energie (kWh)'], marker='o', color='orange')
-ax2.set_xlabel('Monat')
-ax2.set_ylabel('Erzeugte Energie (kWh)')
-ax2.set_title('Erzeugte Energie pro Monat (in kWh)')
-st.pyplot(fig2)
-
-# Hinweis auf die laufende Leistung der Solaranlage
-st.subheader("Status Ihrer Solaranlage")
-st.write("Ihre Solaranlage produziert derzeit zuverlässig Energie und hilft Ihnen, die Stromkosten zu senken.")
+st.line_chart(df.set_index('Monat')['Erzeugte Energie (kWh)'])

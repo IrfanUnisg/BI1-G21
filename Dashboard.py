@@ -43,7 +43,8 @@ if "strompreis" not in st.session_state:
     # Generiere stabilere Strompreise für jede Stunde (24 Messungen pro Tag für 30 Tage)
     np.random.seed(42)
     base_price = 0.1  # Basispreis (10 Rp)
-    st.session_state["strompreis"] = np.clip(base_price + np.random.normal(0, 0.02, 24 * 30), 0.03, 0.15)
+    # Niedrigere Standardabweichung für geringere Volatilität
+    st.session_state["strompreis"] = np.clip(base_price + np.random.normal(0, 0.005, 24 * 30), 0.03, 0.15)
 
 # Werte laden
 preis = 0.1

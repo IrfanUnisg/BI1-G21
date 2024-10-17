@@ -1,10 +1,40 @@
 import streamlit as st
-st.header(Information)
 
+# Überschrift für die Seite
+st.title("Nützliche Anwendungen von Solaranlagen")
 
-st.text(Wussten Sie schon, dass Solaranlagen dafür genutzt werden können, weit mehr zu leisten als nur Strom für Ihr Zuhause zu erzeugen? Moderne Solartechnologien eröffnen zahlreiche zusätzliche Nutzungsmöglichkeiten, die viele Hausbesitzer nicht kennen.
-  Zum Beispiel können Sie mit solarbetriebenen Wasserpumpen in Ihrem Garten effizienter bewässern oder sogar einen Brunnen versorgen - ganz ohne zusätzlichen Energieaufwand. Haben Sie einen Pool? Solaranlagen können auch genutzt werden, um Ihr Schwimmbad umweltfreundlich zu beheizen.
-  Für Ihr Zuhause bieten sich außerdem solare Luftaufbereitungssysteme an, die für ein angenehmes Raumklima sorgen und dabei weniger Energie verbrauchen als herkömmliche Klimaanlagen. Wussten Sie, dass Ihre Fenster und Fassaden durch die Installation transparenter Solarpanels auch Strom erzeugen könnten, ohne dass sie dabei Licht und Sicht beeinträchtigen?
-  Eine weitere innovative Anwendung sind solarbetriebene Außenbeleuchtungen. Sie können ganz einfach eigenständige Garten- oder Straßenleuchten installieren, die tagsüber Sonnenenergie sammeln und nachts automatisch leuchten - ohne aufwendige Verkabelung und zusätzliche Stromkosten.
-  Auch für die kalten Monate gibt es einen Vorteil: Solaranlagen können in Kombination mit solaren Heizungssystemen die Kosten für die Raumwärme erheblich senken.
-  Nutzen Sie das volle Potenzial Ihrer Solaranlage und gestalten Sie Ihr Zuhause effizienter und umweltfreundlicher!)
+# Einführungstext
+st.header("Wussten Sie schon?")
+
+st.write("""
+Solaranlagen können weit mehr leisten als nur Strom für Ihr Zuhause zu erzeugen! Moderne Solartechnologien bieten viele zusätzliche Nutzungsmöglichkeiten, die Hausbesitzer oft noch nicht kennen. Hier sind einige interessante Anwendungsbeispiele:
+""")
+
+# Textabschnitt für solarbetriebene Wasserpumpen
+st.subheader("Solarbetriebene Wasserpumpen und Poolheizung")
+st.write("""
+Mit **solarbetriebenen Wasserpumpen** können Sie Ihren Garten effizient bewässern oder einen Brunnen betreiben – und das völlig autark vom Stromnetz. Wenn Sie einen Pool haben, können Sie ihn umweltfreundlich mit Solarenergie beheizen.
+""")
+
+# Textabschnitt für solare Luftaufbereitungssysteme
+st.subheader("Solare Luftaufbereitung und Energieeffizienz")
+st.write("""
+Auch **solare Luftaufbereitungssysteme** können für ein angenehmes Raumklima sorgen, dabei aber deutlich weniger Energie verbrauchen als herkömmliche Klimaanlagen. Ihre Fenster und Fassaden könnten durch transparente Solarpanels sogar Strom erzeugen, ohne dass Licht und Sicht beeinträchtigt werden.
+""")
+
+# Textabschnitt für solarbetriebene Außenbeleuchtung
+st.subheader("Solarbetriebene Außenbeleuchtung")
+st.write("""
+Installieren Sie eigenständige **solarbetriebene Garten- oder Straßenleuchten**, die tagsüber Sonnenenergie speichern und nachts automatisch leuchten – ganz ohne Verkabelung und zusätzliche Stromkosten.
+""")
+
+# Textabschnitt für solare Heizungssysteme
+st.subheader("Solare Heizungssysteme")
+st.write("""
+Für die kalten Monate sind **solare Heizungssysteme** ideal, um die Raumwärme auf umweltfreundliche Weise zu unterstützen und Ihre Heizkosten erheblich zu senken.
+""")
+
+# Abschluss
+st.write("""
+Nutzen Sie das volle Potenzial Ihrer Solaranlage und gestalten Sie Ihr Zuhause effizienter und umweltfreundlicher!
+""")

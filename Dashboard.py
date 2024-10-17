@@ -3,7 +3,6 @@ import hmac
 import plotly.graph_objects as go
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
 
 # Seite konfigurieren
 st.set_page_config(page_title="Stromkonto", page_icon="⚡", layout="wide")
@@ -111,15 +110,20 @@ st.subheader("Strompreis-Verlauf (letzte 30 Tage)")
 days = pd.date_range(end=pd.Timestamp.today(), periods=30).to_pydatetime().tolist()
 strompreis = st.session_state["strompreis"]
 
-# Erstelle eine Linie für den Strompreis-Verlauf
-fig, ax = plt.subplots()
-ax.plot(days, strompreis, label="Strompreis (CHF)")
-ax.set_xlabel("Datum")
-ax.set_ylabel("Preis (CHF)")
-ax.set_title("Verlauf des Strompreises")
-plt.xticks(rotation=45)
+# Plotly-Liniendiagramm für den Strompreis-Verlauf
+fig_price = go.Figure()
+fig_price.add_trace(go.Scatter(x=days, y=strompreis, mode='lines+markers', name='Strompreis'))
 
-st.pyplot(fig)
+# Layout anpassen
+fig_price.update_layout(
+    title="Verlauf des Strompreises (CHF/kWh)",
+    xaxis_title="Datum",
+    yaxis_title="Preis (CHF)",
+    xaxis_tickformat='%d-%b',
+    xaxis=dict(tickmode='linear')
+)
+
+st.plotly_chart(fig_price, use_container_width=True)
 
 # Fußzeile oder zusätzliche Informationen
 st.markdown("---")

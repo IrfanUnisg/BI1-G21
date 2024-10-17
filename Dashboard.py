@@ -40,9 +40,9 @@ if "stromverbrauch" not in st.session_state:
 if "kapazitaet" not in st.session_state:
     st.session_state["kapazitaet"] = 1000
 if "strompreis" not in st.session_state:
-    # Erstelle einen zufälligen Preisverlauf für die letzten 30 Tage
+    # Erstelle zufällige Strompreise zwischen 3 und 15 Rappen für die letzten 30 Tage
     np.random.seed(42)
-    st.session_state["strompreis"] = 0.1 + np.cumsum(np.random.randn(30) * 0.01)
+    st.session_state["strompreis"] = np.random.uniform(0.03, 0.15, 30)
 
 # Werte laden
 preis = 0.1
@@ -116,15 +116,11 @@ fig_price.add_trace(go.Scatter(x=days, y=strompreis, mode='lines+markers', name=
 
 # Layout anpassen
 fig_price.update_layout(
-    title="Verlauf des Strompreises (CHF/kWh)",
+    title="Verlauf des Strompreises (Rp/kWh)",
     xaxis_title="Datum",
-    yaxis_title="Preis (CHF)",
+    yaxis_title="Preis (Rp)",
     xaxis_tickformat='%d-%b',
     xaxis=dict(tickmode='linear')
 )
 
 st.plotly_chart(fig_price, use_container_width=True)
-
-# Fußzeile oder zusätzliche Informationen
-st.markdown("---")
-st.write("Dies ist ein Stromkonto-Dashboard mit integriertem Stromhandel und einer Übersicht des Strompreis-Verlaufs.")

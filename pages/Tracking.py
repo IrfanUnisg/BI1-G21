@@ -28,12 +28,13 @@ df_melted = df.melt(id_vars='Monat', value_vars=['Kosten ohne Stromkonto (CHF)',
 
 # Altair Säulendiagramm erstellen
 chart = alt.Chart(df_melted).mark_bar().encode(
-    x='Monat:N',
-    y='Kosten (CHF):Q',
+    x=alt.X('Monat:N', title='Monat'),
+    y=alt.Y('Kosten (CHF):Q', title='Kosten (CHF)'),
     color='Kostenart:N',
-    column=alt.Column('Kostenart:N', title=None)
+    tooltip=['Monat', 'Kosten (CHF)', 'Kostenart']
 ).properties(
-    width=150
+    width=600,
+    height=400
 ).interactive()
 
 # Chart anzeigen

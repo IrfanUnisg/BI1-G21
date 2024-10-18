@@ -23,13 +23,8 @@ guthaben = st.session_state["guthaben"]
 cash = st.session_state["cash"]
 kapazitaet = st.session_state["kapazitaet"]
 
-# Layout mit einer besseren Struktur und Styling
-col1, col2 = st.columns([1, 4])
-with col1:
-    st.image("sk.png", width=100)
 
-with col2:
-    st.markdown(f"<h1 style='color:{blue_color};'>Virtual Battery</h1>", unsafe_allow_html=True)
+st.markdown(f"<h1 style='color:{blue_color};'>Virtual Battery</h1>", unsafe_allow_html=True)
 
 # Kontoübersicht (Stromguthaben und Cash)
 st.markdown(f"<h2 style='color:{blue_color};'>Stromkonto</h2>", unsafe_allow_html=True)

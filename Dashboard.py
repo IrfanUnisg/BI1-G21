@@ -1,7 +1,6 @@
 import streamlit as st
 import hmac
 import plotly.graph_objects as go
-import pandas as pd
 import numpy as np
 
 # Seite konfigurieren
@@ -11,10 +10,10 @@ st.set_page_config(page_title="Stromkonto", page_icon="⚡", layout="wide")
 def check_password():
     """Returns `True` if the user had the correct password."""
     def password_entered():
-        """Checks whether a password entered von the user is correct."""
+        """Checks whether a password entered by the user is correct."""
         if hmac.compare_digest(st.session_state["password"], st.secrets["password"]):
             st.session_state["password_correct"] = True
-            del st.session_state["password"]  # Don't store the password.
+            del st.session_state["password"]
         else:
             st.session_state["password_correct"] = False
 
@@ -38,16 +37,11 @@ if "cash" not in st.session_state:
 if "stromverbrauch" not in st.session_state:
     st.session_state["stromverbrauch"] = 500
 if "kapazitaet" not in st.session_state:
-    st.session_state["kapazitaet"] = 1000
-if "strompreis" not in st.session_state:
-    # Generiere stabilere Strompreise für jede Stunde (24 Messungen pro Tag für 30 Tage)
-    np.random.seed(42)
-    base_price = 0.1  # Basispreis (10 Rp)
-    # Niedrigere Standardabweichung für geringere Volatilität
-    st.session_state["strompreis"] = np.clip(base_price + np.random.normal(0, 0.005, 24 * 30), 0.03, 0.15)
+    st.session_state["kapazitaet"] = 3000  # Maximale Kapazität auf 3000 gesetzt
 
 # Werte laden
-preis = 0.1
+kaufpreis = 0.26  # 26 Rp/kWh für Kauf
+verkaufpreis = 0.09  # 9 Rp/kWh für Verkauf
 stromverbrauch = st.session_state["stromverbrauch"]
 guthaben = st.session_state["guthaben"]
 cash = st.session_state["cash"]
@@ -74,21 +68,20 @@ st.write(f"Ihr Kontoguthaben: {cash} CHF")
 fig = go.Figure(go.Indicator(
     mode="gauge+number",
     value=guthaben,
-    gauge={'axis': {'range': [0, kapazitaet]},
-           'bar': {'color': "blue"}},
+    gauge={'axis': {'range': [0, kapazitaet]}, 'bar': {'color': "blue"}},
     title={'text': "Batterie-Status"},
 ))
 st.plotly_chart(fig, use_container_width=True)
 
 # Stromhandel
 st.subheader("Stromhandel")
+st.write(f"Kaufpreis: {kaufpreis * 100} Rp/kWh | Verkaufspreis: {verkaufpreis * 100} Rp/kWh")
 trade_type = st.radio("Möchten Sie Strom kaufen oder verkaufen?", ("Kaufen", "Verkaufen"))
 trade_amount = st.number_input(f"Wählen Sie die Menge an Strom zum {trade_type.lower()} (kWh)", min_value=0)
 
 if st.button(f"{trade_type} bestätigen"):
-    total_price = trade_amount * preis
-
     if trade_type == "Kaufen":
+        total_price = trade_amount * kaufpreis
         if total_price <= cash:
             guthaben += trade_amount
             cash -= total_price
@@ -96,6 +89,7 @@ if st.button(f"{trade_type} bestätigen"):
         else:
             st.error("Nicht genügend Guthaben!")
     else:  # Verkaufen
+        total_price = trade_amount * verkaufpreis
         if trade_amount <= guthaben:
             guthaben -= trade_amount
             cash += total_price
@@ -106,26 +100,3 @@ if st.button(f"{trade_type} bestätigen"):
     # Aktualisiere den Session-State
     st.session_state["guthaben"] = guthaben
     st.session_state["cash"] = cash
-
-# Strompreis-Verlauf hinzufügen
-st.subheader("Strompreis-Verlauf (letzte 30 Tage, stündliche Messungen)")
-strompreis = st.session_state["strompreis"]
-
-# Erstelle Zeitstempel für jede Stunde der letzten 30 Tage
-time_index = pd.date_range(end=pd.Timestamp.today(), periods=24 * 30, freq='H').to_pydatetime().tolist()
-
-# Plotly-Liniendiagramm für den Strompreis-Verlauf
-fig_price = go.Figure()
-fig_price.add_trace(go.Scatter(x=time_index, y=strompreis, mode='lines+markers', name='Strompreis'))
-
-# Layout anpassen
-fig_price.update_layout(
-    title="Verlauf des Strompreises (Rp/kWh) - Stündlich",
-    xaxis_title="Datum und Uhrzeit",
-    yaxis_title="Preis (Rp)",
-    xaxis_tickformat='%d-%b %H:%M',
-    xaxis=dict(tickmode='linear'),
-    showlegend=False  # Entfernt die Legende, um Platz zu sparen
-)
-
-st.plotly_chart(fig_price, use_container_width=True)

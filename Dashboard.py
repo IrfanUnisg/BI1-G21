@@ -10,9 +10,9 @@ yellow_color = "#facb04"
 
 # Initialisiere Session States
 if "guthaben" not in st.session_state:
-    st.session_state["guthaben"] = 600
+    st.session_state["guthaben"] = 1367
 if "cash" not in st.session_state:
-    st.session_state["cash"] = 508
+    st.session_state["cash"] = 967
 if "kapazitaet" not in st.session_state:
     st.session_state["kapazitaet"] = 3000
 

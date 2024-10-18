@@ -139,13 +139,16 @@ price_df = pd.DataFrame({
     'Preis (Rp)': hourly_prices
 })
 st.markdown("---")
-# Plot hourly prices
-st.subheader("Spotmarkt Strompreisentwicklung")
+# Plot hourly prices for the last week
+st.subheader("Spotmarkt Strompreisentwicklung (letzte Woche)")
+# Filter for the last week of October (assuming the month has 31 days)
+last_week_price_df = price_df[price_df['Tag'] > 24]  # Filter for days greater than 24 (25th to 31st)
+
 fig_prices = go.Figure()
 
 fig_prices.add_trace(go.Scatter(
-    x=price_df['Tag'].astype(str) + ' ' + price_df['Stunde'].astype(str) + ':00',  # Combine day and hour for x-axis labels
-    y=price_df['Preis (Rp)'],
+    x=last_week_price_df['Tag'].astype(str) + ' ' + last_week_price_df['Stunde'].astype(str) + ':00',  # Combine day and hour for x-axis labels
+    y=last_week_price_df['Preis (Rp)'],
     mode='lines+markers',
     name='Strompreise (Rp)',
     line=dict(color='#044b5b')

@@ -83,11 +83,13 @@ col4, col5 = st.columns([1, 1])
 
 # Example for current values
 current_energy = 15.7  # kWh
-current_savings = 9.2  # CHF
+current_savings = 2.5  # CHF
+current_solar = 0.24
 
 # Current data
 col4.metric("Aktuell erzeugte Energie (heute)", f"{current_energy} kWh")
-col5.metric("Aktuelle Einsparungen (heute)", f"{current_savings:.2f} CHF")
+col5.metric("Aktuelle Einsparungen Solar", f"{current_savings:.2f} CHF")
+col6.metric("Aktuelle Einsparung Stromkonto",f"{current_solar:.2f} CHF")
 st.markdown("---")
 # Chart for generated energy
 st.subheader("Monatliche erzeugte Energie")

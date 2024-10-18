@@ -4,7 +4,7 @@ st.markdown(
     """
     <style>
     .css-1d391kg {
-        background-color: #f0f4f4; /* Change this to your desired color */
+        background-color: #facb04; /* Change this to your desired color */
     }
     </style>
     """,

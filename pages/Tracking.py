@@ -109,20 +109,34 @@ fig_energy.update_layout(
 
 st.plotly_chart(fig_energy, use_container_width=True)
 
-# Generate hourly prices for October
+# Generate hourly prices for October (31 days)
 np.random.seed(0)  # For reproducibility
+days = 31  # Number of days in October
 hours = np.arange(1, 25)  # Hourly data from 1 to 24
 avg_price = 7  # Average price in Rp
 price_fluctuation = 3  # Fluctuation range in Rp
-hourly_prices = avg_price + np.random.uniform(-price_fluctuation, price_fluctuation, size=24)
+
+# Generate hourly prices for each day
+hourly_prices = []
+
+for day in range(days):
+    daily_prices = avg_price + np.random.uniform(-price_fluctuation, price_fluctuation, size=24)
+    hourly_prices.extend(daily_prices)
+
+# Create DataFrame for hourly prices
+price_df = pd.DataFrame({
+    'Stunde': np.tile(hours, days),
+    'Tag': np.repeat(np.arange(1, days + 1), 24),
+    'Preis (Rp)': hourly_prices
+})
 
 # Plot hourly prices
 st.subheader("Stündliche Strompreise für Oktober")
 fig_prices = go.Figure()
 
 fig_prices.add_trace(go.Scatter(
-    x=hours,
-    y=hourly_prices,
+    x=price_df['Tag'].astype(str) + ' ' + price_df['Stunde'].astype(str) + ':00',  # Combine day and hour for x-axis labels
+    y=price_df['Preis (Rp)'],
     mode='lines+markers',
     name='Strompreise (Rp)',
     line=dict(color='#044b5b')
@@ -131,10 +145,11 @@ fig_prices.add_trace(go.Scatter(
 # Adjust layout for price chart
 fig_prices.update_layout(
     title="Stündliche Strompreise für Oktober",
-    xaxis_title="Stunde",
+    xaxis_title="Zeit",
     yaxis_title="Preis (Rp)",
     height=400,
     margin=dict(l=40, r=40, t=40, b=40),
+    xaxis_tickangle=-45,  # Rotate x-axis labels for better visibility
 )
 
 # Display the price chart

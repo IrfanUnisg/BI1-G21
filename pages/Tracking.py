@@ -116,12 +116,22 @@ hours = np.arange(1, 25)  # Hourly data from 1 to 24
 avg_price = 7  # Average price in Rp
 price_fluctuation = 3  # Fluctuation range in Rp
 
-# Generate hourly prices for each day
+# Initialize the list of hourly prices
 hourly_prices = []
 
+# Start with the average price
+previous_price = avg_price
+
+# Generate hourly prices for each day
 for day in range(days):
-    daily_prices = avg_price + np.random.uniform(-price_fluctuation, price_fluctuation, size=24)
-    hourly_prices.extend(daily_prices)
+    for hour in range(24):
+        # Incrementally adjust the price within the range of ±3 Rappen
+        price_change = np.random.uniform(-price_fluctuation, price_fluctuation)
+        current_price = previous_price + price_change
+        # Ensure the price does not fall below 0
+        current_price = max(current_price, 0)  
+        hourly_prices.append(current_price)
+        previous_price = current_price  # Update previous price for the next hour
 
 # Create DataFrame for hourly prices
 price_df = pd.DataFrame({
@@ -154,3 +164,4 @@ fig_prices.update_layout(
 
 # Display the price chart
 st.plotly_chart(fig_prices, use_container_width=True)
+

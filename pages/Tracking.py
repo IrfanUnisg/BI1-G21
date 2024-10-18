@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.graph_objects as go
 
 # Page title
-st.title("Solaranlage Tracking Dashboard")
+st.title("Solar Tracking Dashboard")
 
 # Sample data (can be replaced with real-time data)
 data = {
@@ -11,8 +11,8 @@ data = {
     'Erzeugte Energie (kWh)': [300, 320, 400, 450, 500, 550, 600, 620, 500, 450],
     'Kosten ohne Stromkonto (CHF)': [120, 128, 160, 180, 200, 220, 240, 248, 200, 180],
     'Kosten mit Stromkonto (CHF)': [100, 106, 130, 150, 165, 185, 200, 210, 170, 155],
-    'Gesparte Kosten durch Solaranlage (CHF)': [45, 48, 60, 67, 75, 83, 90, 93, 75, 67],
-    'Ersparnisse durch Stromkonto (CHF)': [6, 5, 8, 7, 6, 7, 7, 6, 8, 7],
+    'Gesparte Kosten durch Solaranlage (CHF)': [45.1, 48, 60, 67, 75, 83, 90, 93, 75, 67],
+    'Ersparnisse durch Stromkonto (CHF)': [6, 5.6, 8, 7, 6, 7, 7, 6, 8, 7],
     'Stromverbrauch (kWh)': [250, 260, 300, 320, 350, 380, 400, 420, 380, 350]  # Sample consumption
 }
 
@@ -20,8 +20,7 @@ data = {
 df = pd.DataFrame(data)
 
 # Electricity costs: Comparison without and with electricity account
-st.subheader("Stromkosten: Vergleich ohne Stromkonto und mit Stromkonto")
-st.write("Dieses Diagramm zeigt die monatlichen Stromkosten ohne Stromkonto im Vergleich zu den Kosten mit einem Standard-Stromkonto-Abo.")
+st.subheader("Stromkosten: Vergleich ohne/mit Stromkonto")
 
 # Plotly bar chart
 fig = go.Figure()

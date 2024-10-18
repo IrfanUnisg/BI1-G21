@@ -100,7 +100,7 @@ st.line_chart(df.set_index('Monat')['Erzeugte Energie (kWh)'])
 # Strompreis-Verlauf hinzufügen
 st.subheader("Strompreis-Verlauf (letzte 30 Tage, stündliche Messungen)")
 np.random.seed(42)
-strompreis = np.clip(0.07 + np.random.normal(0, 0.002, 24 * 30), 0.05, 0.09)
+strompreis = np.clip(0.07 + np.random.normal(0, 0.002, 24 * 30), 0.05, 0.1)
 
 # Erstelle Zeitstempel für jede Stunde der letzten 30 Tage
 time_index = pd.date_range(end=pd.Timestamp.today(), periods=24 * 30, freq='H').to_pydatetime().tolist()
@@ -113,7 +113,7 @@ fig_price.add_trace(go.Scatter(x=time_index, y=strompreis, mode='lines', name='S
 fig_price.update_layout(
     xaxis_title="Zeit",
     yaxis_title="Strompreis (CHF)",
-    title="Strompreis-Verlauf (mit Schwankungen um 7 Rp)",
+    title="Strompreis-Verlauf",
     margin=dict(l=40, r=40, t=40, b=40),
     height=400
 )

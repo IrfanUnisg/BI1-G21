@@ -33,12 +33,12 @@ fig.add_trace(go.Bar(
     marker_color='lightgrey'
 ))
 
-# Costs with electricity account
+# Costs with electricity account (changed to yellow)
 fig.add_trace(go.Bar(
     x=df['Monat'],
     y=df['Kosten mit Stromkonto (CHF)'],
     name='Kosten mit Stromkonto',
-    marker_color='lightblue'
+    marker_color='#facb04'  # Change to the specified yellow color
 ))
 
 # Adjust layout

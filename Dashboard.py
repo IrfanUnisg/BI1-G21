@@ -2,15 +2,7 @@ import streamlit as st
 import hmac
 import plotly.graph_objects as go
 import numpy as np
-page_bg_color = """
-<style>
-    .stApp {
-        background-color: #f0f4f4;
-    }
-</style>
-"""
 
-st.markdown(page_bg_color, unsafe_allow_html=True)
 # Set the blue color
 blue_color = "#044b5b"
 

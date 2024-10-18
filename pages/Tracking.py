@@ -60,10 +60,10 @@ fig.update_layout(
 
 # Display chart
 st.plotly_chart(fig, use_container_width=True)
-
+st.markdown("---")
 # Additional energy data
 st.subheader("Weitere Energiedaten")
-st.markdown("---")
+
 col1, col2, col3 = st.columns([1, 1, 1])
 
 # Total generated energy

@@ -79,7 +79,7 @@ st.markdown("---")
 
 # Current solar system performance
 st.subheader("Aktuelle Solardaten")
-col4, col5 = st.columns([1, 1])
+col4, col5, col6 = st.columns([1, 1, 1])
 
 # Example for current values
 current_energy = 15.7  # kWh

@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
-import numpy as np
 
 # Seitentitel
 st.title("Solaranlage Tracking Dashboard")
@@ -10,6 +9,7 @@ st.title("Solaranlage Tracking Dashboard")
 data = {
     'Monat': ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt'],
     'Erzeugte Energie (kWh)': [300, 320, 400, 450, 500, 550, 600, 620, 500, 450],
+    'Stromverbrauch (kWh)': [250, 270, 380, 430, 480, 510, 580, 610, 480, 420],
     'Kosten ohne Stromkonto (CHF)': [120, 128, 160, 180, 200, 220, 240, 248, 200, 180],
     'Kosten mit Stromkonto (CHF)': [100, 106, 130, 150, 165, 185, 200, 210, 170, 155],
     'Gesparte Kosten durch Solaranlage (CHF)': [45, 48, 60, 67, 75, 83, 90, 93, 75, 67],
@@ -59,7 +59,6 @@ fig.update_layout(
     )
 )
 
-# Diagramm anzeigen
 st.plotly_chart(fig, use_container_width=True)
 
 # Weitere Energiedaten
@@ -73,8 +72,8 @@ col1.metric("Gesamte erzeugte Energie (kWh)", f"{df['Erzeugte Energie (kWh)'].su
 # Gesamte Einsparungen durch die Solaranlage
 col2.metric("Gesamt eingesparte Kosten durch Solaranlage (CHF)", f"{df['Gesparte Kosten durch Solaranlage (CHF)'].sum():.2f} CHF")
 
-# Gesamte Einsparungen durch das Stromkonto
-col3.metric("Gesamt eingesparte Kosten durch Stromkonto (CHF)", f"{min(df['Ersparnisse durch Stromkonto (CHF)'].sum(), 100):.2f} CHF")
+# Gesamte Einsparungen durch das Stromkonto (leicht unter 100 CHF)
+col3.metric("Gesamt eingesparte Kosten durch Stromkonto (CHF)", f"{df['Ersparnisse durch Stromkonto (CHF)'].sum():.2f} CHF")
 
 st.markdown("---")
 
@@ -82,41 +81,26 @@ st.markdown("---")
 st.subheader("Aktuelle Solardaten")
 col4, col5 = st.columns([1, 1])
 
-# Aktuelle Daten
-current_energy = 15.7  # kWh
-current_savings = 9.2  # CHF
+# Beispiel für aktuelle Werte
+current_energy = 15  # kWh
+current_savings = 15  # CHF
 
-# Aktuelle Daten anzeigen
+# Aktuelle Daten
 col4.metric("Aktuell erzeugte Energie (heute)", f"{current_energy} kWh")
 col5.metric("Aktuelle Einsparungen (heute)", f"{current_savings:.2f} CHF")
 
-# Diagramm für die erzeugte Energie
-st.subheader("Monatliche erzeugte Energie")
-st.write("Dieses Diagramm zeigt die monatliche Energieproduktion Ihrer Solaranlage.")
+# Diagramm für die erzeugte Energie und Stromverbrauch
+st.subheader("Monatliche erzeugte Energie und Stromverbrauch")
+st.write("Dieses Diagramm zeigt die monatliche Energieproduktion und den Stromverbrauch Ihrer Solaranlage.")
 
-# Liniendiagramm für die Energieerzeugung
-st.line_chart(df.set_index('Monat')['Erzeugte Energie (kWh)'])
+# Liniendiagramm für die Energieerzeugung und Stromverbrauch
+fig_energy = go.Figure()
 
-# Strompreis-Verlauf hinzufügen
-st.subheader("Strompreis-Verlauf (letzte 30 Tage, stündliche Messungen)")
-np.random.seed(42)
-strompreis = np.clip(0.07 + np.random.normal(0, 0.002, 24 * 30), 0.05, 0.1)
-
-# Erstelle Zeitstempel für jede Stunde der letzten 30 Tage
-time_index = pd.date_range(end=pd.Timestamp.today(), periods=24 * 30, freq='H').to_pydatetime().tolist()
-
-# Plotly-Liniendiagramm für den Strompreis-Verlauf
-fig_price = go.Figure()
-fig_price.add_trace(go.Scatter(x=time_index, y=strompreis, mode='lines', name='Strompreis', line=dict(color='green')))
+fig_energy.add_trace(go.Scatter(x=df['Monat'], y=df['Erzeugte Energie (kWh)'], mode='lines+markers', name='Erzeugte Energie'))
+fig_energy.add_trace(go.Scatter(x=df['Monat'], y=df['Stromverbrauch (kWh)'], mode='lines+markers', name='Stromverbrauch', line=dict(dash='dash')))
 
 # Layout anpassen
-fig_price.update_layout(
-    xaxis_title="Zeit",
-    yaxis_title="Strompreis (CHF)",
-    title="Strompreis-Verlauf",
-    margin=dict(l=40, r=40, t=40, b=40),
-    height=400
-)
-
-# Diagramm anzeigen
-st.plotly_chart(fig_price, use_container_width=True)
+fig_energy.update_layout(
+    title="Monatliche erzeugte Energie und Stromverbrauch (kWh)",
+    xaxis_title="Monat",
+    yaxis_title

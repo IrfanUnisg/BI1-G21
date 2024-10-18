@@ -4,16 +4,14 @@ import plotly.graph_objects as go
 import numpy as np
 
 # Seite konfigurieren
-st.set_page_config(page_title="Stromkonto", page_icon="⚡", layout="wide")
+st.set_page_config(page_title="Virtual Battery", page_icon="⚡", layout="wide")
 
 # Passwort-Überprüfung
 def check_password():
-    """Returns `True` if the user had the correct password."""
     def password_entered():
-        """Checks whether a password entered von the user is correct."""
         if hmac.compare_digest(st.session_state["password"], st.secrets["password"]):
             st.session_state["password_correct"] = True
-            del st.session_state["password"]  # Don't store the password.
+            del st.session_state["password"]
         else:
             st.session_state["password_correct"] = False
 
@@ -34,71 +32,71 @@ if "guthaben" not in st.session_state:
     st.session_state["guthaben"] = 600
 if "cash" not in st.session_state:
     st.session_state["cash"] = 508
-if "stromverbrauch" not in st.session_state:
-    st.session_state["stromverbrauch"] = 500
 if "kapazitaet" not in st.session_state:
     st.session_state["kapazitaet"] = 3000
 
 # Werte laden
-kaufpreis = 0.26  # 26 Rp/kWh
-verkaufspreis = 0.09  # 9 Rp/kWh
-stromverbrauch = st.session_state["stromverbrauch"]
+preis_kauf = 0.26  # 26 Rp/kWh
+preis_verkauf = 0.09  # 9 Rp/kWh
 guthaben = st.session_state["guthaben"]
 cash = st.session_state["cash"]
 kapazitaet = st.session_state["kapazitaet"]
 
-# Hauptseite
-st.title("Virtual Battery")
-
-st.markdown("---")
-col1, col2 = st.columns([1, 2])
-
+# Layout mit einer besseren Struktur und Styling
+col1, col2 = st.columns([1, 4])
 with col1:
-    st.subheader("Stromverbrauch")
-    st.write(f"Aktueller Verbrauch: {stromverbrauch} kWh")
-
-    # Kontoübersicht (Stromguthaben und Cash)
-    st.subheader("Stromkonto")
-    st.write(f"Stromguthaben: {guthaben} kWh")
-    st.write(f"Kontoguthaben: {cash:.2f} CHF")
+    st.image("sk.png", width=100)
 
 with col2:
-    # Anzeige des Batterie-Status als Gauge-Diagramm
-    fig = go.Figure(go.Indicator(
-        mode="gauge+number",
-        value=guthaben,
-        gauge={'axis': {'range': [0, kapazitaet]},
-               'bar': {'color': "blue"}},
-        title={'text': "Batterie-Status (kWh)"},
-    ))
-    st.plotly_chart(fig, use_container_width=True)
+    st.title("Virtual Battery")
 
-st.markdown("---")
-# Stromhandel
-st.subheader("Stromhandel")
-
+# Kontoübersicht (Stromguthaben und Cash)
+st.subheader("Stromkonto")
 col3, col4 = st.columns(2)
 with col3:
-    st.write(f"Kaufpreis: {kaufpreis} CHF/kWh")
-    st.write(f"Verkaufspreis: {verkaufspreis} CHF/kWh")
+    st.write(f"Ihr aktuelles Stromguthaben: {guthaben} kWh")
+with col4:
+    st.write(f"Ihr Kontoguthaben: {cash:.2f} CHF")
 
-trade_type = st.radio("Möchten Sie Strom kaufen oder verkaufen?", ("Kaufen", "Verkaufen"))
-trade_amount = st.number_input(f"Wählen Sie die Menge an Strom zum {trade_type.lower()} (kWh)", min_value=0)
+# Anzeige des Batterie-Status als Gauge-Diagramm
+st.subheader("Batterie-Status")
+fig = go.Figure(go.Indicator(
+    mode="gauge+number",
+    value=guthaben,
+    gauge={'axis': {'range': [0, kapazitaet]},
+           'bar': {'color': "blue"}},
+    title={'text': "Batterie-Status"},
+))
+st.plotly_chart(fig, use_container_width=True)
+
+# Stromhandel
+st.subheader("Stromhandel")
+col5, col6 = st.columns(2)
+with col5:
+    trade_type = st.radio("Möchten Sie Strom kaufen oder verkaufen?", ("Kaufen", "Verkaufen"))
+    trade_amount = st.number_input(f"Menge an Strom zum {trade_type.lower()} (kWh)", min_value=0)
+
+with col6:
+    st.write(f"Kaufpreis: {preis_kauf * 100:.2f} Rp/kWh")
+    st.write(f"Verkaufspreis: {preis_verkauf * 100:.2f} Rp/kWh")
 
 if st.button(f"{trade_type} bestätigen"):
+    total_price = trade_amount * (preis_kauf if trade_type == "Kaufen" else preis_verkauf)
+
     if trade_type == "Kaufen":
-        total_price = trade_amount * kaufpreis
         if total_price <= cash:
-            st.session_state["guthaben"] += trade_amount
-            st.session_state["cash"] -= total_price
-            st.success(f"Sie haben {trade_amount} kWh für {total_price:.2f} CHF gekauft.")
+            guthaben += trade_amount
+            cash -= total_price
+            st.success(f"Sie haben erfolgreich {trade_amount} kWh gekauft.")
         else:
             st.error("Nicht genügend Guthaben!")
-    elif trade_type == "Verkaufen":
-        total_price = trade_amount * verkaufspreis
+    else:  # Verkaufen
         if trade_amount <= guthaben:
-            st.session_state["guthaben"] -= trade_amount
-            st.session_state["cash"] += total_price
-            st.success(f"Sie haben {trade_amount} kWh für {total_price:.2f} CHF verkauft.")
+            guthaben -= trade_amount
+            cash += total_price
+            st.success(f"Sie haben erfolgreich {trade_amount} kWh verkauft.")
         else:
-            st.error("Nicht genügend Stromguthaben!")
+            st.error("Nicht genügend Strom zu verkaufen!")
+
+    st.session_state["guthaben"] = guthaben
+    st.session_state["cash"] = cash

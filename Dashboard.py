@@ -3,6 +3,9 @@ import hmac
 import plotly.graph_objects as go
 import numpy as np
 
+# Set the blue color
+blue_color = "#044b5b"
+
 # Seite konfigurieren
 st.set_page_config(page_title="Virtual Battery", page_icon="⚡", layout="wide")
 
@@ -48,18 +51,18 @@ with col1:
     st.image("sk.png", width=100)
 
 with col2:
-    st.title("Virtual Battery")
+    st.markdown(f"<h1 style='color:{blue_color};'>Virtual Battery</h1>", unsafe_allow_html=True)
 
 # Kontoübersicht (Stromguthaben und Cash)
-st.subheader("Stromkonto")
+st.markdown(f"<h2 style='color:{blue_color};'>Stromkonto</h2>", unsafe_allow_html=True)
 col3, col4 = st.columns(2)
 with col3:
-    st.write(f"Ihr aktuelles Stromguthaben: {guthaben} kWh")
+    st.markdown(f"<p style='color:{blue_color};'>Ihr aktuelles Stromguthaben: {guthaben} kWh</p>", unsafe_allow_html=True)
 with col4:
-    st.write(f"Ihr Kontoguthaben: {cash:.2f} CHF")
+    st.markdown(f"<p style='color:{blue_color};'>Ihr Kontoguthaben: {cash:.2f} CHF</p>", unsafe_allow_html=True)
 
 # Anzeige des Batterie-Status als Gauge-Diagramm
-st.subheader("Batterie-Status")
+st.markdown(f"<h2 style='color:{blue_color};'>Batterie-Status</h2>", unsafe_allow_html=True)
 fig = go.Figure(go.Indicator(
     mode="gauge+number",
     value=guthaben,
@@ -70,15 +73,15 @@ fig = go.Figure(go.Indicator(
 st.plotly_chart(fig, use_container_width=True)
 
 # Stromhandel
-st.subheader("Stromhandel")
+st.markdown(f"<h2 style='color:{blue_color};'>Stromhandel</h2>", unsafe_allow_html=True)
 col5, col6 = st.columns(2)
 with col5:
     trade_type = st.radio("Möchten Sie Strom kaufen oder verkaufen?", ("Kaufen", "Verkaufen"))
     trade_amount = st.number_input(f"Menge an Strom zum {trade_type.lower()} (kWh)", min_value=0)
 
 with col6:
-    st.write(f"Kaufpreis: {preis_kauf * 100:.2f} Rp/kWh")
-    st.write(f"Verkaufspreis: {preis_verkauf * 100:.2f} Rp/kWh")
+    st.markdown(f"<p style='color:{blue_color};'>Kaufpreis: {preis_kauf * 100:.2f} Rp/kWh</p>", unsafe_allow_html=True)
+    st.markdown(f"<p style='color:{blue_color};'>Verkaufspreis: {preis_verkauf * 100:.2f} Rp/kWh</p>", unsafe_allow_html=True)
 
 if st.button(f"{trade_type} bestätigen"):
     total_price = trade_amount * (preis_kauf if trade_type == "Kaufen" else preis_verkauf)

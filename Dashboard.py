@@ -6,12 +6,21 @@ import numpy as np
 # Seite konfigurieren (must be first command)
 st.set_page_config(page_title="Virtual Battery", page_icon="⚡", layout="wide")
 
-# Inject custom CSS to change background color
+# Inject custom CSS for styling
 page_bg_css = f"""
 <style>
     .stApp {{
         background-color: #f0f4f4;
     }}
+    .css-1d391kg {{
+        background-color: #ffffff; /* Navigation bar color */
+    }}
+    .css-18ni7ap {{
+        background-color: #ffffff; /* Top bar color */
+    }}
+    .plotly {
+        background-color: #f0f4f4; /* Chart background color */
+    }
 </style>
 """
 
@@ -20,6 +29,27 @@ st.markdown(page_bg_css, unsafe_allow_html=True)
 # Set the blue and yellow colors
 blue_color = "#044b5b"
 yellow_color = "#facb04"
+
+# Passwort-Überprüfung
+def check_password():
+    def password_entered():
+        if hmac.compare_digest(st.session_state["password"], st.secrets["password"]):
+            st.session_state["password_correct"] = True
+            del st.session_state["password"]
+        else:
+            st.session_state["password_correct"] = False
+
+    if st.session_state.get("password_correct", False):
+        return True
+
+    st.subheader("Bitte Passwort eingeben.")
+    st.text_input("Passwort", type="password", on_change=password_entered, key="password")
+    if "password_correct" in st.session_state:
+        st.error("😕 Passwort inkorrekt")
+    return False
+
+if not check_password():
+    st.stop()
 
 # Initialisiere Session States
 if "guthaben" not in st.session_state:

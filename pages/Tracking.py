@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
+import numpy as np
 
 # Page title
 st.title("Solar Tracking Dashboard")
@@ -13,11 +14,25 @@ data = {
     'Kosten mit Stromkonto (CHF)': [100, 106, 130, 150, 165, 185, 200, 210, 170, 155],
     'Gesparte Kosten durch Solaranlage (CHF)': [45.1, 48, 60, 67, 75, 83, 90, 93, 75, 67],
     'Ersparnisse durch Stromkonto (CHF)': [6, 5.6, 8, 7, 6, 7, 7, 6, 8, 7],
-    'Stromverbrauch (kWh)': [250, 260, 300, 320, 350, 380, 400, 420, 380, 350]  # Sample consumption
+    'Stromverbrauch (kWh)': [250, 260, 300, 320, 350, 380, 400, 420, 380, 350],  # Sample consumption
 }
 
 # Convert to DataFrame
 df = pd.DataFrame(data)
+
+# Simulate hourly electricity prices
+np.random.seed(42)  # For reproducibility
+hours = 24 * len(df)  # 24 hours for each month
+base_price = 7  # Average price in Rp
+price_variation = 3  # Maximum variation in Rp
+hourly_prices = base_price + np.random.randint(-price_variation, price_variation + 1, hours)
+
+# Create a DataFrame for hourly prices
+hourly_df = pd.DataFrame({
+    'Stunde': np.tile(np.arange(24), len(df)),
+    'Monat': np.repeat(df['Monat'], 24),
+    'Strompreise (Rp)': hourly_prices
+})
 
 # Electricity costs: Comparison without and with electricity account
 st.subheader("Stromkosten: Vergleich ohne/mit Stromkonto")
@@ -107,3 +122,27 @@ fig_energy.update_layout(
 )
 
 st.plotly_chart(fig_energy, use_container_width=True)
+
+# Chart for hourly electricity prices
+st.subheader("Strompreise über die Stunden")
+fig_prices = go.Figure()
+
+# Line chart for hourly electricity prices
+fig_prices.add_trace(go.Scatter(
+    x=hourly_df['Stunde'],
+    y=hourly_df['Strompreise (Rp)'],
+    mode='lines+markers',
+    name='Strompreise (Rp)',
+    line=dict(color='#f03c20')
+))
+
+# Adjust layout for price chart
+fig_prices.update_layout(
+    title="Strompreise (Rp) über die Stunden",
+    xaxis_title="Stunde",
+    yaxis_title="Strompreis (Rp)",
+    height=400,
+)
+
+# Display hourly electricity price chart
+st.plotly_chart(fig_prices, use_container_width=True)

@@ -3,8 +3,9 @@ import hmac
 import plotly.graph_objects as go
 import numpy as np
 
-# Set the blue color
+# Set the blue and yellow colors
 blue_color = "#044b5b"
+yellow_color = "#facb04"
 
 # Seite konfigurieren
 st.set_page_config(page_title="Virtual Battery", page_icon="⚡", layout="wide")
@@ -67,7 +68,7 @@ fig = go.Figure(go.Indicator(
     mode="gauge+number",
     value=guthaben,
     gauge={'axis': {'range': [0, kapazitaet]},
-           'bar': {'color': "blue"}},
+           'bar': {'color': yellow_color}},  # Apply yellow color to the gauge bar
     title={'text': "Batterie-Status"},
 ))
 st.plotly_chart(fig, use_container_width=True)

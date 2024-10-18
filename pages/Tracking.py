@@ -125,8 +125,8 @@ previous_price = np.random.uniform(min_price, max_price)
 # Generate hourly prices for each day
 for day in range(days):
     for hour in range(24):
-        # Incrementally adjust the price within the range of ±3 Rappen
-        price_change = np.random.uniform(-3, 3)
+        # Incrementally adjust the price within a smaller range, e.g., ±0.5 Rp
+        price_change = np.random.uniform(-0.5, 0.5)  # Reduce the fluctuation
         current_price = previous_price + price_change
         # Ensure the price stays within the defined bounds
         current_price = max(min(current_price, max_price), min_price)  

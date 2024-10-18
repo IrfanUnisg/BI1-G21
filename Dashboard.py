@@ -66,7 +66,7 @@ fig = go.Figure(go.Indicator(
     value=guthaben,
     gauge={'axis': {'range': [0, kapazitaet]},
            'bar': {'color': yellow_color}},  # Apply yellow color to the gauge bar
-    title={'text': "Batterie-Status"},
+    title={'text': "Batterie-Status", 'font': {'color': blue_color}},  # Title color
 ))
 st.plotly_chart(fig, use_container_width=True)
 
@@ -94,4 +94,10 @@ if st.button(f"{trade_type} bestätigen"):
     else:  # Verkaufen
         if trade_amount <= guthaben:
             guthaben -= trade_amount
-            
+            cash += total_price
+            st.success(f"Sie haben erfolgreich {trade_amount} kWh verkauft.")
+        else:
+            st.error("Nicht genügend Strom zu verkaufen!")
+
+    st.session_state["guthaben"] = guthaben
+    st.session_state["cash"] = cash

@@ -34,6 +34,12 @@ st.write("""
 Für die kalten Monate sind **solare Heizungssysteme** ideal, um die Raumwärme auf umweltfreundliche Weise zu unterstützen und Ihre Heizkosten erheblich zu senken.
 """)
 
+# Textabschnitt für solare Warmwasser-Systeme
+st.subheader("Solarbetriebene Warmwassersysteme")
+st.write("""
+Solaranlagen können auch **Warmwasser** für den Haushalt bereitstellen, indem sie Sonnenenergie nutzen, um Wasser zu erwärmen. Dies kann besonders in den Sommermonaten erhebliche Energiekosteneinsparungen bringen.
+""")
+
 # Abschluss
 st.write("""
 Nutzen Sie das volle Potenzial Ihrer Solaranlage und gestalten Sie Ihr Zuhause effizienter und umweltfreundlicher!

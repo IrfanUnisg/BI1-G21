@@ -1,8 +1,5 @@
 import streamlit as st
 
-# Überschrift für die Seite
-st.title("Nützliche Anwendungen von Solaranlagen")
-
 # Einführungstext
 st.header("Wussten Sie schon?")
 

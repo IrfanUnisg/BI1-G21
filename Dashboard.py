@@ -4,26 +4,6 @@ import plotly.graph_objects as go
 # Seite konfigurieren (must be first command)
 st.set_page_config(page_title="Virtual Battery", page_icon="⚡", layout="wide")
 
-# Inject custom CSS for styling
-page_bg_css = """
-<style>
-    .stApp {
-        background-color: #f0f4f4; /* Page background color */
-    }
-    .css-1d391kg { /* Navigation bar color */
-        background-color: #ffffff;
-    }
-    .css-18ni7ap { /* Top bar color */
-        background-color: #ffffff;
-    }
-    .plotly {
-        background-color: #f0f4f4; /* Chart background color */
-    }
-</style>
-"""
-
-st.markdown(page_bg_css, unsafe_allow_html=True)
-
 # Set the blue and yellow colors
 blue_color = "#044b5b"
 yellow_color = "#facb04"

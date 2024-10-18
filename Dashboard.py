@@ -33,7 +33,7 @@ with col3:
     st.markdown(f"<p>Ihr aktuelles Stromguthaben: {guthaben} kWh</p>", unsafe_allow_html=True)
 with col4:
     st.markdown(f"<p>Ihr Kontoguthaben: {cash:.2f} CHF</p>", unsafe_allow_html=True)
-
+st.markdown("---")
 # Anzeige des Batterie-Status als Gauge-Diagramm
 st.markdown("<h2>Batterie-Status</h2>", unsafe_allow_html=True)
 fig = go.Figure(go.Indicator(
@@ -44,7 +44,7 @@ fig = go.Figure(go.Indicator(
     title={'text': "Batterie-Status", 'font': {'color': blue_color}},  # Title color
 ))
 st.plotly_chart(fig, use_container_width=True)
-
+st.markdown("---")
 # Stromhandel
 st.markdown("<h2>Stromhandel</h2>", unsafe_allow_html=True)
 col5, col6 = st.columns(2)

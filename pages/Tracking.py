@@ -30,7 +30,7 @@ fig.add_trace(go.Bar(
     x=df['Monat'],
     y=df['Kosten ohne Stromkonto (CHF)'],
     name='Kosten ohne Stromkonto',
-    marker_color='indianred'
+    marker_color='lightgrey'
 ))
 
 # Costs with electricity account
@@ -38,7 +38,7 @@ fig.add_trace(go.Bar(
     x=df['Monat'],
     y=df['Kosten mit Stromkonto (CHF)'],
     name='Kosten mit Stromkonto',
-    marker_color='lightsalmon'
+    marker_color='lightblue'
 ))
 
 # Adjust layout

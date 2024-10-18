@@ -95,8 +95,8 @@ st.write("Dieses Diagramm zeigt die monatliche Energieproduktion Ihrer Solaranla
 
 # Line chart for energy generation and consumption
 fig_energy = go.Figure()
-fig_energy.add_trace(go.Scatter(x=df['Monat'], y=df['Erzeugte Energie (kWh)'], mode='lines+markers', name='Erzeugte Energie', line=dict(color='blue')))
-fig_energy.add_trace(go.Scatter(x=df['Monat'], y=df['Stromverbrauch (kWh)'], mode='lines+markers', name='Stromverbrauch', line=dict(color='orange')))
+fig_energy.add_trace(go.Scatter(x=df['Monat'], y=df['Erzeugte Energie (kWh)'], mode='lines+markers', name='Erzeugte Energie', line=dict(color='#044b5b')))
+fig_energy.add_trace(go.Scatter(x=df['Monat'], y=df['Stromverbrauch (kWh)'], mode='lines+markers', name='Stromverbrauch', line=dict(color='#facb04')))
 
 # Adjust layout
 fig_energy.update_layout(

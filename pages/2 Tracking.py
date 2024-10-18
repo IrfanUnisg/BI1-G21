@@ -10,8 +10,8 @@ st.title("Solar Tracking Dashboard")
 data = {
     'Monat': ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt'],
     'Erzeugte Energie (kWh)': [300, 320, 400, 450, 500, 550, 600, 620, 500, 450],
-    'Kosten ohne Stromkonto (CHF)': [120, 128, 160, 180, 200, 220, 240, 248, 200, 180],
-    'Kosten mit Stromkonto (CHF)': [100, 106, 130, 150, 165, 185, 200, 210, 170, 155],
+    'Kosten ohne Stromkonto (CHF)': [240, 220, 180, 160, 150, 180, 200, 220, 230, 245],
+    'Kosten mit Stromkonto (CHF)': [200, 175, 150, 145, 140, 150, 180, 195, 200, 205],
     'Gesparte Kosten durch Solaranlage (CHF)': [45.1, 48, 60, 67, 75, 83, 90, 93, 75, 67],
     'Ersparnisse durch Stromkonto (CHF)': [6, 5.6, 8, 7, 6, 7, 7, 6, 8, 7],
     'Stromverbrauch (kWh)': [250, 260, 300, 320, 350, 380, 400, 420, 380, 350]  # Sample consumption

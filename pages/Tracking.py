@@ -83,8 +83,8 @@ st.subheader("Aktuelle Solardaten")
 col4, col5 = st.columns([1, 1])
 
 # Aktuelle Daten
-current_energy = 15  # kWh
-current_savings = 15  # CHF
+current_energy = 15.7  # kWh
+current_savings = 9.2  # CHF
 
 # Aktuelle Daten anzeigen
 col4.metric("Aktuell erzeugte Energie (heute)", f"{current_energy} kWh")

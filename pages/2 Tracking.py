@@ -14,7 +14,7 @@ data = {
     'Kosten mit Stromkonto (CHF)': [200, 175, 150, 145, 140, 150, 180, 195, 200, 205],
     'Gesparte Kosten durch Solaranlage (CHF)': [45.1, 48, 60, 67, 75, 83, 90, 93, 75, 67],
     'Ersparnisse durch Stromkonto (CHF)': [6, 5.6, 8, 7, 6, 7, 7, 6, 8, 7],
-    'Stromverbrauch (kWh)': [450, 400, 350, 300, 250, 240, 260, 300, 340, 350]  # Sample consumption
+    'Stromverbrauch (kWh)': [450, 400, 350, 300, 250, 240, 260, 320, 370, 410]  # Sample consumption
 }
 
 # Convert to DataFrame

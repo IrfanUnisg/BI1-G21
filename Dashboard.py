@@ -3,6 +3,9 @@ import hmac
 import plotly.graph_objects as go
 import numpy as np
 
+# Seite konfigurieren (must be first command)
+st.set_page_config(page_title="Virtual Battery", page_icon="⚡", layout="wide")
+
 # Inject custom CSS to change background color
 page_bg_css = f"""
 <style>
@@ -17,9 +20,6 @@ st.markdown(page_bg_css, unsafe_allow_html=True)
 # Set the blue and yellow colors
 blue_color = "#044b5b"
 yellow_color = "#facb04"
-
-# Seite konfigurieren
-st.set_page_config(page_title="Virtual Battery", page_icon="⚡", layout="wide")
 
 # Passwort-Überprüfung
 def check_password():

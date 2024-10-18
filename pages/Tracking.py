@@ -113,23 +113,23 @@ st.plotly_chart(fig_energy, use_container_width=True)
 np.random.seed(0)  # For reproducibility
 days = 31  # Number of days in October
 hours = np.arange(1, 25)  # Hourly data from 1 to 24
-avg_price = 7  # Average price in Rp
-price_fluctuation = 3  # Fluctuation range in Rp
+min_price = 5  # Minimum price in Rp
+max_price = 10  # Maximum price in Rp
 
 # Initialize the list of hourly prices
 hourly_prices = []
 
-# Start with the average price
-previous_price = avg_price
+# Start with a random price within the specified range
+previous_price = np.random.uniform(min_price, max_price)
 
 # Generate hourly prices for each day
 for day in range(days):
     for hour in range(24):
         # Incrementally adjust the price within the range of ±3 Rappen
-        price_change = np.random.uniform(-price_fluctuation, price_fluctuation)
+        price_change = np.random.uniform(-3, 3)
         current_price = previous_price + price_change
-        # Ensure the price does not fall below 0
-        current_price = max(current_price, 0)  
+        # Ensure the price stays within the defined bounds
+        current_price = max(min(current_price, max_price), min_price)  
         hourly_prices.append(current_price)
         previous_price = current_price  # Update previous price for the next hour
 
@@ -164,4 +164,3 @@ fig_prices.update_layout(
 
 # Display the price chart
 st.plotly_chart(fig_prices, use_container_width=True)
-

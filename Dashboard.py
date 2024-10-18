@@ -1,5 +1,4 @@
 import streamlit as st
-import hmac
 import plotly.graph_objects as go
 
 # Seite konfigurieren (must be first command)
@@ -28,27 +27,6 @@ st.markdown(page_bg_css, unsafe_allow_html=True)
 # Set the blue and yellow colors
 blue_color = "#044b5b"
 yellow_color = "#facb04"
-
-# Passwort-Überprüfung
-def check_password():
-    def password_entered():
-        if hmac.compare_digest(st.session_state["password"], st.secrets["password"]):
-            st.session_state["password_correct"] = True
-            del st.session_state["password"]
-        else:
-            st.session_state["password_correct"] = False
-
-    if st.session_state.get("password_correct", False):
-        return True
-
-    st.subheader("Bitte Passwort eingeben.")
-    st.text_input("Passwort", type="password", on_change=password_entered, key="password")
-    if "password_correct" in st.session_state:
-        st.error("😕 Passwort inkorrekt")
-    return False
-
-if not check_password():
-    st.stop()
 
 # Initialisiere Session States
 if "guthaben" not in st.session_state:
@@ -116,10 +94,4 @@ if st.button(f"{trade_type} bestätigen"):
     else:  # Verkaufen
         if trade_amount <= guthaben:
             guthaben -= trade_amount
-            cash += total_price
-            st.success(f"Sie haben erfolgreich {trade_amount} kWh verkauft.")
-        else:
-            st.error("Nicht genügend Strom zu verkaufen!")
-
-    st.session_state["guthaben"] = guthaben
-    st.session_state["cash"] = cash
+            

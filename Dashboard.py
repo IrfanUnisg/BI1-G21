@@ -1,6 +1,15 @@
 import streamlit as st
 import plotly.graph_objects as go
-
+st.markdown(
+    """
+    <style>
+    .css-1d391kg {
+        background-color: #f0f4f4; /* Change this to your desired color */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 # Seite konfigurieren (must be first command)
 st.set_page_config(page_title="Virtual Battery", page_icon="⚡", layout="wide")
 

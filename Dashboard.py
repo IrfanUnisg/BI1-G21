@@ -2,7 +2,7 @@ import streamlit as st
 import plotly.graph_objects as go
 
 # Seite konfigurieren (must be first command)
-st.set_page_config(page_title="Virtual Battery", page_icon="⚡", layout="wide")
+st.set_page_config(page_title="Virtual Battery", page_icon="⚡")
 
 # Set the blue and yellow colors
 blue_color = "#044b5b"

@@ -12,7 +12,7 @@ data = {
     'Kosten ohne Stromkonto (CHF)': [120, 128, 160, 180, 200, 220, 240, 248, 200, 180],
     'Kosten mit Stromkonto (CHF)': [100, 106, 130, 150, 165, 185, 200, 210, 170, 155],
     'Gesparte Kosten durch Solaranlage (CHF)': [45, 48, 60, 67, 75, 83, 90, 93, 75, 67],
-    'Ersparnisse durch Stromkonto (CHF)': [20, 22, 30, 35, 35, 35, 40, 38, 30, 25],
+    'Ersparnisse durch Stromkonto (CHF)': [6, 5, 8, 7, 6, 7, 7, 6, 8, 7],
     'Stromverbrauch (kWh)': [250, 260, 300, 320, 350, 380, 400, 420, 380, 350]  # Sample consumption
 }
 
@@ -83,8 +83,8 @@ st.subheader("Aktuelle Solardaten")
 col4, col5 = st.columns([1, 1])
 
 # Example for current values
-current_energy = 15  # kWh
-current_savings = 15  # CHF
+current_energy = 15.7  # kWh
+current_savings = 9.2  # CHF
 
 # Current data
 col4.metric("Aktuell erzeugte Energie (heute)", f"{current_energy} kWh")

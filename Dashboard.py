@@ -3,6 +3,17 @@ import hmac
 import plotly.graph_objects as go
 import numpy as np
 
+# Inject custom CSS to change background color
+page_bg_css = f"""
+<style>
+    .stApp {{
+        background-color: #f0f4f4;
+    }}
+</style>
+"""
+
+st.markdown(page_bg_css, unsafe_allow_html=True)
+
 # Set the blue and yellow colors
 blue_color = "#044b5b"
 yellow_color = "#facb04"

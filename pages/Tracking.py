@@ -47,7 +47,6 @@ fig.update_layout(
     barmode='group',
     xaxis_title="Monat",
     yaxis_title="Kosten (CHF)",
-    title="Monatliche Stromkosten: Mit und ohne Stromkonto im Vergleich",
     margin=dict(l=40, r=40, t=40, b=40),
     height=400,
     legend=dict(
@@ -89,7 +88,7 @@ current_savings = 9.2  # CHF
 # Current data
 col4.metric("Aktuell erzeugte Energie (heute)", f"{current_energy} kWh")
 col5.metric("Aktuelle Einsparungen (heute)", f"{current_savings:.2f} CHF")
-
+st.markdown("---")
 # Chart for generated energy
 st.subheader("Monatliche erzeugte Energie")
 st.write("Dieses Diagramm zeigt die monatliche Energieproduktion Ihrer Solaranlage, einschließlich des Stromverbrauchs.")
@@ -139,9 +138,9 @@ price_df = pd.DataFrame({
     'Tag': np.repeat(np.arange(1, days + 1), 24),
     'Preis (Rp)': hourly_prices
 })
-
+st.markdown("---")
 # Plot hourly prices
-st.subheader("Stündliche Strompreise für Oktober")
+st.subheader("Spotmarkt Strompreisentwicklung")
 fig_prices = go.Figure()
 
 fig_prices.add_trace(go.Scatter(
@@ -154,7 +153,6 @@ fig_prices.add_trace(go.Scatter(
 
 # Adjust layout for price chart
 fig_prices.update_layout(
-    title="Stündliche Strompreise für Oktober",
     xaxis_title="Zeit",
     yaxis_title="Preis (Rp)",
     height=400,

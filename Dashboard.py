@@ -18,10 +18,13 @@ if "kapazitaet" not in st.session_state:
 
 # Werte laden
 preis_kauf = 0.26  # 26 Rp/kWh
-preis_verkauf = 0.09  # 9 Rp/kWh
+preis_verkauf = 0.09  # 9 Rp/kWh (for selling)
 guthaben = st.session_state["guthaben"]
 cash = st.session_state["cash"]
 kapazitaet = st.session_state["kapazitaet"]
+
+# Calculate the value of stored energy in CHF
+stored_energy_value = guthaben * preis_verkauf
 
 # Titel
 st.markdown("<h1>Virtual Battery</h1>", unsafe_allow_html=True)
@@ -34,6 +37,7 @@ with col3:
 with col4:
     st.markdown(f"<p>Ihr Kontoguthaben: {cash:.2f} CHF</p>", unsafe_allow_html=True)
 st.markdown("---")
+
 # Anzeige des Batterie-Status als Gauge-Diagramm
 st.markdown("<h2>Batterie-Status</h2>", unsafe_allow_html=True)
 fig = go.Figure(go.Indicator(
@@ -41,10 +45,15 @@ fig = go.Figure(go.Indicator(
     value=guthaben,
     gauge={'axis': {'range': [0, kapazitaet]},
            'bar': {'color': yellow_color}},  # Apply yellow color to the gauge bar
-    title={'text': "Batterie-Status", 'font': {'color': blue_color}},  # Title color
+    title={'text': "Batterie-Status (kWh)", 'font': {'color': blue_color}},  # Title color
 ))
+
 st.plotly_chart(fig, use_container_width=True)
+
+# Display the equivalent value in CHF below the gauge chart
+st.markdown(f"<p>Aktueller Batteriewert: {stored_energy_value:.2f} CHF</p>", unsafe_allow_html=True)
 st.markdown("---")
+
 # Stromhandel
 st.markdown("<h2>Stromhandel</h2>", unsafe_allow_html=True)
 col5, col6 = st.columns(2)
@@ -74,5 +83,6 @@ if st.button(f"{trade_type} bestätigen"):
         else:
             st.error("Nicht genügend Strom zu verkaufen!")
 
+    # Update session state
     st.session_state["guthaben"] = guthaben
     st.session_state["cash"] = cash

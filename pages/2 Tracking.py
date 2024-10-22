@@ -5,6 +5,19 @@ import numpy as np
 
 st.set_page_config(layout="wide")
 
+# Custom CSS for centering and making metric labels bold
+st.markdown("""
+    <style>
+        .stMetric label {
+            display: block;
+            text-align: center;  /* Center the labels */
+        }
+        .stMetric div {
+            text-align: center;  /* Ensure values are also centered */
+        }
+    </style>
+""", unsafe_allow_html=True)
+
 # Page title
 st.markdown("<h1 style='text-align: center;'>Solar Tracking Dashboard</h1>", unsafe_allow_html=True)
 st.markdown("---")
@@ -103,7 +116,6 @@ st.markdown("---")
 
 # Chart for generated energy
 st.markdown("<h2 style='text-align: center;'>Monatliche erzeugte Energie</h2>", unsafe_allow_html=True)
-
 
 # Line chart for energy generation and consumption
 fig_energy = go.Figure()

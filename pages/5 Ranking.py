@@ -16,7 +16,7 @@ data_gemeinde = {
 }
 
 data_freunde = {
-    "Name": ["Paul Fischer", "Nina Maurer", "David Baumann", "Katja Beck", "Chris Vogel"],
+    "Name": ["Luc Fischer", "Irfan Kujovic", "Celia Bührer", "Marco Köhler", "Flurin Oehler"],
     "Blitze": [65, 60, 55, 50, 45]
 }
 
@@ -30,19 +30,19 @@ st.markdown("<h1 style='text-align: center;'>⚡ Ranking </h1>", unsafe_allow_ht
 st.markdown("---")
 
 # Ranking Schweiz
-st.markdown("<h2 style='text-align: center;'>Ranking: Schweiz</h2>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align: center;'>Schweiz</h2>", unsafe_allow_html=True)
 st.table(df_schweiz)
 
 st.markdown("---")
 
 # Ranking Gemeinde
-st.markdown("<h2 style='text-align: center;'>Ranking: Gemeinde</h2>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align: center;'>Gemeinde Uzwil</h2>", unsafe_allow_html=True)
 st.table(df_gemeinde)
 
 st.markdown("---")
 
 # Ranking Freunde
-st.markdown("<h2 style='text-align: center;'>Ranking: Freunde</h2>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align: center;'>Freunde</h2>", unsafe_allow_html=True)
 st.table(df_freunde)
 
 # Abschluss

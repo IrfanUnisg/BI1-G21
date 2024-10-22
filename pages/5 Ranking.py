@@ -5,27 +5,27 @@ st.set_page_config(page_title="Ranking", page_icon="⚡", layout="centered")
 
 # Fiktive Daten für Rankings
 ranking_schweiz = [
-    {"Rang": 1, "Name": "Lukas Meier", "Blitze": 120},
-    {"Rang": 2, "Name": "Sarah Müller", "Blitze": 115},
-    {"Rang": 3, "Name": "Thomas Schmid", "Blitze": 110},
-    {"Rang": 4, "Name": "Claudia Huber", "Blitze": 105},
-    {"Rang": 5, "Name": "Michael Weber", "Blitze": 100},
+    {"Rang": 1, "Name": "Lukas Meier", "Blitze": 563},
+    {"Rang": 2, "Name": "Sarah Müller", "Blitze": 554},
+    {"Rang": 3, "Name": "Thomas Schmid", "Blitze": 549},
+    {"Rang": 4, "Name": "Claudia Huber", "Blitze": 497},
+    {"Rang": 5, "Name": "Michael Weber", "Blitze": 486},
 ]
 
 ranking_gemeinde = [
-    {"Rang": 1, "Name": "Anna Steiner", "Blitze": 90},
-    {"Rang": 2, "Name": "Jonas Keller", "Blitze": 85},
-    {"Rang": 3, "Name": "Laura Frei", "Blitze": 80},
-    {"Rang": 4, "Name": "Peter Graf", "Blitze": 75},
-    {"Rang": 5, "Name": "Monika Berger", "Blitze": 70},
+    {"Rang": 1, "Name": "Anna Steiner", "Blitze": 256},
+    {"Rang": 2, "Name": "Jonas Keller", "Blitze": 178},
+    {"Rang": 3, "Name": "Laura Frei", "Blitze": 167},
+    {"Rang": 4, "Name": "Peter Graf", "Blitze": 145},
+    {"Rang": 5, "Name": "Monika Berger", "Blitze": 130},
 ]
 
 ranking_freunde = [
-    {"Rang": 1, "Name": "Luc Fischer", "Blitze": 65},
-    {"Rang": 2, "Name": "Irfan Kujovic", "Blitze": 60},
-    {"Rang": 3, "Name": "Celia Bührer", "Blitze": 55},
-    {"Rang": 4, "Name": "Marco Köhler", "Blitze": 50},
-    {"Rang": 5, "Name": "Flurin Oehler", "Blitze": 45},
+    {"Rang": 1, "Name": "Luc Fischer", "Blitze": 124},
+    {"Rang": 2, "Name": "Irfan Kujovic", "Blitze": 112},
+    {"Rang": 3, "Name": "Celia Bührer", "Blitze": 109},
+    {"Rang": 4, "Name": "Marco Köhler", "Blitze": 106},
+    {"Rang": 5, "Name": "Flurin Oehler", "Blitze": 99},
 ]
 
 # Hilfsfunktion, um eine HTML-Tabelle zu generieren

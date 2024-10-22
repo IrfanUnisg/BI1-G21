@@ -5,7 +5,7 @@ import numpy as np
 
 st.set_page_config(layout="wide")
 
-# Custom CSS for centering elements and headers
+# Custom CSS for centering all content
 st.markdown("""
     <style>
         .center-content {
@@ -14,14 +14,21 @@ st.markdown("""
             align-items: center;
             text-align: center;
         }
+        .stMetric {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .stElement div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
         .stButton button {
             display: block;
             margin: 0 auto;
-        }
-        .stMetric {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
         }
         h1, h2, h3 {
             text-align: center;
@@ -93,7 +100,7 @@ st.markdown("---")
 st.markdown("<h2 class='center-content'>Weitere Energiedaten</h2>", unsafe_allow_html=True)
 
 # Centered columns for metrics
-col1, col2, col3 = st.columns([1, 1, 1])
+col1, col2, col3 = st.columns(3)
 
 # Total generated energy
 col1.metric("Gesamte erzeugte Energie (kWh)", f"{df['Erzeugte Energie (kWh)'].sum()} kWh")
@@ -109,7 +116,7 @@ st.markdown("---")
 # Current solar system performance
 st.markdown("<h2 class='center-content'>Aktuelle Solardaten</h2>", unsafe_allow_html=True)
 
-col4, col5, col6 = st.columns([1, 1, 1])
+col4, col5, col6 = st.columns(3)
 
 # Example for current values
 current_energy = 15.7  # kWh

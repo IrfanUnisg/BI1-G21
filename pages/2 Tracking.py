@@ -117,7 +117,7 @@ st.markdown("---")
 
 # Chart for generated energy
 st.markdown("<h2 style='text-align: center;'>Monatliche erzeugte Energie</h2>", unsafe_allow_html=True)
-st.write("Dieses Diagramm zeigt die monatliche Energieproduktion Ihrer Solaranlage, einschließlich des Stromverbrauchs.")
+
 
 # Line chart for energy generation and consumption
 fig_energy = go.Figure()

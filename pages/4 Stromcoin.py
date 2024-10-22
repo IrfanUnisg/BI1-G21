@@ -10,7 +10,7 @@ st.title("Stromcoin")
 st.write("""
 **Stromcoin** ist ein Krypto-Token, der als Belohnung für die Nutzung der Stromkonto-App vergeben wird. Das Besondere an Stromcoin ist, dass sein Wert nur steigen kann. Nutzer, die überschüssigen Strom über die App handeln oder ihre Energie effizient verwalten, profitieren durch die Teilnahme am Stromcoin-basierten Gewinnbeteiligungssystem.
 """)
-
+st.markdown("---")
 # Additional fictitious Stromcoin details
 st.subheader("Wichtige Informationen über Stromcoin:")
 st.write("""

@@ -3,7 +3,6 @@ import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
 
-
 # Page title
 st.title("Stromcoin")
 
@@ -23,10 +22,10 @@ st.write("""
 
 st.markdown("---")
 
-# Generate fictitious historical price data for Stromcoin (last 30 days with only upward trend)
+# Generate fictitious historical price data for Stromcoin (last year with only upward trend)
 np.random.seed(0)
-days = pd.date_range(end=pd.Timestamp.today(), periods=30)
-prices = np.cumsum(np.random.uniform(0.01, 0.05, size=len(days)))/10  # Prices only going up
+days = pd.date_range(end=pd.Timestamp.today(), periods=365)
+prices = np.cumsum(np.random.uniform(0.01, 0.05, size=len(days))) / 10  # Prices only going up
 
 # Create a DataFrame for the price data
 price_df = pd.DataFrame({
@@ -35,7 +34,7 @@ price_df = pd.DataFrame({
 })
 
 # Plot the price chart
-st.subheader("Stromcoin Preisentwicklung (letzte 30 Tage)")
+st.subheader("Stromcoin Preisentwicklung (letztes Jahr)")
 fig = go.Figure()
 
 fig.add_trace(go.Scatter(
@@ -52,7 +51,7 @@ fig.update_layout(
     yaxis_title="Preis (CHF)",
     height=400,
     margin=dict(l=40, r=40, t=40, b=40),
-    xaxis_tickformat='%d %b',  # Format the date axis
+    xaxis_tickformat='%b %Y',  # Format the date axis for monthly display
     showlegend=False
 )
 
@@ -76,3 +75,4 @@ st.markdown("---")
 st.write("""
 Stromcoin ist nicht nur eine Belohnung für die Nutzung von Stromkonto, sondern auch ein Weg, langfristig an der Wertschöpfung im Strommarkt zu partizipieren. Seien Sie Teil der nachhaltigen Energiezukunft und profitieren Sie vom wachsenden Wert von Stromcoin!
 """)
+

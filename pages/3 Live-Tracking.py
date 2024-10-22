@@ -73,4 +73,4 @@ with col6:
 with col7:
     st.metric("Eigenverbrauch", "4.2 kWh")
 with col8:
-    st.metric("Bezug", "27.7 kWh")
+    st.metric("Bezug", "11.1 kWh")

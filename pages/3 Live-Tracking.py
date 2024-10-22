@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
-
+st.set_page_config(layout="wide")
 # Custom CSS for centering and stacking metric titles and values
 st.markdown("""
     <style>

@@ -54,26 +54,23 @@ fig.update_layout(
     xaxis_rangeslider_visible=True
 )
 
-# Layout to display chart next to summary
-col_chart, col_summary = st.columns([2, 1])
+# Display the plot
+st.plotly_chart(fig, use_container_width=True)
 
-# Display the plot in the first column
-with col_chart:
-    st.plotly_chart(fig, use_container_width=True)
+# Add a horizontal line
+st.markdown("---")
 
-# Summary of energy usage in the second column
-with col_summary:
-    st.markdown("---")
-    st.subheader("Zusammenfassung (Tag)")
+# Summary of energy usage below the chart
+st.subheader("Zusammenfassung (Tag)")
 
-    # Static summary values with correct column setup
-    col5, col6, col7, col8 = st.columns(4)  # Create 4 columns
+# Static summary values displayed in 4 columns
+col5, col6, col7, col8 = st.columns(4)
 
-    with col5:
-        st.metric("Verbrauch", "15.2 kWh")
-    with col6:
-        st.metric("Solarenegie", "7.3 kWh")
-    with col7:
-        st.metric("Eigenverbrauch", "4.2 kWh")
-    with col8:
-        st.metric("Bezug", "27.7 kWh")
+with col5:
+    st.metric("Verbrauch", "15.2 kWh")
+with col6:
+    st.metric("Solarenegie", "7.3 kWh")
+with col7:
+    st.metric("Eigenverbrauch", "4.2 kWh")
+with col8:
+    st.metric("Bezug", "27.7 kWh")

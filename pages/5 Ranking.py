@@ -3,6 +3,9 @@ import streamlit as st
 # Seite konfigurieren
 st.set_page_config(page_title="Ranking", page_icon="⚡", layout="centered")
 
+# Eigene Blitze
+own_blitze = 112
+
 # Fiktive Daten für Rankings
 ranking_schweiz = [
     {"Rang": 1, "Name": "Lukas Meier", "Blitze": 563},
@@ -47,6 +50,10 @@ def generate_table(data):
 
 # Seite Titel
 st.markdown("<h1 style='text-align: center;'>⚡ Ranking ⚡</h1>", unsafe_allow_html=True)
+st.markdown("---")
+
+# Anzeige für eigene Blitze
+st.markdown(f"<h2 style='text-align: center;'>Du hast {own_blitze} Blitze gesammelt!</h2>", unsafe_allow_html=True)
 st.markdown("---")
 
 # Ranking Schweiz

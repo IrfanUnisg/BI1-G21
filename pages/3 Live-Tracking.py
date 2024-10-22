@@ -66,8 +66,9 @@ with col_summary:
     st.markdown("---")
     st.subheader("Zusammenfassung (Tag)")
 
-    # Static summary values
-    col5, col6, col7, col8 = st.columns(2)
+    # Static summary values with correct column setup
+    col5, col6, col7, col8 = st.columns(4)  # Create 4 columns
+
     with col5:
         st.metric("Verbrauch", "15.2 kWh")
     with col6:

@@ -1,7 +1,7 @@
 import streamlit as st
 
 # Seite konfigurieren
-st.set_page_config(page_title="Ranking", page_icon="⚡", layout="centered")
+st.set_page_config(page_title="Ranking", page_icon="⚡", layout="wide")
 
 # Eigene Blitze
 own_blitze = 112

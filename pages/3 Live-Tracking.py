@@ -23,7 +23,7 @@ st.markdown("""
 
 # Page title
 st.markdown("<h1 style='text-align: center;'>Live-Tracking Dashboard</h1>", unsafe_allow_html=True)
-
+st.markdown("---")
 # Live consumption data
 st.markdown("<h2 style='text-align: center;'>Live Daten</h2>", unsafe_allow_html=True)
 
@@ -120,7 +120,7 @@ fig.update_layout(
     ),
     height=500,
 )
-
+st.markdown("---")
 # Display the plot
 st.plotly_chart(fig, use_container_width=True)
 

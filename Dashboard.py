@@ -64,8 +64,6 @@ stored_energy_value = guthaben * preis_verkauf
 # Seite Titel
 st.markdown("<h1 class='center-content'>Virtual Battery</h1>", unsafe_allow_html=True)
 
-# Abschnitt: Kontoübersicht
-st.markdown("<h2 class='center-content'>Kontoübersicht</h2>", unsafe_allow_html=True)
 st.markdown("---")
 col1, col2 = st.columns(2)
 

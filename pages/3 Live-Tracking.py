@@ -16,7 +16,7 @@ with col2:
 with col3:
     st.metric("Aktuelle Solarleistung", "201 W")
 with col4:
-    st.metric("Warmwasser Temperatur", "46 °C")
+    st.metric("Warmwasser Temperatur", "55 °C")
 
 # Example of power consumption and solar power generation over time (simulating the data from the image)
 time = pd.date_range(start="2023-10-19 00:00", end="2023-10-19 23:59", freq="5min")

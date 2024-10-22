@@ -27,7 +27,7 @@ kapazitaet = st.session_state["kapazitaet"]
 stored_energy_value = guthaben * preis_verkauf
 
 # Seite Titel
-st.markdown("<h1 style='text-align: center;'>⚡ Virtual Battery ⚡</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center;'>Virtual Battery</h1>", unsafe_allow_html=True)
 
 # Abschnitt: Kontoübersicht
 st.markdown("<h2 style='text-align: center;'>Kontoübersicht</h2>", unsafe_allow_html=True)

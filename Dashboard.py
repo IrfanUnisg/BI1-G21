@@ -8,7 +8,7 @@ st.set_page_config(page_title="Virtual Battery", page_icon="⚡", layout="wide")
 blue_color = "#044b5b"
 yellow_color = "#facb04"
 
-# Custom CSS for centering content
+# Custom CSS for centering content and ensuring values are below titles
 st.markdown("""
     <style>
         .center-content {
@@ -31,6 +31,14 @@ st.markdown("""
             display: flex;
             justify-content: center;
             align-items: center;
+        }
+        .value-under-title h4 {
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        .value-under-title h2 {
+            margin-top: 0;
+            text-align: center;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -62,9 +70,9 @@ st.markdown("---")
 col1, col2 = st.columns(2)
 
 with col1:
-    st.markdown(f"<div class='center-content'><h4>Aktuelles Stromguthaben: </h4><h2 style='color:{blue_color};'>{guthaben} kWh</h2></div>", unsafe_allow_html=True)
+    st.markdown(f"<div class='value-under-title'><h4>Aktuelles Stromguthaben:</h4><h2 style='color:{blue_color};'>{guthaben} kWh</h2></div>", unsafe_allow_html=True)
 with col2:
-    st.markdown(f"<div class='center-content'><h4>Kontoguthaben: </h4><h2 style='color:{blue_color};'>{cash:.2f} CHF</h2></div>", unsafe_allow_html=True)
+    st.markdown(f"<div class='value-under-title'><h4>Kontoguthaben:</h4><h2 style='color:{blue_color};'>{cash:.2f} CHF</h2></div>", unsafe_allow_html=True)
 
 # Abschnitt: Batterie-Status
 st.markdown("---")

@@ -20,7 +20,8 @@ with col4:
 
 # Example of power consumption and solar power generation over time (simulating the data for the full day)
 time = pd.date_range(start="2023-10-20 00:00", end="2023-10-20 23:59", freq="5min")
-consumption = np.random.uniform(0.5, 1.5, len(time))  # Simulate power consumption
+# Reduce the range of random consumption to simulate less fluctuation
+consumption = np.random.uniform(0.9, 1.2, len(time))  # Simulate power consumption with reduced variation
 
 # Initialize solar power array
 solar = np.zeros(len(time))
@@ -36,8 +37,8 @@ peak_idx = np.where(time == peak_time)[0][0]
 end_idx = np.where(time == end_time)[0][0]
 
 # Solar power ramps up and down with some random variability
-solar[start_idx:peak_idx] = np.linspace(0, 1.2, peak_idx - start_idx) + np.random.uniform(-0.1, 0.1, peak_idx - start_idx)
-solar[peak_idx:end_idx] = np.linspace(1.2, 0, end_idx - peak_idx) + np.random.uniform(-0.1, 0.1, end_idx - peak_idx)
+solar[start_idx:peak_idx] = np.linspace(0, 1.2, peak_idx - start_idx) + np.random.uniform(-0.05, 0.05, peak_idx - start_idx)
+solar[peak_idx:end_idx] = np.linspace(1.2, 0, end_idx - peak_idx) + np.random.uniform(-0.05, 0.05, end_idx - peak_idx)
 
 # Make sure no negative values
 solar[solar < 0] = 0

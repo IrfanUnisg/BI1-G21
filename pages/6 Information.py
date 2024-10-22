@@ -2,7 +2,6 @@ import streamlit as st
 st.set_page_config(layout="wide")
 # Einführungstext
 st.header("Wussten Sie schon?")
-st.markdown("---")
 st.write("""
 Solaranlagen können weit mehr leisten als nur Strom für Ihr Zuhause zu erzeugen! Moderne Solartechnologien bieten viele zusätzliche Nutzungsmöglichkeiten, die Hausbesitzer oft noch nicht kennen. Hier sind einige interessante Anwendungsbeispiele:
 """)

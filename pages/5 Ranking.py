@@ -26,7 +26,7 @@ df_gemeinde = pd.DataFrame(data_gemeinde)
 df_freunde = pd.DataFrame(data_freunde)
 
 # Seite Titel
-st.markdown("<h1 style='text-align: center;'> Ranking </h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center;'>⚡ Ranking </h1>", unsafe_allow_html=True)
 st.markdown("---")
 
 # Ranking Schweiz

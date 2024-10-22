@@ -89,6 +89,10 @@ st.markdown(f"<div class='center-content'><p style='font-size:18px;'>Aktueller W
 st.markdown("---")
 st.markdown("<h2 class='center-content'>Stromhandel</h2>", unsafe_allow_html=True)
 
+# Centered price information
+st.markdown(f"<div class='center-content'><p><b>Kaufpreis:</b> {preis_kauf * 100:.2f} Rp/kWh</p></div>", unsafe_allow_html=True)
+st.markdown(f"<div class='center-content'><p><b>Verkaufspreis:</b> {preis_verkauf * 100:.2f} Rp/kWh</p></div>", unsafe_allow_html=True)
+
 # Centered trade amount and selection box
 st.markdown("<div class='center-content'>", unsafe_allow_html=True)
 trade_type = st.radio("Möchten Sie Strom kaufen, verkaufen oder verschenken?", ("Kaufen", "Verkaufen", "Verschenken"), index=0)
@@ -97,12 +101,6 @@ st.markdown("</div>", unsafe_allow_html=True)
 
 if trade_type == "Verschenken":
     recipient = st.selectbox("Wählen Sie den Empfänger", ("Grossmutter", "Ferienwohnung"))
-
-col3, col4 = st.columns(2)
-
-with col4:
-    st.markdown(f"<div class='center-content'><p><b>Kaufpreis:</b> {preis_kauf * 100:.2f} Rp/kWh</p></div>", unsafe_allow_html=True)
-    st.markdown(f"<div class='center-content'><p><b>Verkaufspreis:</b> {preis_verkauf * 100:.2f} Rp/kWh</p></div>", unsafe_allow_html=True)
 
 # Confirm button
 if st.button(f"{trade_type} bestätigen"):

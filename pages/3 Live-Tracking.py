@@ -2,7 +2,9 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
+
 st.set_page_config(layout="wide")
+
 # Custom CSS for centering and stacking metric titles and values
 st.markdown("""
     <style>
@@ -24,6 +26,7 @@ st.markdown("""
 # Page title
 st.markdown("<h1 style='text-align: center;'>Live-Tracking Dashboard</h1>", unsafe_allow_html=True)
 st.markdown("---")
+
 # Live consumption data
 st.markdown("<h2 style='text-align: center;'>Live Daten</h2>", unsafe_allow_html=True)
 
@@ -31,13 +34,13 @@ st.markdown("<h2 style='text-align: center;'>Live Daten</h2>", unsafe_allow_html
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
-    st.metric(label="Aktueller Verbrauch", value="1'096 W")
+    st.metric(label="**Aktueller Verbrauch**", value="1'096 W")
 with col2:
-    st.metric(label="Aktueller Bezug", value="895 W")
+    st.metric(label="**Aktueller Bezug**", value="895 W")
 with col3:
-    st.metric(label="Aktuelle Solarleistung", value="201 W")
+    st.metric(label="**Aktuelle Solarleistung**", value="201 W")
 with col4:
-    st.metric(label="Warmwasser Temperatur", value="55 °C")
+    st.metric(label="**Warmwasser Temperatur**", value="55 °C")
 
 # Example of power consumption and solar power generation over time (simulating the data for the full day)
 time = pd.date_range(start="2023-10-20 00:00", end="2023-10-20 23:59", freq="5min")
@@ -134,11 +137,12 @@ st.markdown("<h2 style='text-align: center;'>Zusammenfassung (Tag)</h2>", unsafe
 col5, col6, col7, col8 = st.columns(4)
 
 with col5:
-    st.metric(label="Verbrauch", value="15.7 kWh")
+    st.metric(label="**Verbrauch**", value="15.7 kWh")
 with col6:
-    st.metric(label="Solarenegie", value="7.3 kWh")
+    st.metric(label="**Solarenegie**", value="7.3 kWh")
 with col7:
-    st.metric(label="Eigenverbrauch", value="4.6 kWh")
+    st.metric(label="**Eigenverbrauch**", value="4.6 kWh")
 with col8:
-    st.metric(label="Bezug", value="11.1 kWh")
+    st.metric(label="**Bezug**", value="11.1 kWh")
+
 st.markdown("---")

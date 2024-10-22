@@ -17,7 +17,7 @@ if "kapazitaet" not in st.session_state:
     st.session_state["kapazitaet"] = 3000
 
 # Werte laden
-preis_kauf = 0.26  # 26 Rp/kWh
+preis_kauf = 0.2714  # 26 Rp/kWh
 preis_verkauf = 0.09  # 9 Rp/kWh (für Verkauf)
 guthaben = st.session_state["guthaben"]
 cash = st.session_state["cash"]

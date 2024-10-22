@@ -67,6 +67,3 @@ with col7:
     st.metric("Eigenverbrauch", "4.2 kWh")
 with col8:
     st.metric("Bezug", "27.7 kWh")
-
-# Additional notes
-st.write("Diese Werte basieren auf den Daten vom 19. Oktober und beinhalten den gesamten Energieverbrauch und die Solarproduktion.")

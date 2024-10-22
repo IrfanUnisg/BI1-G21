@@ -69,7 +69,7 @@ st.markdown(generate_table(ranking_schweiz), unsafe_allow_html=True)
 st.markdown("---")
 
 # Ranking Gemeinde
-st.markdown("<h2 style='text-align: center;'>Gemeinde Uzwil</h2>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align: center;'>Gemeinde St.Gallen</h2>", unsafe_allow_html=True)
 st.markdown(generate_table(ranking_gemeinde), unsafe_allow_html=True)
 
 st.markdown("---")

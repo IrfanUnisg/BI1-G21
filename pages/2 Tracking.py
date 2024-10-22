@@ -5,39 +5,23 @@ import numpy as np
 
 st.set_page_config(layout="wide")
 
-# Custom CSS for centering all content
+# Custom CSS for centering and stacking metric titles and values
 st.markdown("""
     <style>
-        .center-content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-        .stMetric {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-        .stElement div {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-        .stButton button {
+        .stMetric label {
             display: block;
-            margin: 0 auto;
+            font-size: 14px;
+            margin-bottom: 5px;
+            text-align: center;
         }
-        h1, h2, h3 {
+        .stMetric div {
             text-align: center;
         }
     </style>
 """, unsafe_allow_html=True)
 
 # Page title
-st.markdown("<h1 class='center-content'>Solar Tracking Dashboard</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center;'>Solar Tracking Dashboard</h1>", unsafe_allow_html=True)
 
 # Sample data (can be replaced with real-time data)
 data = {
@@ -54,7 +38,7 @@ data = {
 df = pd.DataFrame(data)
 
 # Electricity costs: Comparison without and with electricity account
-st.markdown("<h2 class='center-content'>Stromkosten: Vergleich ohne/mit Stromkonto</h2>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align: center;'>Stromkosten: Vergleich ohne/mit Stromkonto</h2>", unsafe_allow_html=True)
 
 # Plotly bar chart
 fig = go.Figure()
@@ -96,26 +80,27 @@ st.plotly_chart(fig, use_container_width=True)
 
 st.markdown("---")
 
-# Additional energy data
-st.markdown("<h2 class='center-content'>Weitere Energiedaten</h2>", unsafe_allow_html=True)
+# Section: Additional energy data
+st.markdown("<h2 style='text-align: center;'>Weitere Energiedaten</h2>", unsafe_allow_html=True)
 
-# Centered columns for metrics
+# Centered columns for metrics under "Weitere Energiedaten"
 col1, col2, col3 = st.columns(3)
 
 # Total generated energy
-col1.metric("Gesamte erzeugte Energie (kWh)", f"{df['Erzeugte Energie (kWh)'].sum()} kWh")
+col1.metric(label="Gesamte erzeugte Energie (kWh)", value=f"{df['Erzeugte Energie (kWh)'].sum()} kWh")
 
 # Total savings from solar system
-col2.metric("Gesamt eingesparte Kosten durch Solaranlage (CHF)", f"{df['Gesparte Kosten durch Solaranlage (CHF)'].sum():.2f} CHF")
+col2.metric(label="Gesamt eingesparte Kosten durch Solaranlage (CHF)", value=f"{df['Gesparte Kosten durch Solaranlage (CHF)'].sum():.2f} CHF")
 
 # Total savings from the electricity account
-col3.metric("Gesamt eingesparte Kosten durch Stromkonto (CHF)", f"{df['Ersparnisse durch Stromkonto (CHF)'].sum():.2f} CHF")
+col3.metric(label="Gesamt eingesparte Kosten durch Stromkonto (CHF)", value=f"{df['Ersparnisse durch Stromkonto (CHF)'].sum():.2f} CHF")
 
 st.markdown("---")
 
-# Current solar system performance
-st.markdown("<h2 class='center-content'>Aktuelle Solardaten</h2>", unsafe_allow_html=True)
+# Section: Current solar system performance
+st.markdown("<h2 style='text-align: center;'>Aktuelle Solardaten</h2>", unsafe_allow_html=True)
 
+# Centered columns for metrics under "Aktuelle Solardaten"
 col4, col5, col6 = st.columns(3)
 
 # Example for current values
@@ -124,14 +109,14 @@ current_savings = 2.5  # CHF
 current_solar = 0.24
 
 # Current data
-col4.metric("Heute erzeugte Energie (kWh)", f"{current_energy} kWh")
-col5.metric("Heute eingesparte Kosten durch Solaranlage (CHF)", f"{current_savings:.2f} CHF")
-col6.metric("Heute eingesparte Kosten durch Stromkonto (CHF)", f"{current_solar:.2f} CHF")
+col4.metric(label="Heute erzeugte Energie (kWh)", value=f"{current_energy} kWh")
+col5.metric(label="Heute eingesparte Kosten durch Solaranlage (CHF)", value=f"{current_savings:.2f} CHF")
+col6.metric(label="Heute eingesparte Kosten durch Stromkonto (CHF)", value=f"{current_solar:.2f} CHF")
 
 st.markdown("---")
 
 # Chart for generated energy
-st.markdown("<h2 class='center-content'>Monatliche erzeugte Energie</h2>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align: center;'>Monatliche erzeugte Energie</h2>", unsafe_allow_html=True)
 st.write("Dieses Diagramm zeigt die monatliche Energieproduktion Ihrer Solaranlage, einschließlich des Stromverbrauchs.")
 
 # Line chart for energy generation and consumption
@@ -183,7 +168,7 @@ price_df = pd.DataFrame({
 st.markdown("---")
 
 # Plot hourly prices for the last week
-st.markdown("<h2 class='center-content'>Spotmarkt Strompreisentwicklung (letzte Woche)</h2>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align: center;'>Spotmarkt Strompreisentwicklung (letzte Woche)</h2>", unsafe_allow_html=True)
 
 # Filter for the last week of October (assuming the month has 31 days)
 last_week_price_df = price_df[price_df['Tag'] > 24]  # Filter for days greater than 24 (25th to 31st)

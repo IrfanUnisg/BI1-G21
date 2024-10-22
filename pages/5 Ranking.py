@@ -23,10 +23,10 @@ data_freunde = {
     "Blitze": [65, 60, 55, 50, 45]
 }
 
-# DataFrames erstellen und Index zurücksetzen
-df_schweiz = pd.DataFrame(data_schweiz).reset_index(drop=True)
-df_gemeinde = pd.DataFrame(data_gemeinde).reset_index(drop=True)
-df_freunde = pd.DataFrame(data_freunde).reset_index(drop=True)
+# DataFrames erstellen und Index vollständig entfernen
+df_schweiz = pd.DataFrame(data_schweiz)
+df_gemeinde = pd.DataFrame(data_gemeinde)
+df_freunde = pd.DataFrame(data_freunde)
 
 # Seite Titel
 st.markdown("<h1 style='text-align: center;'>⚡ Ranking </h1>", unsafe_allow_html=True)
@@ -34,19 +34,19 @@ st.markdown("---")
 
 # Ranking Schweiz
 st.markdown("<h2 style='text-align: center;'>Schweiz</h2>", unsafe_allow_html=True)
-st.table(df_schweiz)
+st.table(df_schweiz.style.hide(axis="index"))  # Index vollständig ausblenden
 
 st.markdown("---")
 
 # Ranking Gemeinde
 st.markdown("<h2 style='text-align: center;'>Gemeinde Uzwil</h2>", unsafe_allow_html=True)
-st.table(df_gemeinde)
+st.table(df_gemeinde.style.hide(axis="index"))  # Index vollständig ausblenden
 
 st.markdown("---")
 
 # Ranking Freunde
 st.markdown("<h2 style='text-align: center;'>Freunde</h2>", unsafe_allow_html=True)
-st.table(df_freunde)
+st.table(df_freunde.style.hide(axis="index"))  # Index vollständig ausblenden
 
 # Abschluss
 st.write("Diese Ranglisten basieren auf der Anzahl der Blitze, die durch Interaktionen mit der Stromkonto-App gesammelt wurden. Je mehr Blitze, desto höher das Ranking!")

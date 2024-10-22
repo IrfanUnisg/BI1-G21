@@ -25,7 +25,7 @@ st.markdown("---")
 # Generate fictitious historical price data for Stromcoin (last year with only upward trend)
 np.random.seed(0)
 days = pd.date_range(end=pd.Timestamp.today(), periods=365)
-prices = np.cumsum(np.random.uniform(0.01, 0.05, size=len(days))) / 10  # Prices only going up
+prices = np.cumsum(np.random.uniform(0.01, 0.05, size=len(days))) / 100  # Prices only going up
 
 # Create a DataFrame for the price data
 price_df = pd.DataFrame({

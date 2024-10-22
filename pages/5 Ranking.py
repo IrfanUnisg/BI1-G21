@@ -34,19 +34,19 @@ st.markdown("---")
 
 # Ranking Schweiz
 st.markdown("<h2 style='text-align: center;'>Schweiz</h2>", unsafe_allow_html=True)
-st.table(df_schweiz)
+st.table(df_schweiz.style.hide_index())  # Verhindert die Anzeige des Pandas-Index
 
 st.markdown("---")
 
 # Ranking Gemeinde
 st.markdown("<h2 style='text-align: center;'>Gemeinde Uzwil</h2>", unsafe_allow_html=True)
-st.table(df_gemeinde)
+st.table(df_gemeinde.style.hide_index())  # Verhindert die Anzeige des Pandas-Index
 
 st.markdown("---")
 
 # Ranking Freunde
 st.markdown("<h2 style='text-align: center;'>Freunde</h2>", unsafe_allow_html=True)
-st.table(df_freunde)
+st.table(df_freunde.style.hide_index())  # Verhindert die Anzeige des Pandas-Index
 
 # Abschluss
 st.write("Diese Ranglisten basieren auf der Anzahl der Blitze, die durch Interaktionen mit der Stromkonto-App gesammelt wurden. Je mehr Blitze, desto höher das Ranking!")

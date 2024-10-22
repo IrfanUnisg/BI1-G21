@@ -18,17 +18,29 @@ with col3:
 with col4:
     st.metric("Warmwasser Temperatur", "55 °C")
 
-# Example of power consumption and solar power generation over time (simulating the data from the image)
-time = pd.date_range(start="2023-10-19 00:00", end="2023-10-19 23:59", freq="5min")
+# Example of power consumption and solar power generation over time (simulating the data for the full day)
+time = pd.date_range(start="2023-10-20 00:00", end="2023-10-20 23:59", freq="5min")
 consumption = np.random.uniform(0.5, 1.5, len(time))  # Simulate power consumption
-solar = np.random.uniform(0.1, 1.2, len(time))  # Simulate solar power generation
+
+# Initialize solar power array
+solar = np.zeros(len(time))
+
+# Solar power is active between 08:30 and 18:30 with a peak at 13:30
+start_time = pd.Timestamp("2023-10-20 08:30")
+end_time = pd.Timestamp("2023-10-20 18:30")
+peak_time = pd.Timestamp("2023-10-20 13:30")
+
+# Indices corresponding to the start, peak, and end of solar production
+start_idx = np.where(time == start_time)[0][0]
+peak_idx = np.where(time == peak_time)[0][0]
+end_idx = np.where(time == end_time)[0][0]
+
+# Solar power ramping up until peak and ramping down after peak
+solar[start_idx:peak_idx] = np.linspace(0, 1.2, peak_idx - start_idx)  # Ramp up
+solar[peak_idx:end_idx] = np.linspace(1.2, 0, end_idx - peak_idx)  # Ramp down
 
 # Create a DataFrame
 data = pd.DataFrame({"Time": time, "Consumption (kW)": consumption, "Solar Power (kW)": solar})
-
-# Filter data between 7:00 AM and 6:00 PM
-data = data[(data['Time'].dt.time >= pd.to_datetime('07:00').time()) & 
-            (data['Time'].dt.time <= pd.to_datetime('18:00').time())]
 
 # Plot energy usage over time
 fig = go.Figure()
@@ -47,7 +59,7 @@ fig.add_trace(go.Scatter(
 
 # Update layout for style and appearance
 fig.update_layout(
-    title="Energieverbrauch und Solarproduktion (7:00 - 18:00 Uhr)",
+    title="Energieverbrauch und Solarproduktion am 20. Oktober",
     xaxis_title="Zeit",
     yaxis_title="Leistung (kW)",
     xaxis=dict(
@@ -57,6 +69,7 @@ fig.update_layout(
         linecolor='rgb(204, 204, 204)',
         linewidth=2,
         ticks='outside',
+        tickformat="%H:%M",  # Format for time as hour:minute
         tickfont=dict(
             family='Arial',
             size=12,

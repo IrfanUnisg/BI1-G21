@@ -5,21 +5,14 @@ import numpy as np
 
 st.set_page_config(layout="wide")
 
-# Custom CSS for improving readability of metric titles and values
+# Custom CSS to adjust only the metric titles
 st.markdown("""
     <style>
-        .stMetric label {
-            display: block;
+        .metric-title {
             font-size: 18px;
-            margin-bottom: 5px;
-            text-align: center;
             font-weight: bold;
             color: #044b5b;
-        }
-        .stMetric div {
             text-align: center;
-            font-size: 22px;
-            font-weight: bold;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -92,13 +85,13 @@ st.markdown("<h2 style='text-align: center;'>Weitere Energiedaten</h2>", unsafe_
 col1, col2, col3 = st.columns(3)
 
 # Total generated energy
-col1.metric(label="Gesamte erzeugte Energie (kWh)", value=f"{df['Erzeugte Energie (kWh)'].sum()} kWh")
+col1.metric(label="<div class='metric-title'>Gesamte erzeugte Energie (kWh)</div>", value=f"{df['Erzeugte Energie (kWh)'].sum()} kWh", unsafe_allow_html=True)
 
 # Total savings from solar system
-col2.metric(label="Gesamt eingesparte Kosten durch Solaranlage (CHF)", value=f"{df['Gesparte Kosten durch Solaranlage (CHF)'].sum():.2f} CHF")
+col2.metric(label="<div class='metric-title'>Gesamt eingesparte Kosten durch Solaranlage (CHF)</div>", value=f"{df['Gesparte Kosten durch Solaranlage (CHF)'].sum():.2f} CHF", unsafe_allow_html=True)
 
 # Total savings from the electricity account
-col3.metric(label="Gesamt eingesparte Kosten durch Stromkonto (CHF)", value=f"{df['Ersparnisse durch Stromkonto (CHF)'].sum():.2f} CHF")
+col3.metric(label="<div class='metric-title'>Gesamt eingesparte Kosten durch Stromkonto (CHF)</div>", value=f"{df['Ersparnisse durch Stromkonto (CHF)'].sum():.2f} CHF", unsafe_allow_html=True)
 
 st.markdown("---")
 

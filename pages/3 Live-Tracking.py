@@ -36,22 +36,49 @@ fig = go.Figure()
 # Plot consumption
 fig.add_trace(go.Scatter(
     x=data['Time'], y=data['Consumption (kW)'], mode='lines', name='Verbrauch',
-    line=dict(color='blue', width=2)
+    line=dict(color='deepskyblue', width=3)
 ))
 
 # Plot solar power generation
 fig.add_trace(go.Scatter(
     x=data['Time'], y=data['Solar Power (kW)'], mode='lines', name='Solarleistung',
-    line=dict(color='yellow', width=2)
+    line=dict(color='yellow', width=3)
 ))
 
-# Update layout
+# Update layout for style and appearance
 fig.update_layout(
     title="Energieverbrauch und Solarproduktion (7:00 - 18:00 Uhr)",
     xaxis_title="Zeit",
     yaxis_title="Leistung (kW)",
+    xaxis=dict(
+        showline=True,
+        showgrid=False,
+        showticklabels=True,
+        linecolor='rgb(204, 204, 204)',
+        linewidth=2,
+        ticks='outside',
+        tickfont=dict(
+            family='Arial',
+            size=12,
+            color='rgb(82, 82, 82)',
+        ),
+    ),
+    yaxis=dict(
+        showgrid=True,
+        zeroline=False,
+        showline=True,
+        showticklabels=True,
+    ),
+    plot_bgcolor='white',
+    showlegend=True,
+    legend=dict(
+        orientation="h",
+        yanchor="bottom",
+        y=1.02,
+        xanchor="right",
+        x=1
+    ),
     height=500,
-    xaxis_rangeslider_visible=True
 )
 
 # Display the plot

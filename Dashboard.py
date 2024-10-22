@@ -64,8 +64,11 @@ st.markdown("<h2 style='text-align: center;'>Stromhandel</h2>", unsafe_allow_htm
 
 col3, col4 = st.columns(2)
 with col3:
-    trade_type = st.radio("Möchten Sie Strom kaufen oder verkaufen?", ("Kaufen", "Verkaufen"))
+    trade_type = st.radio("Möchten Sie Strom kaufen, verkaufen oder verschenken?", ("Kaufen", "Verkaufen", "Verschenken"))
     trade_amount = st.number_input(f"Menge an Strom zum {trade_type.lower()} (kWh)", min_value=0)
+
+    if trade_type == "Verschenken":
+        recipient = st.selectbox("Wählen Sie den Empfänger", ("Grossmutter", "Ferienwohnung"))
 
 with col4:
     st.markdown(f"<p><b>Kaufpreis:</b> {preis_kauf * 100:.2f} Rp/kWh</p>", unsafe_allow_html=True)
@@ -81,13 +84,19 @@ if st.button(f"{trade_type} bestätigen"):
             st.success(f"Sie haben erfolgreich {trade_amount} kWh gekauft.")
         else:
             st.error("Nicht genügend Guthaben!")
-    else:  # Verkaufen
+    elif trade_type == "Verkaufen":
         if trade_amount <= guthaben:
             guthaben -= trade_amount
             cash += total_price
             st.success(f"Sie haben erfolgreich {trade_amount} kWh verkauft.")
         else:
             st.error("Nicht genügend Strom zu verkaufen!")
+    else:  # Verschenken
+        if trade_amount <= guthaben:
+            guthaben -= trade_amount
+            st.success(f"Sie haben erfolgreich {trade_amount} kWh an {recipient} verschenkt.")
+        else:
+            st.error("Nicht genügend Strom zu verschenken!")
 
     # Update session state
     st.session_state["guthaben"] = guthaben

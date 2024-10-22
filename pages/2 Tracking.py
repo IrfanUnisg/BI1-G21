@@ -5,7 +5,7 @@ import numpy as np
 
 st.set_page_config(layout="wide")
 
-# Custom CSS for centering elements
+# Custom CSS for centering elements and headers
 st.markdown("""
     <style>
         .center-content {
@@ -22,6 +22,9 @@ st.markdown("""
             display: block;
             margin-left: auto;
             margin-right: auto;
+        }
+        h1, h2, h3 {
+            text-align: center;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -44,7 +47,7 @@ data = {
 df = pd.DataFrame(data)
 
 # Electricity costs: Comparison without and with electricity account
-st.subheader("Stromkosten: Vergleich ohne/mit Stromkonto")
+st.markdown("<h2 class='center-content'>Stromkosten: Vergleich ohne/mit Stromkonto</h2>", unsafe_allow_html=True)
 
 # Plotly bar chart
 fig = go.Figure()
@@ -87,7 +90,7 @@ st.plotly_chart(fig, use_container_width=True)
 st.markdown("---")
 
 # Additional energy data
-st.subheader("Weitere Energiedaten")
+st.markdown("<h2 class='center-content'>Weitere Energiedaten</h2>", unsafe_allow_html=True)
 
 # Centered columns for metrics
 col1, col2, col3 = st.columns([1, 1, 1])
@@ -104,7 +107,8 @@ col3.metric("Gesamt eingesparte Kosten durch Stromkonto (CHF)", f"{df['Ersparnis
 st.markdown("---")
 
 # Current solar system performance
-st.subheader("Aktuelle Solardaten")
+st.markdown("<h2 class='center-content'>Aktuelle Solardaten</h2>", unsafe_allow_html=True)
+
 col4, col5, col6 = st.columns([1, 1, 1])
 
 # Example for current values
@@ -120,7 +124,7 @@ col6.metric("Heute eingesparte Kosten durch Stromkonto (CHF)", f"{current_solar:
 st.markdown("---")
 
 # Chart for generated energy
-st.subheader("Monatliche erzeugte Energie")
+st.markdown("<h2 class='center-content'>Monatliche erzeugte Energie</h2>", unsafe_allow_html=True)
 st.write("Dieses Diagramm zeigt die monatliche Energieproduktion Ihrer Solaranlage, einschließlich des Stromverbrauchs.")
 
 # Line chart for energy generation and consumption
@@ -172,7 +176,7 @@ price_df = pd.DataFrame({
 st.markdown("---")
 
 # Plot hourly prices for the last week
-st.subheader("Spotmarkt Strompreisentwicklung (letzte Woche)")
+st.markdown("<h2 class='center-content'>Spotmarkt Strompreisentwicklung (letzte Woche)</h2>", unsafe_allow_html=True)
 
 # Filter for the last week of October (assuming the month has 31 days)
 last_week_price_df = price_df[price_df['Tag'] > 24]  # Filter for days greater than 24 (25th to 31st)

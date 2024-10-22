@@ -49,16 +49,16 @@ data = pd.DataFrame({"Time": time, "Consumption (kW)": consumption, "Solar Power
 # Plot energy usage over time
 fig = go.Figure()
 
-# Plot consumption
+# Plot consumption with dark blue color
 fig.add_trace(go.Scatter(
     x=data['Time'], y=data['Consumption (kW)'], mode='lines', name='Verbrauch',
-    line=dict(color='deepskyblue', width=3)
+    line=dict(color='#044b5b', width=3)  # Dark blue
 ))
 
-# Plot solar power generation
+# Plot solar power generation with yellow color
 fig.add_trace(go.Scatter(
     x=data['Time'], y=data['Solar Power (kW)'], mode='lines', name='Solarleistung',
-    line=dict(color='yellow', width=3)
+    line=dict(color='#facb04', width=3)  # Yellow as specified
 ))
 
 # Update layout for style and appearance

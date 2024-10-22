@@ -89,13 +89,22 @@ st.markdown(f"<div class='center-content'><p style='font-size:18px;'>Aktueller W
 st.markdown("---")
 st.markdown("<h2 class='center-content'>Stromhandel</h2>", unsafe_allow_html=True)
 
-# Centered price information
-st.markdown(f"<div class='center-content'><p><b>Kaufpreis:</b> {preis_kauf * 100:.2f} Rp/kWh</p></div>", unsafe_allow_html=True)
-st.markdown(f"<div class='center-content'><p><b>Verkaufspreis:</b> {preis_verkauf * 100:.2f} Rp/kWh</p></div>", unsafe_allow_html=True)
+# Two columns for options and prices
+col1, col2 = st.columns([1, 1])  # Adjust ratio if needed
+
+# Left column: Trade options
+with col1:
+    st.markdown("<div class='center-content'>", unsafe_allow_html=True)
+    trade_type = st.radio("Möchten Sie Strom kaufen, verkaufen oder verschenken?", ("Kaufen", "Verkaufen", "Verschenken"), index=0)
+    st.markdown("</div>", unsafe_allow_html=True)
+
+# Right column: Prices
+with col2:
+    st.markdown(f"<div class='center-content'><p><b>Kaufpreis:</b> {preis_kauf * 100:.2f} Rp/kWh</p></div>", unsafe_allow_html=True)
+    st.markdown(f"<div class='center-content'><p><b>Verkaufspreis:</b> {preis_verkauf * 100:.2f} Rp/kWh</p></div>", unsafe_allow_html=True)
 
 # Centered trade amount and selection box
 st.markdown("<div class='center-content'>", unsafe_allow_html=True)
-trade_type = st.radio("Möchten Sie Strom kaufen, verkaufen oder verschenken?", ("Kaufen", "Verkaufen", "Verschenken"), index=0)
 trade_amount = st.number_input(f"Menge an Strom zum {trade_type.lower()} (kWh)", min_value=0)
 st.markdown("</div>", unsafe_allow_html=True)
 

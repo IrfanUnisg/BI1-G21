@@ -141,3 +141,4 @@ with col7:
     st.metric(label="Eigenverbrauch", value="4.6 kWh")
 with col8:
     st.metric(label="Bezug", value="11.1 kWh")
+st.markdown("---")

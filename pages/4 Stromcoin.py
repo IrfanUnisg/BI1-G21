@@ -8,15 +8,15 @@ st.title("Stromcoin")
 
 # Introduction of Stromcoin
 st.write("""
-**Stromcoin** ist ein Krypto-Token, der als Belohnung für die Nutzung der Stromkonto-App vergeben wird. Das Besondere an Stromcoin ist, dass sein Wert nur steigen kann. Nutzer, die überschüssigen Strom über die App handeln oder ihre Energie effizient verwalten, profitieren durch die Teilnahme am Stromcoin-basierten Umsatzbeteiligungssystem.
+**Stromcoin** ist ein Krypto-Token, der als Belohnung für die Nutzung der Stromkonto-App vergeben wird. Das Besondere an Stromcoin ist, dass sein Wert nur steigen kann. Nutzer, die überschüssigen Strom über die App handeln oder ihre Energie effizient verwalten, profitieren durch die Teilnahme am Stromcoin-basierten Gewinnbeteiligungssystem.
 """)
 
 # Additional fictitious Stromcoin details
 st.subheader("Wichtige Informationen über Stromcoin:")
 st.write("""
 - **Ticker**: STRC
-- **Maximale Versorgung**: 50 Millionen STRC
-- **Verwendungszweck**: Einnahmenbeteiligung durch die Nutzung der Stromkonto-App
+- **Maximale Versorgung**: 2 Millionen STRC
+- **Verwendungszweck**: Gewinnbeteiligung durch die Nutzung der Stromkonto-App
 - **Preiswachstum**: Der Preis von Stromcoin kann nur steigen, was die langfristige Wertsteigerung für Nutzer garantiert.
 """)
 
@@ -63,8 +63,8 @@ st.markdown("---")
 # Additional fictitious features or benefits of Stromcoin
 st.subheader("Vorteile der Nutzung von Stromcoin:")
 st.write("""
-- **Umsatzbeteiligung**: Stromcoin ermöglicht Ihnen, Einnahmen aus der Stromkonto-App zu teilen und davon zu profitieren.
-- **Langfristige Wertsteigerung**: Der Wert von Stromcoin kann nur steigen, was bedeutet, dass je mehr Sie die App nutzen, desto mehr wertvolle Token Sie verdienen.
+- **Gewinnbeteiligung**: Durch den Stromcoin stellt Ihnen das Stromkonto einen Teil seines Gewinns zur Verfügung.
+- **Langfristige Wertsteigerung**: Der Wert von Stromcoin kann nur steigen, was bedeutet, dass je mehr Sie die App nutzen, desto mehr wertvolle Token verdienen Sie.
 - **Nachhaltigkeit fördern**: Durch die Teilnahme am Strommarkt und die Nutzung erneuerbarer Energien können Sie Ihre Stromkosten senken und gleichzeitig durch Stromcoin profitieren.
 - **Dezentralisierte Kontrolle**: Stromcoin basiert auf der Blockchain-Technologie, die ein sicheres und dezentrales System für den Energiehandel bietet.
 """)

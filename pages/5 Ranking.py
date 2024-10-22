@@ -77,6 +77,6 @@ st.markdown("---")
 # Ranking Freunde, highlighting the row with 112 Blitze
 st.markdown("<h2 style='text-align: center;'>Freunde</h2>", unsafe_allow_html=True)
 st.markdown(generate_table(ranking_freunde, highlight_value=112), unsafe_allow_html=True)
-
+st.markdown("---")
 # Abschluss
 st.write("Diese Ranglisten basieren auf der Anzahl der Blitze, die durch Generieren von Strom gesammelt wurden. Je mehr Blitze, desto höher das Ranking!")

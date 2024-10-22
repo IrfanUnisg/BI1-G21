@@ -85,13 +85,19 @@ st.markdown("<h2 style='text-align: center;'>Weitere Energiedaten</h2>", unsafe_
 col1, col2, col3 = st.columns(3)
 
 # Total generated energy
-col1.metric(label="<div class='metric-title'>Gesamte erzeugte Energie (kWh)</div>", value=f"{df['Erzeugte Energie (kWh)'].sum()} kWh", unsafe_allow_html=True)
+with col1:
+    st.markdown("<div class='metric-title'>Gesamte erzeugte Energie (kWh)</div>", unsafe_allow_html=True)
+    st.metric(label="", value=f"{df['Erzeugte Energie (kWh)'].sum()} kWh")
 
 # Total savings from solar system
-col2.metric(label="<div class='metric-title'>Gesamt eingesparte Kosten durch Solaranlage (CHF)</div>", value=f"{df['Gesparte Kosten durch Solaranlage (CHF)'].sum():.2f} CHF", unsafe_allow_html=True)
+with col2:
+    st.markdown("<div class='metric-title'>Gesamt eingesparte Kosten durch Solaranlage (CHF)</div>", unsafe_allow_html=True)
+    st.metric(label="", value=f"{df['Gesparte Kosten durch Solaranlage (CHF)'].sum():.2f} CHF")
 
 # Total savings from the electricity account
-col3.metric(label="<div class='metric-title'>Gesamt eingesparte Kosten durch Stromkonto (CHF)</div>", value=f"{df['Ersparnisse durch Stromkonto (CHF)'].sum():.2f} CHF", unsafe_allow_html=True)
+with col3:
+    st.markdown("<div class='metric-title'>Gesamt eingesparte Kosten durch Stromkonto (CHF)</div>", unsafe_allow_html=True)
+    st.metric(label="", value=f"{df['Ersparnisse durch Stromkonto (CHF)'].sum():.2f} CHF")
 
 st.markdown("---")
 

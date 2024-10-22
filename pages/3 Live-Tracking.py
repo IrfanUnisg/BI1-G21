@@ -26,6 +26,10 @@ solar = np.random.uniform(0.1, 1.2, len(time))  # Simulate solar power generatio
 # Create a DataFrame
 data = pd.DataFrame({"Time": time, "Consumption (kW)": consumption, "Solar Power (kW)": solar})
 
+# Filter data between 7:00 AM and 6:00 PM
+data = data[(data['Time'].dt.time >= pd.to_datetime('07:00').time()) & 
+            (data['Time'].dt.time <= pd.to_datetime('18:00').time())]
+
 # Plot energy usage over time
 fig = go.Figure()
 
@@ -43,27 +47,32 @@ fig.add_trace(go.Scatter(
 
 # Update layout
 fig.update_layout(
-    title="Energieverbrauch und Solarproduktion",
+    title="Energieverbrauch und Solarproduktion (7:00 - 18:00 Uhr)",
     xaxis_title="Zeit",
     yaxis_title="Leistung (kW)",
     height=500,
     xaxis_rangeslider_visible=True
 )
 
-# Display the plot
-st.plotly_chart(fig, use_container_width=True)
+# Layout to display chart next to summary
+col_chart, col_summary = st.columns([2, 1])
 
-# Summary of energy usage
-st.markdown("---")
-st.subheader("Zusammenfassung")
+# Display the plot in the first column
+with col_chart:
+    st.plotly_chart(fig, use_container_width=True)
 
-# Static summary values (using values from the image)
-col5, col6, col7, col8 = st.columns(4)
-with col5:
-    st.metric("Verbrauch", "31.9 kWh")
-with col6:
-    st.metric("Solarenegie", "4.3 kWh")
-with col7:
-    st.metric("Eigenverbrauch", "4.2 kWh")
-with col8:
-    st.metric("Bezug", "27.7 kWh")
+# Summary of energy usage in the second column
+with col_summary:
+    st.markdown("---")
+    st.subheader("Zusammenfassung (Tag)")
+
+    # Static summary values
+    col5, col6, col7, col8 = st.columns(2)
+    with col5:
+        st.metric("Verbrauch", "15.2 kWh")
+    with col6:
+        st.metric("Solarenegie", "7.3 kWh")
+    with col7:
+        st.metric("Eigenverbrauch", "4.2 kWh")
+    with col8:
+        st.metric("Bezug", "27.7 kWh")

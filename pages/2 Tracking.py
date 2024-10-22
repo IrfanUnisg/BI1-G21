@@ -5,7 +5,7 @@ import numpy as np
 
 st.set_page_config(layout="wide")
 
-# Custom CSS for centering and stacking metric titles and values
+# Custom CSS for centering and making metric labels bold
 st.markdown("""
     <style>
         .stMetric label {
@@ -13,6 +13,7 @@ st.markdown("""
             font-size: 14px;
             margin-bottom: 5px;
             text-align: center;
+            font-weight: bold;  /* Make the labels bold */
         }
         .stMetric div {
             text-align: center;
@@ -23,6 +24,7 @@ st.markdown("""
 # Page title
 st.markdown("<h1 style='text-align: center;'>Solar Tracking Dashboard</h1>", unsafe_allow_html=True)
 st.markdown("---")
+
 # Sample data (can be replaced with real-time data)
 data = {
     'Monat': ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt'],

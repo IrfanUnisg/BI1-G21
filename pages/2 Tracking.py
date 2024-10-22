@@ -5,22 +5,6 @@ import numpy as np
 
 st.set_page_config(layout="wide")
 
-# Custom CSS for centering and making metric labels bold
-st.markdown("""
-    <style>
-        .stMetric label {
-            display: block;
-            font-size: 14px;
-            margin-bottom: 5px;
-            text-align: center;
-            font-weight: bold;  /* Make the labels bold */
-        }
-        .stMetric div {
-            text-align: center;
-        }
-    </style>
-""", unsafe_allow_html=True)
-
 # Page title
 st.markdown("<h1 style='text-align: center;'>Solar Tracking Dashboard</h1>", unsafe_allow_html=True)
 st.markdown("---")
@@ -89,13 +73,13 @@ st.markdown("<h2 style='text-align: center;'>Weitere Energiedaten</h2>", unsafe_
 col1, col2, col3 = st.columns(3)
 
 # Total generated energy
-col1.metric(label="Gesamte erzeugte Energie (kWh)", value=f"{df['Erzeugte Energie (kWh)'].sum()} kWh")
+col1.metric(label="**Gesamte erzeugte Energie (kWh)**", value=f"{df['Erzeugte Energie (kWh)'].sum()} kWh")
 
 # Total savings from solar system
-col2.metric(label="Gesamt eingesparte Kosten durch Solaranlage (CHF)", value=f"{df['Gesparte Kosten durch Solaranlage (CHF)'].sum():.2f} CHF")
+col2.metric(label="**Gesamt eingesparte Kosten durch Solaranlage (CHF)**", value=f"{df['Gesparte Kosten durch Solaranlage (CHF)'].sum():.2f} CHF")
 
 # Total savings from the electricity account
-col3.metric(label="Gesamt eingesparte Kosten durch Stromkonto (CHF)", value=f"{df['Ersparnisse durch Stromkonto (CHF)'].sum():.2f} CHF")
+col3.metric(label="**Gesamt eingesparte Kosten durch Stromkonto (CHF)**", value=f"{df['Ersparnisse durch Stromkonto (CHF)'].sum():.2f} CHF")
 
 st.markdown("---")
 
@@ -111,9 +95,9 @@ current_savings = 2.5  # CHF
 current_solar = 0.24
 
 # Current data
-col4.metric(label="Heute erzeugte Energie (kWh)", value=f"{current_energy} kWh")
-col5.metric(label="Heute eingesparte Kosten durch Solaranlage (CHF)", value=f"{current_savings:.2f} CHF")
-col6.metric(label="Heute eingesparte Kosten durch Stromkonto (CHF)", value=f"{current_solar:.2f} CHF")
+col4.metric(label="**Heute erzeugte Energie (kWh)**", value=f"{current_energy} kWh")
+col5.metric(label="**Heute eingesparte Kosten durch Solaranlage (CHF)**", value=f"{current_savings:.2f} CHF")
+col6.metric(label="**Heute eingesparte Kosten durch Stromkonto (CHF)**", value=f"{current_solar:.2f} CHF")
 
 st.markdown("---")
 

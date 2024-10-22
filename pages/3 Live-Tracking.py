@@ -67,7 +67,7 @@ st.subheader("Zusammenfassung (Tag)")
 col5, col6, col7, col8 = st.columns(4)
 
 with col5:
-    st.metric("Verbrauch", "15.2 kWh")
+    st.metric("Verbrauch", "15.7 kWh")
 with col6:
     st.metric("Solarenegie", "7.3 kWh")
 with col7:

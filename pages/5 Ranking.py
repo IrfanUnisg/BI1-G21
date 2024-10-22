@@ -52,8 +52,8 @@ def generate_table(data):
 st.markdown("<h1 style='text-align: center;'>⚡ Ranking ⚡</h1>", unsafe_allow_html=True)
 st.markdown("---")
 
-# Anzeige für eigene Blitze
-st.markdown(f"<h2 style='text-align: center;'>Du hast {own_blitze} Blitze gesammelt!</h2>", unsafe_allow_html=True)
+# Anzeige für eigene Blitze mit hellblauer Farbe
+st.markdown(f"<h2 style='text-align: center; color: #ADD8E6;'>Du hast {own_blitze} Blitze gesammelt!</h2>", unsafe_allow_html=True)
 st.markdown("---")
 
 # Ranking Schweiz

@@ -5,13 +5,16 @@ import numpy as np
 
 st.set_page_config(layout="wide")
 
-# Custom CSS to adjust only the metric titles
+# Custom CSS for centering and stacking metric titles and values
 st.markdown("""
     <style>
-        .metric-title {
-            font-size: 18px;
-            font-weight: bold;
-            color: #044b5b;
+        .stMetric label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        .stMetric div {
             text-align: center;
         }
     </style>
@@ -20,7 +23,6 @@ st.markdown("""
 # Page title
 st.markdown("<h1 style='text-align: center;'>Solar Tracking Dashboard</h1>", unsafe_allow_html=True)
 st.markdown("---")
-
 # Sample data (can be replaced with real-time data)
 data = {
     'Monat': ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt'],
@@ -85,19 +87,13 @@ st.markdown("<h2 style='text-align: center;'>Weitere Energiedaten</h2>", unsafe_
 col1, col2, col3 = st.columns(3)
 
 # Total generated energy
-with col1:
-    st.markdown("<div class='metric-title'>Gesamte erzeugte Energie (kWh)</div>", unsafe_allow_html=True)
-    st.metric(label="", value=f"{df['Erzeugte Energie (kWh)'].sum()} kWh")
+col1.metric(label="Gesamte erzeugte Energie (kWh)", value=f"{df['Erzeugte Energie (kWh)'].sum()} kWh")
 
 # Total savings from solar system
-with col2:
-    st.markdown("<div class='metric-title'>Gesamt eingesparte Kosten durch Solaranlage (CHF)</div>", unsafe_allow_html=True)
-    st.metric(label="", value=f"{df['Gesparte Kosten durch Solaranlage (CHF)'].sum():.2f} CHF")
+col2.metric(label="Gesamt eingesparte Kosten durch Solaranlage (CHF)", value=f"{df['Gesparte Kosten durch Solaranlage (CHF)'].sum():.2f} CHF")
 
 # Total savings from the electricity account
-with col3:
-    st.markdown("<div class='metric-title'>Gesamt eingesparte Kosten durch Stromkonto (CHF)</div>", unsafe_allow_html=True)
-    st.metric(label="", value=f"{df['Ersparnisse durch Stromkonto (CHF)'].sum():.2f} CHF")
+col3.metric(label="Gesamt eingesparte Kosten durch Stromkonto (CHF)", value=f"{df['Ersparnisse durch Stromkonto (CHF)'].sum():.2f} CHF")
 
 st.markdown("---")
 
@@ -121,6 +117,7 @@ st.markdown("---")
 
 # Chart for generated energy
 st.markdown("<h2 style='text-align: center;'>Monatliche erzeugte Energie</h2>", unsafe_allow_html=True)
+
 
 # Line chart for energy generation and consumption
 fig_energy = go.Figure()

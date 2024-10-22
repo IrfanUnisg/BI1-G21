@@ -32,7 +32,7 @@ ranking_freunde = [
 ]
 
 # Hilfsfunktion, um eine HTML-Tabelle zu generieren
-def generate_table(data):
+def generate_table(data, highlight_value=None):
     html = "<table style='width:100%; border-collapse: collapse; border: 1px solid black;'>"
     html += "<thead><tr style='background-color: #f2f2f2;'>"
     html += "<th style='border: 1px solid black; padding: 8px;'>Rang</th>"
@@ -41,9 +41,15 @@ def generate_table(data):
     html += "</tr></thead><tbody>"
     
     for entry in data:
-        html += f"<tr><td style='border: 1px solid black; padding: 8px;'>{entry['Rang']}</td>"
-        html += f"<td style='border: 1px solid black; padding: 8px;'>{entry['Name']}</td>"
-        html += f"<td style='border: 1px solid black; padding: 8px;'>{entry['Blitze']}</td></tr>"
+        # Highlight row if 'Blitze' matches the highlight_value
+        if entry['Blitze'] == highlight_value:
+            html += f"<tr style='background-color: #ADD8E6;'><td style='border: 1px solid black; padding: 8px;'>{entry['Rang']}</td>"
+            html += f"<td style='border: 1px solid black; padding: 8px;'>{entry['Name']}</td>"
+            html += f"<td style='border: 1px solid black; padding: 8px;'>{entry['Blitze']}</td></tr>"
+        else:
+            html += f"<tr><td style='border: 1px solid black; padding: 8px;'>{entry['Rang']}</td>"
+            html += f"<td style='border: 1px solid black; padding: 8px;'>{entry['Name']}</td>"
+            html += f"<td style='border: 1px solid black; padding: 8px;'>{entry['Blitze']}</td></tr>"
     
     html += "</tbody></table>"
     return html
@@ -52,8 +58,8 @@ def generate_table(data):
 st.markdown("<h1 style='text-align: center;'>⚡ Ranking ⚡</h1>", unsafe_allow_html=True)
 st.markdown("---")
 
-# Anzeige für eigene Blitze mit hellblauer Farbe
-st.markdown(f"<h2 style='text-align: center; color: #ADD8E6;'>Du hast {own_blitze} Blitze gesammelt!</h2>", unsafe_allow_html=True)
+# Anzeige für eigene Blitze (keine Farbänderung mehr)
+st.markdown(f"<h2 style='text-align: center;'>Du hast {own_blitze} Blitze gesammelt!</h2>", unsafe_allow_html=True)
 st.markdown("---")
 
 # Ranking Schweiz
@@ -68,9 +74,9 @@ st.markdown(generate_table(ranking_gemeinde), unsafe_allow_html=True)
 
 st.markdown("---")
 
-# Ranking Freunde
+# Ranking Freunde, highlighting the row with 112 Blitze
 st.markdown("<h2 style='text-align: center;'>Freunde</h2>", unsafe_allow_html=True)
-st.markdown(generate_table(ranking_freunde), unsafe_allow_html=True)
+st.markdown(generate_table(ranking_freunde, highlight_value=112), unsafe_allow_html=True)
 
 # Abschluss
 st.write("Diese Ranglisten basieren auf der Anzahl der Blitze, die durch Generieren von Strom gesammelt wurden. Je mehr Blitze, desto höher das Ranking!")

@@ -22,7 +22,7 @@ st.markdown("""
 
 # Page title
 st.markdown("<h1 style='text-align: center;'>Solar Tracking Dashboard</h1>", unsafe_allow_html=True)
-
+st.markdown("---")
 # Sample data (can be replaced with real-time data)
 data = {
     'Monat': ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt'],

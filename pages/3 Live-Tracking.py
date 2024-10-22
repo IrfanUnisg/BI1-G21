@@ -3,11 +3,37 @@ import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
 
+# Custom CSS for centering elements
+st.markdown("""
+    <style>
+        .center-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .stMetric {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            text-align: center;
+        }
+        .stButton button {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
 # Page title
-st.title("Live-Tracking Dashboard")
+st.markdown("<h1 class='center-content'>Live-Tracking Dashboard</h1>", unsafe_allow_html=True)
 
 # Live consumption data
-st.subheader("Live Daten")
+st.markdown("<h2 class='center-content'>Live Daten</h2>", unsafe_allow_html=True)
 col1, col2, col3, col4 = st.columns(4)
 with col1:
     st.metric("Aktueller Verbrauch", "1'096 W")
@@ -107,7 +133,7 @@ st.plotly_chart(fig, use_container_width=True)
 st.markdown("---")
 
 # Summary of energy usage below the chart
-st.subheader("Zusammenfassung (Tag)")
+st.markdown("<h2 class='center-content'>Zusammenfassung (Tag)</h2>", unsafe_allow_html=True)
 
 # Static summary values displayed in 4 columns
 col5, col6, col7, col8 = st.columns(4)

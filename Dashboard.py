@@ -56,7 +56,7 @@ fig = go.Figure(go.Indicator(
 st.plotly_chart(fig, use_container_width=True)
 
 # Batteriewert in CHF anzeigen
-st.markdown(f"<p style='text-align: center; font-size:18px;'>Aktueller Batteriewert: <b>{stored_energy_value:.2f} CHF</b></p>", unsafe_allow_html=True)
+st.markdown(f"<p style='text-align: center; font-size:18px;'>Aktueller Wert des gespeicherten Stroms: <b>{stored_energy_value:.2f} CHF</b></p>", unsafe_allow_html=True)
 
 # Abschnitt: Stromhandel
 st.markdown("---")

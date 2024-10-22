@@ -2,9 +2,32 @@ import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
 import numpy as np
+
 st.set_page_config(layout="wide")
+
+# Custom CSS for centering elements
+st.markdown("""
+    <style>
+        .center-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .stButton button {
+            display: block;
+            margin: 0 auto;
+        }
+        .stMetric {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
 # Page title
-st.title("Solar Tracking Dashboard")
+st.markdown("<h1 class='center-content'>Solar Tracking Dashboard</h1>", unsafe_allow_html=True)
 
 # Sample data (can be replaced with real-time data)
 data = {
@@ -60,10 +83,13 @@ fig.update_layout(
 
 # Display chart
 st.plotly_chart(fig, use_container_width=True)
+
 st.markdown("---")
+
 # Additional energy data
 st.subheader("Weitere Energiedaten")
 
+# Centered columns for metrics
 col1, col2, col3 = st.columns([1, 1, 1])
 
 # Total generated energy
@@ -89,8 +115,10 @@ current_solar = 0.24
 # Current data
 col4.metric("Heute erzeugte Energie (kWh)", f"{current_energy} kWh")
 col5.metric("Heute eingesparte Kosten durch Solaranlage (CHF)", f"{current_savings:.2f} CHF")
-col6.metric("Heute eingesparte Kosten durch Stromkonto (CHF)",f"{current_solar:.2f} CHF")
+col6.metric("Heute eingesparte Kosten durch Stromkonto (CHF)", f"{current_solar:.2f} CHF")
+
 st.markdown("---")
+
 # Chart for generated energy
 st.subheader("Monatliche erzeugte Energie")
 st.write("Dieses Diagramm zeigt die monatliche Energieproduktion Ihrer Solaranlage, einschließlich des Stromverbrauchs.")
@@ -140,9 +168,12 @@ price_df = pd.DataFrame({
     'Tag': np.repeat(np.arange(1, days + 1), 24),
     'Preis (Rp)': hourly_prices
 })
+
 st.markdown("---")
+
 # Plot hourly prices for the last week
 st.subheader("Spotmarkt Strompreisentwicklung (letzte Woche)")
+
 # Filter for the last week of October (assuming the month has 31 days)
 last_week_price_df = price_df[price_df['Tag'] > 24]  # Filter for days greater than 24 (25th to 31st)
 

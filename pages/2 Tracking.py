@@ -87,9 +87,9 @@ current_savings = 2.5  # CHF
 current_solar = 0.24
 
 # Current data
-col4.metric("Aktuell erzeugte Energie (heute)", f"{current_energy} kWh")
-col5.metric("Aktuelle Einsparungen Solar", f"{current_savings:.2f} CHF")
-col6.metric("Aktuelle Einsparung Stromkonto",f"{current_solar:.2f} CHF")
+col4.metric("Heute erzeugte Energie (kWh)", f"{current_energy} kWh")
+col5.metric("Heute eingesparte Kosten durch Solaranlage (CHF)", f"{current_savings:.2f} CHF")
+col6.metric("Heute eingesparte Kosten durch Stromkonto (CHF)",f"{current_solar:.2f} CHF")
 st.markdown("---")
 # Chart for generated energy
 st.subheader("Monatliche erzeugte Energie")

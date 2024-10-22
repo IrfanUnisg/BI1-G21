@@ -5,17 +5,21 @@ import numpy as np
 
 st.set_page_config(layout="wide")
 
-# Custom CSS for centering and stacking metric titles and values
+# Custom CSS for improving readability of metric titles and values
 st.markdown("""
     <style>
         .stMetric label {
             display: block;
-            font-size: 14px;
+            font-size: 18px;
             margin-bottom: 5px;
             text-align: center;
+            font-weight: bold;
+            color: #044b5b;
         }
         .stMetric div {
             text-align: center;
+            font-size: 22px;
+            font-weight: bold;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -23,6 +27,7 @@ st.markdown("""
 # Page title
 st.markdown("<h1 style='text-align: center;'>Solar Tracking Dashboard</h1>", unsafe_allow_html=True)
 st.markdown("---")
+
 # Sample data (can be replaced with real-time data)
 data = {
     'Monat': ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt'],
@@ -117,7 +122,6 @@ st.markdown("---")
 
 # Chart for generated energy
 st.markdown("<h2 style='text-align: center;'>Monatliche erzeugte Energie</h2>", unsafe_allow_html=True)
-
 
 # Line chart for energy generation and consumption
 fig_energy = go.Figure()

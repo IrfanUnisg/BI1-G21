@@ -68,7 +68,7 @@ with col2:
 
 # Abschnitt: Batterie-Status
 st.markdown("---")
-st.markdown("<h2 class='center-content'>Batterie-Status</h2>", unsafe_allow_html=True)
+st.markdown("<h2 class='center-content'>Batterie-Status (kWh)</h2>", unsafe_allow_html=True)
 
 # Batterie-Gauge-Diagramm
 fig = go.Figure(go.Indicator(
@@ -78,7 +78,6 @@ fig = go.Figure(go.Indicator(
         'axis': {'range': [0, kapazitaet]},
         'bar': {'color': yellow_color}
     },
-    title={'text': "Batterie-Status (kWh)", 'font': {'color': blue_color}}
 ))
 st.plotly_chart(fig, use_container_width=True)
 

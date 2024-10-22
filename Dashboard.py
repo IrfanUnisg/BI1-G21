@@ -21,6 +21,17 @@ st.markdown("""
             display: block;
             margin: 0 auto;
         }
+        .stRadio, .stNumberInput, .stSelectbox {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+        div[data-testid="stBlock"] > div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 """, unsafe_allow_html=True)
 
@@ -78,18 +89,22 @@ st.markdown(f"<div class='center-content'><p style='font-size:18px;'>Aktueller W
 st.markdown("---")
 st.markdown("<h2 class='center-content'>Stromhandel</h2>", unsafe_allow_html=True)
 
-col3, col4 = st.columns(2)
-with col3:
-    trade_type = st.radio("Möchten Sie Strom kaufen, verkaufen oder verschenken?", ("Kaufen", "Verkaufen", "Verschenken"), index=0, key="trade_type")
-    trade_amount = st.number_input(f"Menge an Strom zum {trade_type.lower()} (kWh)", min_value=0, key="trade_amount")
+# Centered trade amount and selection box
+st.markdown("<div class='center-content'>", unsafe_allow_html=True)
+trade_type = st.radio("Möchten Sie Strom kaufen, verkaufen oder verschenken?", ("Kaufen", "Verkaufen", "Verschenken"), index=0)
+trade_amount = st.number_input(f"Menge an Strom zum {trade_type.lower()} (kWh)", min_value=0)
+st.markdown("</div>", unsafe_allow_html=True)
 
-    if trade_type == "Verschenken":
-        recipient = st.selectbox("Wählen Sie den Empfänger", ("Grossmutter", "Ferienwohnung"), key="recipient")
+if trade_type == "Verschenken":
+    recipient = st.selectbox("Wählen Sie den Empfänger", ("Grossmutter", "Ferienwohnung"))
+
+col3, col4 = st.columns(2)
 
 with col4:
     st.markdown(f"<div class='center-content'><p><b>Kaufpreis:</b> {preis_kauf * 100:.2f} Rp/kWh</p></div>", unsafe_allow_html=True)
     st.markdown(f"<div class='center-content'><p><b>Verkaufspreis:</b> {preis_verkauf * 100:.2f} Rp/kWh</p></div>", unsafe_allow_html=True)
 
+# Confirm button
 if st.button(f"{trade_type} bestätigen"):
     total_price = trade_amount * (preis_kauf if trade_type == "Kaufen" else preis_verkauf)
 

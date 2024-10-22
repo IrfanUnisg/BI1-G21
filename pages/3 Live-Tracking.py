@@ -86,7 +86,9 @@ fig.update_layout(
         showline=True,
         showticklabels=True,
     ),
-    plot_bgcolor='white',
+    # Setting a light grey background color for the plot and the entire figure
+    plot_bgcolor='rgb(245, 245, 245)',  # Light grey background for the plot area
+    paper_bgcolor='rgb(230, 230, 230)',  # Slightly darker grey background for the entire figure
     showlegend=True,
     legend=dict(
         orientation="h",

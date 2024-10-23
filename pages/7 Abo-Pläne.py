@@ -80,7 +80,7 @@ st.markdown("""
                 <td class="premium">5 weitere Haushalte</td>
             </tr>
             <tr>
-                <td>Swisscoin</td>
+                <td>Stromcoin</td>
                 <td class="basic">Nicht verfügbar</td>
                 <td class="medium">Nicht verfügbar</td>
                 <td class="premium">Jährliche Ausschüttung</td>

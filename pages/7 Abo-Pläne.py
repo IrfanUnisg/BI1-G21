@@ -76,8 +76,8 @@ st.markdown("""
             <tr>
                 <td>Swisscoin</td>
                 <td class="basic">Nicht verfügbar</td>
-                <td class="medium">1 Swisscoin</td>
-                <td class="premium">2 Swisscoins</td>
+                <td class="medium">1 Swisscoin/Monat</td>
+                <td class="premium">2 Swisscoins/Monat</td>
             </tr>
             <tr>
                 <td>Stromkarte</td>
@@ -86,7 +86,7 @@ st.markdown("""
                 <td class="premium">Verfügbar</td>
             </tr>
             <tr>
-                <td>Vergleich zu Gemeinde</td>
+                <td>Ranking</td>
                 <td class="basic">Verfügbar</td>
                 <td class="medium">Verfügbar</td>
                 <td class="premium">Verfügbar</td>

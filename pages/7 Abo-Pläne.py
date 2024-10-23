@@ -54,23 +54,13 @@ data = {
 # Erstelle einen DataFrame aus den Abodaten
 df = pd.DataFrame(data)
 
-# Style für die Tabelle: Verschiedene Farben pro Plan
-def color_cells(val):
-    if "Basic" in val:
-        return 'background-color: #d3e4cd;'  # Light green for Basic
-    elif "Medium" in val:
-        return 'background-color: #ade8f4;'  # Light blue for Medium
-    elif "Premium" in val:
-        return 'background-color: #caf0f8;'  # Light teal for Premium
-    return ''
-
-# Wende den Style auf den DataFrame an
-styled_df = df.style.applymap(color_cells, subset=["Basic Plan", "Medium Plan", "Premium Plan"])
+# Setze die "Merkmal"-Spalte als Index, um sie als erste Spalte anzuzeigen und die Indizes zu vermeiden
+df.set_index("Merkmal", inplace=True)
 
 # Zeige die Tabelle an
-st.dataframe(styled_df, use_container_width=True)
+st.table(df)
 
-# Zusätzlicher Hinweis oder Beschreibung, falls notwendig
+# Zusätzlicher Hinweis oder Beschreibung
 st.write("""
-Hier sehen Sie die verschiedenen Abonnementpläne im Vergleich. Die farblichen Hervorhebungen erleichtern es, die Unterschiede zwischen den Plänen zu erkennen.
+Hier sehen Sie die verschiedenen Abonnementpläne im Vergleich. Diese Tabelle erleichtert es, die Unterschiede zwischen den Plänen zu erkennen.
 """)

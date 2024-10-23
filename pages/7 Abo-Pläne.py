@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 
 # Seite konfigurieren
 st.set_page_config(page_title="Abonnementpläne", layout="wide")
@@ -6,47 +7,70 @@ st.set_page_config(page_title="Abonnementpläne", layout="wide")
 # Seiten-Titel
 st.title("Vergleich der Abonnementpläne")
 
-# Verwende 3 Spalten für die Abonnementpläne
-col1, col2, col3 = st.columns(3)
+# Daten für die Abonnementpläne
+data = {
+    "Merkmal": [
+        "Preis", 
+        "Kapazität Rent-a-Virtual-Battery", 
+        "Tracking & Empfehlungen", 
+        "Stromsharing", 
+        "Swisscoin", 
+        "Stromkarte", 
+        "Vergleich zu Gemeinde", 
+        "Loyalty / Referral"
+    ],
+    "Basic Plan": [
+        "CHF 0", 
+        "Keine", 
+        "Keine", 
+        "Nicht verfügbar", 
+        "Nicht verfügbar", 
+        "Nicht verfügbar", 
+        "Verfügbar", 
+        "Nicht verfügbar"
+    ],
+    "Medium Plan": [
+        "CHF 14.90", 
+        "3000 kWh", 
+        "Volles Dashboard", 
+        "Verfügbar (Nur für Auto)", 
+        "1 Swisscoin", 
+        "Verfügbar", 
+        "Verfügbar", 
+        "Nur für Auto"
+    ],
+    "Premium Plan": [
+        "CHF 22", 
+        "Unlimitiert", 
+        "Volles Dashboard", 
+        "Verfügbar (Ganzes Angebot)", 
+        "2 Swisscoins", 
+        "Verfügbar", 
+        "Verfügbar", 
+        "Ganzes Angebot"
+    ]
+}
 
-# Basic Plan
-with col1:
-    st.markdown("### Basic Plan")
-    st.markdown("""
-    - **Preis:** CHF 0
-    - **Kapazität Rent-a-Virtual-Battery:** Keine
-    - **Tracking & Empfehlungen:** Keine
-    - **Stromsharen:** Nicht verfügbar
-    - **Swisscoin:** Nicht verfügbar
-    - **Stromkarte:** Nicht verfügbar
-    - **Vergleich zu Gemeinde:** Verfügbar
-    - **Loyalty / Referral:** Nicht verfügbar
-    """, unsafe_allow_html=True)
+# Erstelle einen DataFrame aus den Abodaten
+df = pd.DataFrame(data)
 
-# Medium Plan
-with col2:
-    st.markdown("### Medium Plan")
-    st.markdown("""
-    - **Preis:** CHF 14.90
-    - **Kapazität Rent-a-Virtual-Battery:** 3000 kWh
-    - **Tracking & Empfehlungen:** Volles Dashboard
-    - **Stromsharen:** Verfügbar (Nur für Auto)
-    - **Swisscoin:** 1 Swisscoin
-    - **Stromkarte:** Verfügbar
-    - **Vergleich zu Gemeinde:** Verfügbar
-    - **Loyalty / Referral:** Nur für Auto
-    """, unsafe_allow_html=True)
+# Style für die Tabelle: Verschiedene Farben pro Plan
+def color_cells(val):
+    if "Basic" in val:
+        return 'background-color: #d3e4cd;'  # Light green for Basic
+    elif "Medium" in val:
+        return 'background-color: #ade8f4;'  # Light blue for Medium
+    elif "Premium" in val:
+        return 'background-color: #caf0f8;'  # Light teal for Premium
+    return ''
 
-# Premium Plan
-with col3:
-    st.markdown("### Premium Plan")
-    st.markdown("""
-    - **Preis:** CHF 22
-    - **Kapazität Rent-a-Virtual-Battery:** Unlimitiert
-    - **Tracking & Empfehlungen:** Volles Dashboard
-    - **Stromsharen:** Verfügbar (Ganzes Angebot)
-    - **Swisscoin:** 2 Swisscoins
-    - **Stromkarte:** Verfügbar
-    - **Vergleich zu Gemeinde:** Verfügbar
-    - **Loyalty / Referral:** Ganzes Angebot
-    """, unsafe_allow_html=True)
+# Wende den Style auf den DataFrame an
+styled_df = df.style.applymap(color_cells, subset=["Basic Plan", "Medium Plan", "Premium Plan"])
+
+# Zeige die Tabelle an
+st.dataframe(styled_df, use_container_width=True)
+
+# Zusätzlicher Hinweis oder Beschreibung, falls notwendig
+st.write("""
+Hier sehen Sie die verschiedenen Abonnementpläne im Vergleich. Die farblichen Hervorhebungen erleichtern es, die Unterschiede zwischen den Plänen zu erkennen.
+""")

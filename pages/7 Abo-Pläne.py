@@ -58,8 +58,8 @@ st.markdown("""
             <tr>
                 <td>Preis</td>
                 <td class="basic">CHF 0</td>
-                <td class="medium">CHF 14.90</td>
-                <td class="premium">CHF 22</td>
+                <td class="medium">CHF 12.90</td>
+                <td class="premium">CHF 18.90</td>
             </tr>
             <tr>
                 <td>Kapazität Rent-a-Virtual-Battery</td>
@@ -76,19 +76,19 @@ st.markdown("""
             <tr>
                 <td>Stromsharing</td>
                 <td class="basic">Nicht verfügbar</td>
-                <td class="medium">Verfügbar (Nur für Auto)</td>
-                <td class="premium">Verfügbar (Ganzes Angebot)</td>
+                <td class="medium">3 weitere Haushalte</td>
+                <td class="premium">5 weitere Haushalte</td>
             </tr>
             <tr>
                 <td>Swisscoin</td>
                 <td class="basic">Nicht verfügbar</td>
-                <td class="medium">1 Swisscoin/Monat</td>
-                <td class="premium">2 Swisscoins/Monat</td>
+                <td class="medium">Nicht verfügbar</td>
+                <td class="premium">Jährliche Ausschüttung</td>
             </tr>
             <tr>
                 <td>Stromkarte</td>
                 <td class="basic">Nicht verfügbar</td>
-                <td class="medium">Verfügbar</td>
+                <td class="medium">Nicht verfügbar</td>
                 <td class="premium">Verfügbar</td>
             </tr>
             <tr>
@@ -100,7 +100,7 @@ st.markdown("""
             <tr>
                 <td>Loyalty / Referral</td>
                 <td class="basic">Nicht verfügbar</td>
-                <td class="medium">Nur für Auto</td>
+                <td class="medium">Limitiert verfügbar</td>
                 <td class="premium">Ganzes Angebot</td>
             </tr>
         </tbody>

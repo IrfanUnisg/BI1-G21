@@ -69,24 +69,24 @@ st.markdown("""
             </tr>
             <tr>
                 <td>Tracking & Empfehlungen</td>
-                <td class="basic">Keine</td>
+                <td class="basic">Basic Dashboard</td>
                 <td class="medium">Volles Dashboard</td>
                 <td class="premium">Volles Dashboard</td>
             </tr>
             <tr>
-                <td>Stromsharing</td>
+                <td>Strom-Sharing</td>
                 <td class="basic">Nicht verfügbar</td>
                 <td class="medium">3 weitere Haushalte</td>
                 <td class="premium">5 weitere Haushalte</td>
             </tr>
             <tr>
-                <td>Stromcoin</td>
+                <td>Strom-Coin</td>
                 <td class="basic">Nicht verfügbar</td>
                 <td class="medium">Nicht verfügbar</td>
                 <td class="premium">Jährliche Ausschüttung</td>
             </tr>
             <tr>
-                <td>Stromkarte</td>
+                <td>Strom-Debitkarte</td>
                 <td class="basic">Nicht verfügbar</td>
                 <td class="medium">Nicht verfügbar</td>
                 <td class="premium">Verfügbar</td>

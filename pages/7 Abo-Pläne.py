@@ -3,12 +3,12 @@ import streamlit as st
 # Seite konfigurieren
 st.set_page_config(page_title="Abonnementpläne", layout="wide")
 
-# Seiten-Titel
-st.title("Vergleich der Abonnementpläne")
-
-# HTML für die farbige Tabelle
+# CSS für zentrierten Titel
 st.markdown("""
     <style>
+    .center-title {
+        text-align: center;
+    }
     .table {
         width: 100%;
         margin-bottom: 1rem;
@@ -38,7 +38,13 @@ st.markdown("""
         background-color: #caf0f8;  /* Light teal for Premium */
     }
     </style>
+""", unsafe_allow_html=True)
 
+# Seiten-Titel zentriert
+st.markdown("<h1 class='center-title'>Vergleich der Abonnementpläne</h1>", unsafe_allow_html=True)
+
+# HTML für die farbige Tabelle
+st.markdown("""
     <table class="table">
         <thead>
             <tr>

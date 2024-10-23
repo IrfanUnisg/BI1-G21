@@ -43,10 +43,18 @@ current_price = price_df['Preis (CHF)'].iloc[-1]
 stromcoins_in_possession = 57
 stromcoins_value = stromcoins_in_possession * current_price
 
-# Show the user's Stromcoins and value
-st.subheader("Ihre Stromcoins im Besitz:")
-st.write(f"**Anzahl der Stromcoins im Besitz**: {stromcoins_in_possession} STRC")
-st.write(f"**Aktueller Wert in CHF**: {stromcoins_value:.2f} CHF")
+# Title for ownership section
+st.subheader("Ihre Stromcoins")
+
+# Create two columns for displaying the ownership information
+col1, col2 = st.columns(2)
+
+# Display number of Stromcoins and current value, centered in their respective columns
+with col1:
+    st.write(f"<div style='text-align: center;'>**Anzahl der Stromcoins im Besitz**: {stromcoins_in_possession} STRC</div>", unsafe_allow_html=True)
+
+with col2:
+    st.write(f"<div style='text-align: center;'>**Aktueller Wert in CHF**: {stromcoins_value:.2f} CHF</div>", unsafe_allow_html=True)
 
 st.markdown("---")
 

@@ -2,7 +2,9 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
+
 st.set_page_config(layout="wide")
+
 # Page title
 st.title("Stromcoin")
 
@@ -11,6 +13,7 @@ st.write("""
 **Stromcoin** ist ein Krypto-Token, der als Belohnung für die Nutzung der Stromkonto-App vergeben wird. Das Besondere an Stromcoin ist, dass sein Wert nur steigen kann. Nutzer, die überschüssigen Strom über die App handeln oder ihre Energie effizient verwalten, profitieren durch die Teilnahme am Stromcoin-basierten Gewinnbeteiligungssystem.
 """)
 st.markdown("---")
+
 # Additional fictitious Stromcoin details
 st.subheader("Wichtige Informationen über Stromcoin:")
 st.write("""
@@ -32,6 +35,20 @@ price_df = pd.DataFrame({
     'Datum': days,
     'Preis (CHF)': prices
 })
+
+# Current price of Stromcoin (latest price from the generated data)
+current_price = price_df['Preis (CHF)'].iloc[-1]
+
+# Display Stromcoin ownership and value in CHF
+stromcoins_in_possession = 57
+stromcoins_value = stromcoins_in_possession * current_price
+
+# Show the user's Stromcoins and value
+st.subheader("Ihre Stromcoins im Besitz:")
+st.write(f"**Anzahl der Stromcoins im Besitz**: {stromcoins_in_possession} STRC")
+st.write(f"**Aktueller Wert in CHF**: {stromcoins_value:.2f} CHF")
+
+st.markdown("---")
 
 # Plot the price chart
 st.subheader("Stromcoin Preisentwicklung (letztes Jahr)")
@@ -75,4 +92,3 @@ st.markdown("---")
 st.write("""
 Stromcoin ist nicht nur eine Belohnung für die Nutzung von Stromkonto, sondern auch ein Weg, langfristig an der Wertschöpfung im Strommarkt zu partizipieren. Seien Sie Teil der nachhaltigen Energiezukunft und profitieren Sie vom wachsenden Wert von Stromcoin!
 """)
-

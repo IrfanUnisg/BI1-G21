@@ -62,7 +62,7 @@ st.markdown("""
                 <td class="premium">CHF 18.90</td>
             </tr>
             <tr>
-                <td>Kapazität Rent-a-Virtual-Battery</td>
+                <td>Kapazität Virtual-Battery</td>
                 <td class="basic">Keine</td>
                 <td class="medium">3000 kWh</td>
                 <td class="premium">Unlimitiert</td>
